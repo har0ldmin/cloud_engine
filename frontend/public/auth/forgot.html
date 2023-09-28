@@ -1,0 +1,98 @@
+{% extends 'template/index_blank.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row  align-items-center justify-content-center">
+        <div class="col-lg-5 auth-banner ">
+        </div>
+        <div class="col-lg-7">
+            <div class="row">
+                <div class="col-md-10 login-container mt-2">
+
+                    <div class="d-grid gap-3 d-flex justify-content-end">
+                        <a class="btn" href="../">
+                            <img src="../auth/images/icon-x.svg" style="width:30px; height:30px;" alt="X">
+                        </a>
+                    </div>
+
+                    <div class="d-grid gap-3 d-flex justify-content-center">
+                        <div class="image-container">
+                            <img src="../auth/images/text-bg.png" alt="Image" class="image mx-auto">
+                            <div class="text-on-image" style="left: 50% !important;">
+                                <h2>Reset Password</h2>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Welcome message -->
+                    <div class="d-grid gap-3 d-flex justify-content-center auth-sub-normal my-5">
+                        <p class="auth-subheading" id="forgot-msg">Initialising...</p>
+                    </div>
+
+                    <!-- Error Popup -->
+                    <div class="d-grid d-flex justify-content-center auth-sub-warning" id="forgot-err-popup">
+                        <div class="d-grid gap-3 d-flex justify-content-center auth-sub-warning bg-danger-subtle m-3 p-3 rounded-4">
+                                <img src="../auth/images/icon-minus.png" alt="ERROR"class="my-auto auth-warning-icon">
+                            <p class="auth-warning-text my-auto text-center" id="forgot-err-msg">Initialising...</p>
+                        </div>
+                    </div>
+
+                    <!-- Detail Entry Form -->
+                    <div class="forgot-form" id="forgot-emailView">
+
+                        <form id="forgotForm">
+                            <div class="form-floating my-5">
+                                <input type="email" class="form-control" id="forgot-email" placeholder="XXXXXX" name="email">
+                                <label for="forgot-email">Email</label>
+                            </div>
+
+                            <div class="d-grid py-4">
+                                <button class="btn btn-warning orange-button" type="submit">Next</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                    <div class="forgot-resetForm" id="forgot-resetView">
+
+                        <form id="forgotResetForm">
+                            <div class="form-floating my-5">
+                                <input type="text" class="form-control" id="forgot-token" placeholder="XXXXXX" name="token">
+                                <label for="forgot-token">Reset Token</label>
+                            </div>
+
+                            <div class="form-floating my-5">
+                                <input type="password" class="form-control" id="forgot-email" placeholder="XXXXXX" name="password">
+                                <label for="forgot-email">New Password</label>
+                            </div>
+
+                            <div class="d-grid py-4">
+                                <button class="btn btn-warning orange-button" type="submit">Complete</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                    <!-- Message Button -->
+                    <div class="message-btn d-none">
+
+                        <div class="d-grid py-4 my-5">
+                            <a class="btn btn-warning orange-button">Continue</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="../auth/scripts/forgot.js" defer="true"></script>
+
+{% endblock %}

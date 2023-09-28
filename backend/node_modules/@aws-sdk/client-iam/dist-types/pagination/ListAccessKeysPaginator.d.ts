@@ -1,0 +1,7 @@
+import { Paginator } from "@smithy/types";
+import { ListAccessKeysCommandInput, ListAccessKeysCommandOutput } from "../commands/ListAccessKeysCommand";
+import { IAMPaginationConfiguration } from "./Interfaces";
+/**
+ * @public
+ */
+export declare function paginateListAccessKeys(config: IAMPaginationConfiguration, input: ListAccessKeysCommandInput, ...additionalArguments: any): Paginator<ListAccessKeysCommandOutput>;

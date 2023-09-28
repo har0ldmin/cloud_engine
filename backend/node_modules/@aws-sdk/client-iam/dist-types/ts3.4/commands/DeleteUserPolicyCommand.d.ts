@@ -1,0 +1,33 @@
+import { EndpointParameterInstructions } from "@smithy/middleware-endpoint";
+import { Command as $Command } from "@smithy/smithy-client";
+import {
+  Handler,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetadataBearer as __MetadataBearer,
+  MiddlewareStack,
+} from "@smithy/types";
+import {
+  IAMClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../IAMClient";
+import { DeleteUserPolicyRequest } from "../models/models_0";
+export { __MetadataBearer, $Command };
+export interface DeleteUserPolicyCommandInput extends DeleteUserPolicyRequest {}
+export interface DeleteUserPolicyCommandOutput extends __MetadataBearer {}
+export declare class DeleteUserPolicyCommand extends $Command<
+  DeleteUserPolicyCommandInput,
+  DeleteUserPolicyCommandOutput,
+  IAMClientResolvedConfig
+> {
+  readonly input: DeleteUserPolicyCommandInput;
+  static getEndpointParameterInstructions(): EndpointParameterInstructions;
+  constructor(input: DeleteUserPolicyCommandInput);
+  resolveMiddleware(
+    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
+    configuration: IAMClientResolvedConfig,
+    options?: __HttpHandlerOptions
+  ): Handler<DeleteUserPolicyCommandInput, DeleteUserPolicyCommandOutput>;
+  private serialize;
+  private deserialize;
+}

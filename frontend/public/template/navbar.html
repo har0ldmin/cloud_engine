@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg bg-body-secondary">
+    <div class="container-xl">
+        <!-- Logo Image -->
+        <a class="navbar-brand" href="/"><img class="logoImg" src="../images/logo.png" alt="Cloud Engine"></a>
+        <!-- Toggle Btn -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Sidebar -->
+        <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
+
+            <!-- Sidebar Header -->
+            <div class="offcanvas-header border-bottom">
+                <a class="offcanvas-title" id="offcanvasNavbarLabel" href="/"><img class="logoImg"
+                        src="../images/logo.png" alt="Cloud Engine"></a>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+
+            <!-- Sidebar Body -->
+            <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
+                <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/aboutUs2">About Us</a>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/service">Our Services</a>
+                    </li>
+
+
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            My Dashboard
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="/myDashboard">Dashboard</a></li>
+                            <li><a class="nav-link" href="/instance">Instances</a></li>
+                            <li><a class="nav-link" href="/history">Order History</a></li>
+                            <li><a class="nav-link" href="/settings">Profile</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Login / Sign up -->
+                <div class="d-flex justify-content-center align-items-center gap-3 fs-7" id="GuestOption">
+                    <!-- <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3"> Column Arrangement-->
+
+                    <a class="text-decoration-none px-3 py-1 rounded-4" style="background-color: #F79901; color: black;"
+                        href="../auth/signup">Register</a>
+                    <a class="text-decoration-none px-3 py-1 rounded-4" style="background-color: #F79901; color: black;"
+                        href="../auth/login">Login</a>
+                </div>
+                <div class="d-flex justify-content-center align-items-center gap-3 fs-7" id="UserOption">
+                    <!-- <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3"> Column Arrangement-->
+
+                    <button class="text-decoration-none px-3 py-1 rounded-4" style="background-color: #F79901;"
+                        onclick="logout();">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+<script src="../scripts/navbar.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    function logout() {
+        const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+
+        axios.post("http://localhost:3001/api/logout",
+            {
+                "userId": userId,
+                "createToken": token
+            }
+        )
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+    }
+</script> -->

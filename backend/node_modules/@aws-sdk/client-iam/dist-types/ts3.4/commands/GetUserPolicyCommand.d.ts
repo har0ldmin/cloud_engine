@@ -1,0 +1,38 @@
+import { EndpointParameterInstructions } from "@smithy/middleware-endpoint";
+import { Command as $Command } from "@smithy/smithy-client";
+import {
+  Handler,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetadataBearer as __MetadataBearer,
+  MiddlewareStack,
+} from "@smithy/types";
+import {
+  IAMClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../IAMClient";
+import {
+  GetUserPolicyRequest,
+  GetUserPolicyResponse,
+} from "../models/models_0";
+export { __MetadataBearer, $Command };
+export interface GetUserPolicyCommandInput extends GetUserPolicyRequest {}
+export interface GetUserPolicyCommandOutput
+  extends GetUserPolicyResponse,
+    __MetadataBearer {}
+export declare class GetUserPolicyCommand extends $Command<
+  GetUserPolicyCommandInput,
+  GetUserPolicyCommandOutput,
+  IAMClientResolvedConfig
+> {
+  readonly input: GetUserPolicyCommandInput;
+  static getEndpointParameterInstructions(): EndpointParameterInstructions;
+  constructor(input: GetUserPolicyCommandInput);
+  resolveMiddleware(
+    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
+    configuration: IAMClientResolvedConfig,
+    options?: __HttpHandlerOptions
+  ): Handler<GetUserPolicyCommandInput, GetUserPolicyCommandOutput>;
+  private serialize;
+  private deserialize;
+}

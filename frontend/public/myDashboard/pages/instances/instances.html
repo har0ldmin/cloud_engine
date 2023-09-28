@@ -1,0 +1,489 @@
+{% extends 'template/dashboard.html' %} {% block content %}
+
+
+<style>
+    .btn-smaller {
+        padding: 0.15rem 0.75rem;
+        font-size: 0.75rem;
+    }
+</style>
+
+
+<main class="content">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-block mb-4 mb-md-0">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="#">Instances</a></li>
+                </ol>
+            </nav>
+            <h2 class="h4">Current Instances</h2>
+            <p class="mb-0">Effectively Control Your Instances Here.</p>
+        </div>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div>
+                <button class="btn btn-gray-800 d-inline-flex align-items-center dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    New Instance
+                </button>
+                <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
+                    <a class="dropdown-item d-flex align-items-center" href="#" onclick="createNewInstance(1, 1)">
+                        <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
+                            <path fill-rule="evenodd"
+                                d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        EC2
+                    </a>
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                        <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
+                            <path fill-rule="evenodd"
+                                d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        RSD
+                    </a>
+                </div>
+            </div>
+
+            <div class="btn-group ms-2 ms-lg-3">
+                <button type="button" class="btn btn-sm btn-outline-gray-600"
+                    onclick="ControlAllInstances(true)">Activate All</button>
+                <button type="button" class="btn btn-sm btn-outline-gray-600"
+                    onclick="ControlAllInstances(false)">Deactivate All</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-body border-0 shadow table-wrapper table-responsive" style="margin-top: 3%;">
+
+        <div class="table-settings mb-4" style="margin-top: 1%;">
+            <div class="col col-md-6 col-lg-3 col-xl-4">
+                <div class="input-group me-2 me-lg-3 fmxw-800">
+                    <span class="input-group-text">
+                        <svg class="icon icon-xs" x-description="Heroicon name: solid/search"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control me-2" placeholder="Search Instance..." id="searchInput"
+                        style="border-radius: 0 10px 10px 0px;">
+                    <div id="errorMessage" class="text-danger mt-2"
+                        style="display: none; font-size: 14px; margin-left: 1%;"> Enter at least 2 words</div>
+                </div>
+            </div>
+
+            <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-3"
+                onclick="refreshInstances()" style="margin-top: 2% !important; margin-right: 3% !important;">
+                <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21.58 12a9 9 0 1 1-2.12-5.7M19.36 12h2.86M4.46 4.45L2.12 2.12M21.58 12H24"></path>
+                </svg>
+            </button>
+
+
+
+        </div>
+
+        <table class="table table-hover" style="margin-top: 3%;">
+            <thead>
+                <tr>
+                    <th class="border-gray-200">ID</th>
+                    <th class="border-gray-200">Private Ip Address</th>
+                    <th class="border-gray-200">Private DNS Name</th>
+                    <th class="border-gray-200">Instance Type</th>
+                    <th class="border-gray-200">Status</th>
+                    <th class="border-gray-200">Action</th>
+                    <th class="border-gray-200"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Instances go here -->
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+
+
+<!-- Search Box function -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const errorMessage = document.getElementById("errorMessage");
+        const tableRows = document.querySelectorAll("tbody tr");
+
+        searchInput.addEventListener("input", function () {
+            const searchValue = searchInput.value.trim().toLowerCase();
+
+            if (searchValue.length >= 2) {
+                tableRows.forEach(function (row) {
+                    const text = row.textContent.trim().toLowerCase();
+                    row.style.display = text.includes(searchValue) ? "table-row" : "none";
+                });
+
+                // Hide the error message when the search query is valid
+                errorMessage.style.display = "none";
+            } else if (searchValue.length > 0) {
+                // Show the error message when the search query is too short
+                errorMessage.style.display = "block";
+
+                // Clear the table rows when the search query is too short
+                tableRows.forEach(function (row) {
+                    row.style.display = "none";
+                });
+            } else {
+                // Clear the table rows and hide the error message when the input is empty
+                errorMessage.style.display = "none";
+                tableRows.forEach(function (row) {
+                    row.style.display = "table-row";
+                });
+            }
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+    // refreshInstances
+    function refreshInstances() {
+        location.reload();
+    }
+
+
+    // Retrieve Dashboard
+    async function dashboardAPI() {
+        const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+
+        console.log(userId, token);
+
+        try {
+            const response = await axios.post('http://localhost:3001/api/dashboard', {
+                "userId": userId,
+                "createToken": token,
+            });
+            await localStorage.setItem("ec2", response.data.ec2);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    // Creating a new instance
+    function createNewInstance(instanceId, InstanceType, PrivateIpAddress, PrivateDnsName, Status) {
+
+        var newRow = document.createElement('tr');
+
+        var idCell = document.createElement('td');
+        var idLink = document.createElement('a');
+        idLink.href = '#';
+        idLink.classList.add('fw-bold');
+        idLink.textContent = instanceId;
+        idCell.appendChild(idLink);
+        newRow.appendChild(idCell);
+
+        var otherCells = [
+            PrivateIpAddress, PrivateDnsName, InstanceType, Status, '', ''
+        ];
+
+        for (var i = 0; i < otherCells.length; i++) {
+            var cell = document.createElement('td');
+            var span = document.createElement('span');
+            span.classList.add('fw-normal');
+            span.textContent = otherCells[i];
+            cell.appendChild(span);
+
+            if (i === 4) {
+                var divToggleSwitch = document.createElement('div');
+                divToggleSwitch.classList.add('form-check', 'form-switch');
+
+                var inputToggleSwitch = document.createElement('input');
+                inputToggleSwitch.classList.add('form-check-input');
+                inputToggleSwitch.type = 'checkbox';
+                inputToggleSwitch.id = 'toggle' + (i + 1);
+
+                if ((Status === "running") || (Status === "pending")) {
+                    inputToggleSwitch.checked = true;
+                    if (Status === "pending") {
+                        inputToggleSwitch.disabled = true;
+                    }
+                } else {
+                    inputToggleSwitch.checked = false;
+                    if (Status !== "stopped") {
+                        inputToggleSwitch.disabled = true;
+                    }
+                }
+
+                inputToggleSwitch.addEventListener('change', async function () {
+                    if (this.checked) {
+                        await toggle(true, instanceId);
+
+                    } else {
+                        await toggle(false, instanceId);
+                    }
+                    location.reload();
+                });
+
+                var labelToggleSwitch = document.createElement("label");
+                labelToggleSwitch.classList.add("form-check-label");
+                labelToggleSwitch.htmlFor = 'toggle' + (i + 1);
+
+                divToggleSwitch.appendChild(inputToggleSwitch);
+                divToggleSwitch.appendChild(labelToggleSwitch);
+
+                cell.appendChild(divToggleSwitch);
+            }
+
+            if (i === otherCells.length - 1) {
+                var removeButton = document.createElement("button");
+                removeButton.classList.add("btn", "btn-danger", "btn-smaller");
+                removeButton.textContent = "Remove";
+                removeButton.onclick = function () { deleteRow(this, instanceId); };
+
+                cell.appendChild(removeButton);
+            }
+
+            newRow.appendChild(cell);
+        }
+
+        var tableBody = document.querySelector("tbody");
+        tableBody.appendChild(newRow);
+    }
+</script>
+
+
+<!-- Render Instances -->
+<script>
+    document.addEventListener("DOMContentLoaded", async function () {
+
+        await dashboardAPI();
+
+        const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+        const tableBody = document.querySelector("tbody");
+        const ec2Instances = localStorage.getItem("ec2");
+
+        if (ec2Instances) {
+            const instances = ec2Instances.split(",");
+
+            if (instances.length > 0) {
+                instances.forEach(function (instanceId) {
+
+                    axios.post("http://localhost:3001/api/sdk/ec2/describe",
+                        {
+                            "userId": userId,
+                            "createToken": token,
+                            "InstanceId": instanceId,
+                        }
+                    )
+                        .then(function (response) {
+                            const InstanceStatus = response.data.ec2info[0];
+                            console.log(InstanceStatus);
+                            createNewInstance(instanceId, InstanceStatus.InstanceType, InstanceStatus.PrivateIpAddress, InstanceStatus.PrivateDnsName, InstanceStatus.Status);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                });
+            }
+        } else {
+            displayNoInstancesMessage();
+        }
+    });
+</script>
+
+
+<!-- Remove Instance -->
+<script>
+    async function deleteRow(button, instanceId) {
+        const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+
+        const row = button.closest("tr");
+
+        await axios.post("http://localhost:3001/api/sdk/ec2/terminate", {
+            "userId": userId,
+            "createToken": token,
+            "InstanceId": instanceId,
+        })
+            .then(function (response) {
+                console.log(response.data);
+                row.remove();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+</script>
+
+
+<!-- Control Toggles -->
+<script>
+    async function toggle(state, instanceId) {
+        const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+
+        if (state == true) {
+            await axios.post("http://localhost:3001/api/sdk/ec2/start",
+                {
+                    'InstanceId': instanceId,
+                    'userId': userId,
+                    'createToken': token
+                }
+
+            )
+                .then(function (response) {
+                    console.log("started succesfully");
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+        else {
+            await axios.post("http://localhost:3001/api/sdk/ec2/stop",
+                {
+                    'InstanceId': instanceId,
+                    'userId': userId,
+                    'createToken': token
+                }
+            )
+                .then(function (response) {
+                    console.log("stopped succesfully");
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
+</script>
+
+
+<!-- Controll All Toggles -->
+<script>
+    function TurnOnAllInstances() {
+        const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+        const ec2Instances = localStorage.getItem("ec2");
+
+        if (ec2Instances) {
+            const instances = ec2Instances.split(",");
+
+            if (instances.length > 0) {
+                instances.forEach(function (instanceId) {
+
+                    axios.post("http://localhost:3001/api/sdk/ec2/start",
+                        {
+                            'InstanceId': instanceId,
+                            'userId': userId,
+                            'createToken': token
+                        }
+                    )
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                });
+            }
+        } else {
+            console.log("There are no instances to switch on.");
+        }
+    }
+
+
+    function TurnOffAllInstances() {
+        const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+        const ec2Instances = localStorage.getItem("ec2");
+
+        if (ec2Instances) {
+            const instances = ec2Instances.split(",");
+
+            if (instances.length > 0) {
+                instances.forEach(function (instanceId) {
+
+                    axios.post("http://localhost:3001/api/sdk/ec2/stop",
+                        {
+                            "userId": userId,
+                            "createToken": token,
+                            "InstanceId": instanceId,
+                        }
+                    )
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                });
+            }
+        } else {
+            console.log("There are no instances to switch off.");
+        }
+    }
+
+
+    async function ControlAllInstances(status) {
+        if (status == true) {
+            await TurnOnAllInstances();
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        }
+        else {
+            await TurnOffAllInstances();
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        }
+    }
+</script>
+
+
+<!-- Display You don't have any items yet -->
+<script>
+    function displayNoInstancesMessage() {
+        const noInstancesRow = document.createElement("tr");
+        const noInstancesCell = document.createElement("td");
+
+        noInstancesCell.setAttribute("colspan", "7");
+        noInstancesCell.textContent = "You don't have any instances yet";
+
+        noInstancesCell.style.textAlign = "center";
+        noInstancesCell.style.fontSize = "24px";
+        noInstancesCell.style.fontWeight = "bold";
+        noInstancesCell.style.color = "#888888";
+        noInstancesCell.style.paddingTop = "2%";
+        noInstancesCell.style.paddingBottom = "2%";
+
+        noInstancesRow.appendChild(noInstancesCell);
+        tableBody.appendChild(noInstancesRow);
+    };
+</script>
+
+
+{% endblock %}

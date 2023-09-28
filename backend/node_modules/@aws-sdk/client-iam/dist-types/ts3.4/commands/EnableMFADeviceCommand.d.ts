@@ -1,0 +1,33 @@
+import { EndpointParameterInstructions } from "@smithy/middleware-endpoint";
+import { Command as $Command } from "@smithy/smithy-client";
+import {
+  Handler,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetadataBearer as __MetadataBearer,
+  MiddlewareStack,
+} from "@smithy/types";
+import {
+  IAMClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../IAMClient";
+import { EnableMFADeviceRequest } from "../models/models_0";
+export { __MetadataBearer, $Command };
+export interface EnableMFADeviceCommandInput extends EnableMFADeviceRequest {}
+export interface EnableMFADeviceCommandOutput extends __MetadataBearer {}
+export declare class EnableMFADeviceCommand extends $Command<
+  EnableMFADeviceCommandInput,
+  EnableMFADeviceCommandOutput,
+  IAMClientResolvedConfig
+> {
+  readonly input: EnableMFADeviceCommandInput;
+  static getEndpointParameterInstructions(): EndpointParameterInstructions;
+  constructor(input: EnableMFADeviceCommandInput);
+  resolveMiddleware(
+    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
+    configuration: IAMClientResolvedConfig,
+    options?: __HttpHandlerOptions
+  ): Handler<EnableMFADeviceCommandInput, EnableMFADeviceCommandOutput>;
+  private serialize;
+  private deserialize;
+}

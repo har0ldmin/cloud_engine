@@ -1,0 +1,331 @@
+{% extends 'template/dashboard.html' %} {% block content %}
+
+
+
+<main class="content">
+
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-block mb-4 mb-md-0">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="#">History</a></li>
+                </ol>
+            </nav>
+            <h2 class="h4">Usage History</h2>
+            <p class="mb-0">Effectively Control Your History Here.</p>
+        </div>
+    </div>
+
+
+    <div class="card card-body border-0 shadow table-wrapper table-responsive" style="margin-top: 3%;">
+
+        <div class="table-settings mb-4" style="margin-top: 1%;">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 col-xl-4">
+                    <div class="input-group me-2 me-lg-3 fmxw-800">
+                        <span class="input-group-text">
+                            <svg class="icon icon-xs" x-description="Heroicon name: solid/search"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                        <input type="text" class="form-control me-2" placeholder="Search History..." id="searchInput"
+                            style="border-radius: 0 10px 10px 0px;">
+                        <div id="errorMessage" class="text-danger mt-2"
+                            style="display: none; font-size: 14px; margin-left: 1%;"> Enter at least 2 words</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-9 col-xl-8 text-end">
+                    <button type="button" class="btn btn-sm btn-outline-gray-600">Download All</button>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-hover" style="margin-top: 3%;">
+            <thead>
+                <tr>
+                    <th class="border-gray-200">ID</th>
+                    <th class="border-gray-200">Private Ip Address</th>
+                    <th class="border-gray-200">Private DNS Name</th>
+                    <th class="border-gray-200">Instance Type</th>
+                    <th class="border-gray-200">Status</th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            456478
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">Platinum Subscription Plan</span>
+                    </td>
+                    <td><span class="fw-normal">1 May 2020</span></td>
+                    <td><span class="fw-normal">1 Jun 2020</span></td>
+                    <td><span class="fw-bold text-warning">Pending</span></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
+                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
+                    </td>
+                </tr>
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            456423
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">Platinum Subscription Plan</span>
+                    </td>
+                    <td><span class="fw-normal">1 Apr 2020</span></td>
+                    <td><span class="fw-normal">1 May 2020</span></td>
+                    <td><span class="fw-bold text-success">Active</span></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
+                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
+                    </td>
+                </tr>
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            456420
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">Platinum Subscription Plan</span>
+                    </td>
+                    <td><span class="fw-normal">1 Mar 2020</span></td>
+                    <td><span class="fw-normal">1 Apr 2020</span></td>
+                    <td><span class="fw-bold text-success">Active</span></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
+                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
+                    </td>
+                </tr>
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            456421
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">Platinum Subscription Plan</span>
+                    </td>
+                    <td><span class="fw-normal">1 Feb 2020</span></td>
+                    <td><span class="fw-normal">1 Mar 2020</span></td>
+                    <td><span class="fw-bold text-success">Active</span></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
+                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
+                    </td>
+                </tr>
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            456420
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">Platinum Subscription Plan</span>
+                    </td>
+                    <td><span class="fw-normal">1 Jan 2020</span></td>
+                    <td><span class="fw-normal">1 Feb 2020</span></td>
+                    <td><span class="fw-bold text-success">Active</span></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
+                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
+                    </td>
+                </tr>
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            456479
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">Platinum Subscription Plan</span>
+                    </td>
+                    <td><span class="fw-normal">1 Dec 2019</span></td>
+                    <td><span class="fw-normal">1 Jan 2020</span></td>
+                    <td><span class="fw-bold text-success">Active</span></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
+                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
+                    </td>
+                </tr>
+                <!-- Item -->
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            456478
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">Platinum Subscription Plan</span>
+                    </td>
+                    <td><span class="fw-normal">1 Nov 2019</span></td>
+                    <td><span class="fw-normal">1 Dec 2019</span></td>
+                    <td><span class="fw-bold text-success">Active</span></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
+                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
+                    </td>
+                </tr>
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            453673
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">Gold Subscription Plan</span>
+                    </td>
+                    <td><span class="fw-normal">1 Oct 2019</span></td>
+                    <td><span class="fw-normal">1 Nov 2019</span></td>
+                    <td><span class="fw-bold text-danger">Deactive</span></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
+                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
+                    </td>
+                </tr>
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            456468
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">Gold Subscription Plan</span>
+                    </td>
+                    <td><span class="fw-normal">1 Sep 2019</span></td>
+                    <td><span class="fw-normal">1 Oct 2019</span></td>
+                    <td><span class="fw-bold text-success">Active</span></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
+                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
+                    </td>
+                </tr>
+                <!-- Item -->
+                <tr>
+                    <td>
+                        <a href="#" class="fw-bold">
+                            456478
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fw-normal">Flexible Subscription Plan</span>
+                    </td>
+                    <td><span class="fw-normal">1 Aug 2019</span></td>
+                    <td><span class="fw-normal">1 Sep 2019</span></td>
+                    <td><span class="fw-bold text-success">Active</span></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
+                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+
+<!-- Search Box function -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const errorMessage = document.getElementById("errorMessage");
+        const tableRows = document.querySelectorAll("tbody tr");
+
+        searchInput.addEventListener("input", function () {
+            const searchValue = searchInput.value.trim().toLowerCase();
+
+            if (searchValue.length >= 2) {
+                tableRows.forEach(function (row) {
+                    const text = row.textContent.trim().toLowerCase();
+                    row.style.display = text.includes(searchValue) ? "table-row" : "none";
+                });
+
+                // Hide the error message when the search query is valid
+                errorMessage.style.display = "none";
+            } else if (searchValue.length > 0) {
+                // Show the error message when the search query is too short
+                errorMessage.style.display = "block";
+
+                // Clear the table rows when the search query is too short
+                tableRows.forEach(function (row) {
+                    row.style.display = "none";
+                });
+            } else {
+                // Clear the table rows and hide the error message when the input is empty
+                errorMessage.style.display = "none";
+                tableRows.forEach(function (row) {
+                    row.style.display = "table-row";
+                });
+            }
+        });
+    });
+</script>
+
+<style>
+    .btn-smaller {
+        padding: 0.2rem 0.75rem;
+        font-size: 0.75rem;
+    }
+    .btn-primary {
+        background-color: rgb(105, 105, 105);
+        border-color: rgb(105, 105, 105);
+    }
+    .btn-primary:hover{
+        background-color: rgb(95, 95, 95);
+        border-color: rgb(95, 95, 95);
+    }
+    .btn-info {
+        background-color: rgba(0, 100, 255);
+        border-color: rgba(0, 100, 255);
+    }
+    .btn-info:hover{
+        background-color: rgba(0, 90, 255);
+        border-color: rgba(0, 90, 255);
+    }
+</style>
+
+
+{% endblock %}
