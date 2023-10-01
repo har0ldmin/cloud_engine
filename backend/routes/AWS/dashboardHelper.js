@@ -6,7 +6,12 @@ const { UserAWS } = require("../../models/UserAWSModel");
 
 router.post("/", dashboard, async (req, res) => {
     const serviceUser = await UserAWS.findById(req.dashboardId);
-    console.log(req.dashboardId);
+    
+    
+    console.log(res);
+    console.log(serviceUser);
+    console.log("omg test");
+    
     return res.json({
         code: "OK",
         message: "Ready to use dashboard",

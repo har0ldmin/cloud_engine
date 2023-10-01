@@ -44,7 +44,7 @@
                     New Instance
                 </button>
                 <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                    <a class="dropdown-item d-flex align-items-center" href="#" onclick="createNewInstance(1, 1)">
+                    <a class="dropdown-item d-flex align-items-center" href="#" id="ec2_deploy">
                         <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
@@ -98,12 +98,8 @@
             </div>
 
             <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-3"
-                onclick="refreshInstances()" style="margin-top: 2% !important; margin-right: 3% !important;">
-                <svg class="icon icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21.58 12a9 9 0 1 1-2.12-5.7M19.36 12h2.86M4.46 4.45L2.12 2.12M21.58 12H24"></path>
-                </svg>
+                onclick="refreshInstances()" style="margin-top: 2% !important; margin-right: 3% !important;"">
+                <a style="font-size: 20px; padding: 0% !important;">&#8635</a>
             </button>
 
 
@@ -113,6 +109,7 @@
         <table class="table table-hover" style="margin-top: 3%;">
             <thead>
                 <tr>
+                    <th class="border-gray-200">Company</th>
                     <th class="border-gray-200">ID</th>
                     <th class="border-gray-200">Private Ip Address</th>
                     <th class="border-gray-200">Private DNS Name</th>
@@ -199,20 +196,20 @@
 
 
     // Creating a new instance
-    function createNewInstance(instanceId, InstanceType, PrivateIpAddress, PrivateDnsName, Status) {
+    function createNewInstance(company, instanceId, InstanceType, PrivateIpAddress, PrivateDnsName, Status) {
 
         var newRow = document.createElement('tr');
 
         var idCell = document.createElement('td');
-        var idLink = document.createElement('a');
-        idLink.href = '#';
-        idLink.classList.add('fw-bold');
-        idLink.textContent = instanceId;
-        idCell.appendChild(idLink);
+        var companyLink = document.createElement('a');
+        companyLink.href = '#';
+        companyLink.classList.add('fw-bold');
+        companyLink.textContent = company;
+        idCell.appendChild(companyLink);
         newRow.appendChild(idCell);
 
         var otherCells = [
-            PrivateIpAddress, PrivateDnsName, InstanceType, Status, '', ''
+            instanceId, PrivateIpAddress, PrivateDnsName, InstanceType, Status, '', ''
         ];
 
         for (var i = 0; i < otherCells.length; i++) {
@@ -273,6 +270,7 @@
             }
 
             newRow.appendChild(cell);
+            console.log("Instance redered");
         }
 
         var tableBody = document.querySelector("tbody");
@@ -284,8 +282,9 @@
 <!-- Render Instances -->
 <script>
     document.addEventListener("DOMContentLoaded", async function () {
-
+        console.log("Dashboard API calling..");
         await dashboardAPI();
+        console.log("Dashboard API called..");
 
         const userId = localStorage.getItem("id");
         const token = localStorage.getItem("token");
@@ -294,9 +293,13 @@
 
         if (ec2Instances) {
             const instances = ec2Instances.split(",");
+            console.log("EC2 instances list: " + instances);
 
             if (instances.length > 0) {
+                console.log("Instances list's length is: " + instances.length); 
+
                 instances.forEach(function (instanceId) {
+                    console.log(instanceId);
 
                     axios.post("http://localhost:3001/api/sdk/ec2/describe",
                         {
@@ -306,9 +309,10 @@
                         }
                     )
                         .then(function (response) {
+                            console.log("response is back: " + response);
                             const InstanceStatus = response.data.ec2info[0];
                             console.log(InstanceStatus);
-                            createNewInstance(instanceId, InstanceStatus.InstanceType, InstanceStatus.PrivateIpAddress, InstanceStatus.PrivateDnsName, InstanceStatus.Status);
+                            createNewInstance("AMAZON", instanceId, InstanceStatus.InstanceType, InstanceStatus.PrivateIpAddress, InstanceStatus.PrivateDnsName, InstanceStatus.Status);
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -325,6 +329,12 @@
 <!-- Remove Instance -->
 <script>
     async function deleteRow(button, instanceId) {
+        let msg = "Are you sure you want to remove the instance?";
+
+        if (confirm(msg) == false) {
+            return;
+        }
+
         const userId = localStorage.getItem("id");
         const token = localStorage.getItem("token");
 
@@ -485,5 +495,34 @@
     };
 </script>
 
+
+<script>
+    document.getElementById("ec2_deploy").addEventListener("click", function (event) {
+        let msg = "Are you sure you want to add a new EC2 instance?";
+
+        if (confirm(msg) == false) {
+            return;
+        }
+
+        const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+
+        axios.post('http://localhost:3001/api/sdk/ec2/create',
+            {
+                "userId": userId,
+                "createToken": token,
+            },
+        )
+            .then(function (response) {
+                // setTimeout(function () {
+                //     location.reload();
+                // }, 1000);
+                location.reload();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+</script>
 
 {% endblock %}
