@@ -1,24 +1,101 @@
-{% extends 'template/index.html' %}
+{% extends 'template/index_services.html' %}
 
 {% block content %}
 
-<div class="container-fluid m-0">
+<style>
+    .serv-cell {
+        height: 85vh;
+    }
 
+    .serv-cell a {
+        color: rgba(241, 241, 241, 0.853);
+        font-size: 2.5rem;
+        text-decoration: none;
+        transition: all 0.45s ease-in-out;
+        font-weight: 700;
+    }
+
+    .serv-cell a:hover {
+        color: #e9a530;
+    }
+
+    .recom a:hover {
+        color: #302ade;
+    }
+
+    .serv-solution-cell {
+        background-image: url('../service/images/solutions_bg.jpeg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .serv-solution-cell a {
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .serv-recomm-cell {
+        background-image: url('../service/images/recommendation_bg.jpeg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .serv-recomm-cell a {
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    header {
+        background-image: linear-gradient(to bottom, #3b17be4f, #ffffff26) !important;
+    }
+
+    header a:hover {
+        color: rgb(255, 255, 255) !important;
+    }
+
+    button[type="exploreMore"] {
+        background: linear-gradient(to right, #303ce9d0, #f8c76d7a);
+        border: none;
+        border-radius: 5px;
+        padding: 0.5rem 1.25rem;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 700 !important;
+        margin-top: 2rem;
+    }
+
+</style>
+
+
+
+<div class="container-fluid m-0">
     <div class="row">
-        <div class="col-lg-5">
-            <div class="row">
-                <div class="col-md-12 serv-cell serv-recomm-cell">
-                    <a href="/selection"> Recommendations</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 serv-cell serv-quotes-cell">
-                    Free Quotes
-                </div>
-            </div>
+        <div class="col-md-6 serv-cell recom serv-recomm-cell">
+            <a href="/selection">
+                <span class="serv-text">
+                    Recommendations
+                    <br>
+                    <button type="exploreMore">Explore more</button>
+                </span>
+            </a>
         </div>
-        <div class="col-lg-7 serv-cell serv-solution-cell">
-            <a href="/solution"> Solutions</a>
+
+        <div class="col-md-6 serv-cell serv-solution-cell">
+            <a href="/solution">
+                <span class="serv-text">
+                    Solutions
+                    <br>
+                    <button type="exploreMore">Explore more</button>
+                </span>
+            </a>
         </div>
     </div>
 </div>

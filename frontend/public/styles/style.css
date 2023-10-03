@@ -39,15 +39,6 @@ h3 {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 24px;
-  min-height: 500px;
-}.serv-solution-cell {
-  background-image: url('../service/images/solutions_bg.jpg');
-}.serv-quotes-cell {
-  background-image: url('../service/images/quotes_bg.jpg');
-}.serv-recomm-cell {
-  background-image: url('../service/images/recommendation_bg.jpg');
-  background-position: 60% 0%;
 }
 
 

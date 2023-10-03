@@ -7,44 +7,73 @@
 <!-- Template Main CSS File -->
 <link href="../solution/assets/css/solution.css" rel="stylesheet">
 
+<style>
+    .dashboard-dropdown .rounded-circle {
+        border: 2px solid #fff;
+        /* Border color for the profile image */
+        cursor: pointer;
+        /* Add this to indicate that it's clickable */
+    }
+
+    /* User Name Styles */
+    .dashboard-dropdown #user-name {
+        font-size: 18px;
+        /* Font size for the user name */
+        font-weight: 600;
+        /* Font weight for the user name */
+    }
+
+    /* Adjust the dropdown menu positioning */
+    .dashboard-dropdown.dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: auto;
+        padding: 2vh;
+    }
+
+    /* Add this style to make sure the dropdown is aligned to the right */
+    .dashboard-dropdown.dropdown-menu-right {
+        left: auto;
+        right: 0;
+    }
+
+    .navbar-nav.dropdown {
+        position: relative;
+    }
+
+    .dashboard-dropdown.dropdown-menu a.dropdown-item {
+        color: #000000;
+    }
+</style>
+
+
 
 <header id="header" class="header d-flex align-items-center">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-        
+
         <nav id="navbar" class="navbar">
-            <a href="/" class="logo d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center" style="left: -7%;">
                 <img src="../images/logo.png" style="margin-right: 200px;" alt="Cloud Engine">
             </a>
             <ul>
                 <li style="margin-right: 20px;"><a href="/">Home</a></li>
                 <li style="margin-right: 20px;"><a href="/aboutUs2">About Us</a></li>
-                
+
                 <li style="margin-right: 20px;"><a href="/service">Our Services</a></li>
-                <!-- <li><a href="#portfolio">Portfolio</a></li> -->
-                <!-- <li><a href="#team">Team</a></li> -->
-                <!-- <li><a href="blog.html">Blog</a></li> -->
+
                 <li class="dropdown" style="margin-right: 200px;"><a href="#"><span>Dashboard</span> <i
                             class="bi bi-chevron-down dropdown-indicator"></i></a>
                     <ul>
                         <li><a href="/myDashboard">My Dashboard</a></li>
-                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
-                                    class="bi bi-chevron-down dropdown-indicator"></i></a>
-                            <ul>
-                                <li><a href="#">Deep Drop Down 1</a></li>
-                                <li><a href="#">Deep Drop Down 2</a></li>
-                                <li><a href="#">Deep Drop Down 3</a></li>
-                                <li><a href="#">Deep Drop Down 4</a></li>
-                                <li><a href="#">Deep Drop Down 5</a></li>
-                            </ul>
-                        </li>
                         <li><a href="/instance">Instances</a></li>
                         <li><a href="/history">Order History</a></li>
                         <li><a href="/settings">Profile</a></li>
                     </ul>
                 </li>
-                
-                
-                <!-- Login / Sign up -->
+
+
+                <!-- Guest -->
                 <div class="d-flex justify-content-center align-items-center gap-3 fs-7" id="GuestOption">
                     <!-- <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3"> Column Arrangement-->
 
@@ -53,12 +82,34 @@
                     <a class="text-decoration-none px-3 py-1 rounded-4" style="background-color: #eecb94; color: black;"
                         href="../auth/login">Login</a>
                 </div>
-                <div class="d-flex justify-content-center align-items-center gap-3 fs-7" id="UserOption">
-                    <!-- <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3"> Column Arrangement-->
 
-                    <button class="text-decoration-none px-3 py-1 rounded-4" style="background-color: #eecb94;"
-                        onclick="logout();">Logout</button>
+                <!-- User  -->
+                <div class="d-flex justify-content-center align-items-center gap-3 fs-7" id="UserOption">
+                    <!-- User Profile -->
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item dropdown ms-lg-3">
+                            <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="media d-flex align-items-center">
+                                    <img class="rounded-circle" alt="Image placeholder" width="50" height="50"
+                                        src="../myDashboard/assets/img/team/profile-picture-3.jpg">
+                                    <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
+                                        <span class="mb-0 font-small fw-bold text-gray-900" id="user-name"
+                                            style="font-size: 18px; padding-left: 3%; color: white;">Rendering...</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <ul>
+                                <li><a href="/settings">My Profile</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#" onclick="logout()">Logout</a></li>
+                            </ul>
+
+                        </li>
+                    </ul>
                 </div>
+
             </ul>
         </nav><!-- .navbar -->
 
@@ -84,3 +135,29 @@
 <!-- edit -->
 <!-- Template Main JS File -->
 <script src="../solution/assets/js/main.js"></script>
+
+
+<!-- Retrieve User Profile -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    function UserProfile() {
+        const userid = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+
+        axios.post("http://localhost:3001/api/profile",
+            {
+                "userId": userid,
+                "createToken": token,
+            },
+        )
+            .then(function (response) {
+                let fullName = response.data.firstName + " " + response.data.surname;
+                document.getElementById("user-name").innerHTML = fullName;
+                // document.getElementById("sidebar-user-name").innerHTML = fullName;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    window.onload = UserProfile();
+</script>

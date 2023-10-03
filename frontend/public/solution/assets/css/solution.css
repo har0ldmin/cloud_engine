@@ -23,10 +23,10 @@
 
 
 .header {
-  transition: all 0.5s;
+  /* transition: all 1s; */
   z-index: 997;
-  height: 50px;
-  background-color: var(--color-primary);
+  height: 8vh;
+  background-image: linear-gradient(to bottom, #3b17be7c, #3e17be1f);
 }
 
 /* .header.sticked {
@@ -42,15 +42,12 @@
   top: 0;
   right: 0;
   left: 0;
-  height: 50px;
-  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
+  height: 8vh;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .header .logo img {
-  max-height: 40px;
-  margin-right: 6px;
-  top: 5vh;
-  
+  max-height: 45px;
 }
 
 .sticked-header-offset {
@@ -147,7 +144,7 @@ section {
     z-index: 99;
     opacity: 0;
     visibility: hidden;
-    background: #fff;
+    background: #ffffffa1;
     box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     transition: 0.3s;
     border-radius: 4px;
@@ -1074,7 +1071,6 @@ section {
 .hero {
   width: 100%;
   position: relative;
-  background-image: url("../img/photo1.png");
   padding: 60px 0 0 0;
 }
 
