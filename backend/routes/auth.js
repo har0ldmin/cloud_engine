@@ -3,7 +3,7 @@ const router = express.Router();
 const { auth } = require("../middleware/auth");
 const { User } = require("../models/account");
 
-router.get("/", auth, (req, res) => {
+router.post("/", auth, (req, res) => {
     // #swagger.tags = ['Authentication']
     // Sample Custom Parameter Definition
     // /*	#swagger.parameters['obj'] = {

@@ -185,7 +185,7 @@ router.post("/describe", dashboard, async (req, res) => {
     }
 });
 
-router.get("/getAllEC2Instances", dashboard, async (req, res) => {
+router.post("/getAllEC2Instances", dashboard, async (req, res) => {
     try {
         const serviceUser = await UserAWS.findById(req.dashboardId);
         if (!serviceUser) {
@@ -232,7 +232,7 @@ router.post("/terminate", dashboard, async (req, res) => {
     try {
         const serviceUser = await UserAWS.findById(req.dashboardId);
         const InstanceId = req.body.InstanceId;
-        console.log(InstanceId, 111111);
+
         if (!serviceUser) {
             return res.status(500).json({
                 isError: true,
