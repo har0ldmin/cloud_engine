@@ -126,8 +126,8 @@ h3 {
   height: 250px;
 }.text-on-image {
   position: absolute;
-  top: 55%;
-  left: 40%;
+  top: 15%;
+  left: 0%;
   transform: translate(-50%, -50%);
   color: #6469B2;
   padding: 10px;
@@ -144,6 +144,10 @@ h3 {
   color: #303468;
   text-align: left;
   font-size: 12pt;
+}.xIcon {
+  position: relative;
+  top: -2%;
+  right: -22%;
 }
 
 
@@ -381,15 +385,6 @@ button[type="switch"] {
 
 }
 
-
-/* Results page */
-.main {
-  background-image: url("../results/images/nature.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  /* Additional CSS properties for positioning and styling can be added here */
-}
 
 /* Add additional CSS styles for your content here */
 .content {
