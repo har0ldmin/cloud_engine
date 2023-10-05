@@ -38,7 +38,7 @@ loginForm.addEventListener('submit', async event => {
             localStorage.setItem('id', data.userId);
             // console.log( data.createToken);
             // console.log(localStorage.getItem('token'));
-            window.location.href = '../';
+            window.location.href = '/myDashboard';
         } else {
             showErrPopup(data.message);
             // console.log(data);
