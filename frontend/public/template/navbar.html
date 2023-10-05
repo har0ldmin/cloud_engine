@@ -45,6 +45,18 @@
     .dashboard-dropdown.dropdown-menu a.dropdown-item {
         color: #000000;
     }
+
+    .loginRegisterButton {
+        background-color: #d89e4144;
+        border: 2px solid #d89e41;
+        color: rgb(255, 255, 255);
+        padding: 8px 22px !important;
+    }
+
+    .loginRegisterButton:hover {
+        background-color: rgba(216, 158, 65, 0.742);
+        color: rgb(255, 255, 255) !important;
+    }
 </style>
 
 
@@ -75,12 +87,8 @@
 
                 <!-- Guest -->
                 <div class="d-flex justify-content-center align-items-center gap-3 fs-7" id="GuestOption">
-                    <!-- <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3"> Column Arrangement-->
-
-                    <a class="text-decoration-none px-3 py-1 rounded-4" style="background-color: #eecb94; color: black;"
-                        href="../auth/signup">Register</a>
-                    <a class="text-decoration-none px-3 py-1 rounded-4" style="background-color: #eecb94; color: black;"
-                        href="../auth/login">Login</a>
+                    <a class="text-decoration-none px-3 py-1 rounded-2 loginRegisterButton" href="../auth/signup">Register</a>
+                    <a class="text-decoration-none px-3 py-1 rounded-2 loginRegisterButton" href="../auth/login">Login</a>
                 </div>
 
                 <!-- User  -->
