@@ -9,6 +9,10 @@
     {
       "url": "http://localhost:5501/",
       "description": "main server"
+    },
+    {
+      "url": "http://localhost:3001/",
+      "description": "main server"
     }
   ],
   "tags": [
@@ -174,6 +178,214 @@
                 "type": "object",
                 "properties": {
                   "username": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sdk/rds/getAllRDSInstances": {
+      "get": {
+        "tags": [
+          "SDK - RDS"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/sdk/rds/getRDSInstance": {
+      "post": {
+        "tags": [
+          "SDK - RDS"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sdk/rds/create": {
+      "post": {
+        "tags": [
+          "SDK - RDS"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "example": "any"
+                  },
+                  "dbUsername": {
+                    "example": "any"
+                  },
+                  "dbPassword": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sdk/rds/delete": {
+      "delete": {
+        "tags": [
+          "SDK - RDS"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sdk/rds/shutdown": {
+      "post": {
+        "tags": [
+          "SDK - RDS"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sdk/rds/poweron": {
+      "post": {
+        "tags": [
+          "SDK - RDS"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sdk/rds/reboot": {
+      "post": {
+        "tags": [
+          "SDK - RDS"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dbName": {
                     "example": "any"
                   }
                 }
@@ -403,7 +615,7 @@
       }
     },
     "/api/profile/": {
-      "post": {
+      "get": {
         "tags": [
           "Authentication"
         ],
@@ -426,24 +638,7 @@
           {
             "createdToken": []
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/api/forgot_password/": {
@@ -516,18 +711,22 @@
         }
       }
     },
+    "/api/sdk/ec2/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/sdk/ec2/create": {
       "post": {
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -540,12 +739,6 @@
                 "type": "object",
                 "properties": {
                   "InstanceName": {
-                    "example": "any"
-                  },
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
                     "example": "any"
                   }
                 }
@@ -562,12 +755,6 @@
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -579,12 +766,6 @@
                 "type": "object",
                 "properties": {
                   "InstanceId": {
-                    "example": "any"
-                  },
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
                     "example": "any"
                   }
                 }
@@ -601,12 +782,6 @@
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -618,12 +793,6 @@
                 "type": "object",
                 "properties": {
                   "InstanceId": {
-                    "example": "any"
-                  },
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
                     "example": "any"
                   }
                 }
@@ -640,12 +809,6 @@
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -657,12 +820,6 @@
                 "type": "object",
                 "properties": {
                   "InstanceId": {
-                    "example": "any"
-                  },
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
                     "example": "any"
                   }
                 }
@@ -679,12 +836,6 @@
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -696,12 +847,6 @@
                 "type": "object",
                 "properties": {
                   "InstanceId": {
-                    "example": "any"
-                  },
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
                     "example": "any"
                   }
                 }
@@ -718,12 +863,6 @@
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -737,12 +876,6 @@
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -754,285 +887,6 @@
                 "type": "object",
                 "properties": {
                   "InstanceId": {
-                    "example": "any"
-                  },
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/sdk/rds/getRDSInstance": {
-      "post": {
-        "tags": [
-          "SDK - RDS"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "example": "any"
-                  },
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/sdk/rds/create": {
-      "post": {
-        "tags": [
-          "SDK - RDS"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "example": "any"
-                  },
-                  "dbUsername": {
-                    "example": "any"
-                  },
-                  "dbPassword": {
-                    "example": "any"
-                  },
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/sdk/rds/delete": {
-      "delete": {
-        "tags": [
-          "SDK - RDS"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "example": "any"
-                  },
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/sdk/rds/shutdown": {
-      "post": {
-        "tags": [
-          "SDK - RDS"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/sdk/rds/poweron": {
-      "post": {
-        "tags": [
-          "SDK - RDS"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/sdk/rds/reboot": {
-      "post": {
-        "tags": [
-          "SDK - RDS"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "dbName": {
-                    "example": "any"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/dashboard/": {
-      "post": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "createToken": {
-                    "example": "any"
-                  },
-                  "userId": {
                     "example": "any"
                   }
                 }

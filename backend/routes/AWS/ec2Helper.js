@@ -22,81 +22,6 @@ AWS.config.getCredentials(function (err) {
 });
 
 const ec2 = new AWS.EC2({ apiVersion: "2016-11-15" });
-
-// function createEC2Instance(instanceName) {
-//     let result = {
-//         name: instanceName,
-//         ec2info: [
-//             {
-//                 InstanceId: null,
-//                 Status: null,
-//                 PrivateIpAddress: null,
-//                 PrivateDnsName: null,
-//             },
-//         ],
-//         isError: false,
-//         message: null,
-//     };
-
-//     var instanceParams = {
-//         ImageId: "ami-0dfb78957e4edea0c",
-//         InstanceType: "t2.micro",
-//         // KeyName: "KEY_PAIR_NAME",
-//         MinCount: 1,
-//         MaxCount: 1,
-//     };
-
-//     // Create a promise on an EC2 service object
-//     var instancePromise = new AWS.EC2({ apiVersion: "2016-11-15" })
-//         .runInstances(instanceParams)
-//         .promise();
-
-//     // Handle promise's fulfilled/rejected states
-//     instancePromise
-//         .then(function (data) {
-//             // console.log(data);
-//             var instanceId = data.Instances[0].InstanceId;
-//             var PrivateIpAddress = data.Instances[0].PrivateIpAddress;
-//             var PrivateDnsName = data.Instances[0].PrivateDnsName;
-//             // console.log("Created instance", instanceId);
-//             // Add tags to the instance
-//             tagParams = {
-//                 Resources: [instanceId],
-//                 Tags: [
-//                     {
-//                         Key: "Name",
-//                         Value: instanceName,
-//                     },
-//                 ],
-//             };
-//             // Create a promise on an EC2 service object
-//             var tagPromise = new AWS.EC2({ apiVersion: "2016-11-15" })
-//                 .createTags(tagParams)
-//                 .promise();
-//             // Handle promise's fulfilled/rejected states
-//             tagPromise
-//                 .then(function (data) {
-//                     console.log("Instance tagged", data);
-//                 })
-//                 .catch(function (err) {
-//                     console.error(err, err.stack);
-//                 });
-//             result.ec2info = [
-//                 {
-//                     InstanceId: instanceId,
-//                     Status: "pending",
-//                     PrivateIpAddress: PrivateIpAddress,
-//                     PrivateDnsName: PrivateDnsName,
-//                     tagName: instanceName,
-//                 },
-//             ];
-//             console.log(result);
-//         })
-//         .catch(function (err) {
-//             console.error(err, err.stack);
-//         });
-// }
-
 function createEC2Instance(instanceName) {
     let result = {
         name: instanceName,
@@ -156,52 +81,6 @@ function createEC2Instance(instanceName) {
     });
 }
 
-//                 ));
-
-//             .then(function (data) {
-//                 var instanceId = data.Instances[0].InstanceId;
-//                 var PrivateIpAddress = data.Instances[0].PrivateIpAddress;
-//                 var PrivateDnsName = data.Instances[0].PrivateDnsName;
-//                 var status = data.Instances[0].State.Name;
-//                 tagParams = {
-//                     Resources: [instanceId],
-//                     Tags: [
-//                         {
-//                             Key: "Name",
-//                             Value: instanceName,
-//                         },
-//                     ],
-//                 };
-//                 var tagPromise = new AWS.EC2({ apiVersion: "2016-11-15" })
-//                     .createTags(tagParams)
-//                     .promise();
-//                 tagPromise
-//                     .then(function (data) {
-//                         console.log("Instance tagged", data);
-//                     })
-//                     .catch(function (err) {
-//                         console.error(err, err.stack);
-//                     });
-//                 result.ec2info = [
-//                     {
-//                         InstanceId: instanceId,
-//                         Status: status,
-//                         PrivateIpAddress: PrivateIpAddress,
-//                         PrivateDnsName: PrivateDnsName,
-//                         tagName: instanceName,
-//                     },
-//                 ];
-//                 resolve(result);
-//             })
-//             .catch(function (err) {
-//                 console.error(err, err.stack);
-//                 result.isError = true;
-//                 result.message = err;
-//                 reject(result);
-//             });
-//     });
-// }
-
 function startEC2Instance(instanceId) {
     let result = {
         name: null,
@@ -239,49 +118,6 @@ function startEC2Instance(instanceId) {
     });
 }
 
-// createEC2Instance("test");
-
-// function startEC2Instance(instanceId) {
-//     var params = {
-//         InstanceIds: [instanceId],
-//         DryRun: true,
-//     };
-//     return ec2.startInstances(params, function (err, data) {
-//         if (err && err.code === "DryRunOperation") {
-//             params.DryRun = false;
-//             ec2.startInstances(params, function (err, data) {
-//                 if (err) {
-//                     console.log("Error", err);
-//                 } else if (data) {
-//                     console.log("Success", data.StartingInstances);
-//                 }
-//             });
-//         } else {
-//             console.log("You don't have permission to start instances.");
-//         }
-//     });
-// }
-// function stopEC2Instances(instanceId) {
-//     var params = {
-//         InstanceIds: [instanceId],
-//         DryRun: true,
-//     };
-//     return ec2.stopInstances(params, function (err, data) {
-//         if (err && err.code === "DryRunOperation") {
-//             params.DryRun = false;
-//             ec2.stopInstances(params, function (err, data) {
-//                 if (err) {
-//                     console.log("Error", err);
-//                 } else if (data) {
-//                     console.log("Success", data.StoppingInstances);
-//                 }
-//             });
-//         } else {
-//             console.log("You don't have permission to stop instances");
-//         }
-//     });
-// }
-
 function stopEC2Instance(instanceId) {
     let result = {
         name: null,
@@ -318,34 +154,6 @@ function stopEC2Instance(instanceId) {
         });
     });
 }
-
-// var params = {
-//     InstanceIds: ["i-0335b616c9b9cdac8"],
-//     DryRun: true,
-// };
-
-// stopEC2Instances("i-0335b616c9b9cdac8");
-// function rebootEC2Instance(instanceId) {
-//     let result = {};
-//     var params = {
-//         InstanceIds: [instanceId],
-//         DryRun: true,
-//     };
-//     ec2.rebootInstances(params, function (err, data) {
-//         if (err && err.code === "DryRunOperation") {
-//             params.DryRun = false;
-//             ec2.rebootInstances(params, function (err, data) {
-//                 if (err) {
-//                     console.log("Error", err);
-//                 } else if (data) {
-//                     console.log("Success", data);
-//                 }
-//             });
-//         } else {
-//             console.log("You don't have permission to reboot instances.");
-//         }
-//     });
-// }
 
 function rebootEC2Instance(instanceId) {
     let result = {
@@ -516,9 +324,6 @@ function terminateEC2Instance(instanceId) {
         });
     });
 }
-
-// createEC2Instance("testing");
-// getAllEC2Instances();
 
 module.exports = {
     createEC2Instance,

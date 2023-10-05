@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-iam": "^3.405.0",
+    "@google-cloud/compute": "^4.0.1",
     "aws-sdk": "^2.1450.0",
     "bcrypt": "^5.1.1",
     "bson": "^6.0.0",

@@ -11,6 +11,10 @@ const options = {
       url: "http://localhost:5501/",
       description: "main server"
     },
+    {
+      url: "http://localhost:3001/",
+      description: "main server"
+    },
   ],
   schemes: ['http'],
   securityDefinitions: {
