@@ -6,11 +6,253 @@
         padding: 0.15rem 0.75rem;
         font-size: 0.75rem;
     }
+
+    .newinstance {
+        background-color: white;
+        color: blue;
+        border-color: blue;
+    }
+
+    .refreshicon {
+        color: black;
+    }
+
+    .refreshicon:hover {
+        background-color: white;
+    }
+
+    .refreshicon:hover .refreshpause {
+        display: none !important;
+    }
+
+    .refreshicon:hover .refreshplay {
+        display: block !important;
+        color: blue;
+    }
+
+    /* Overlay Helper */
+    .overlay {
+        position: absolute;
+        height: 15%;
+        width: 15%;
+        background-color: rgba(225, 183, 114, 0.7);
+        margin-top: 0.5%;
+        border-radius: 10px;
+        z-index: 1;
+    }
+
+    .nextBtn {
+        position: absolute;
+        bottom: 10;
+        right: 15;
+        border-radius: 5px;
+    }
+
+    .nextBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .skipBtn {
+        position: absolute;
+        bottom: 10;
+        left: 15;
+        border-radius: 5px;
+        background-color: rgb(99, 99, 99);
+        border-color: rgb(99, 99, 99);
+        ;
+    }
+
+    .skipBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .description {
+        position: absolute;
+        left: 15;
+        top: 10;
+        color: white;
+        font-size: 16px;
+    }
 </style>
 
 
-<main class="content">
+<!-- Popup Modal Design -->
+<style>
+    * {
+        box-sizing: border-box
+    }
 
+    button:hover {
+        opacity: 1;
+    }
+
+    .cancelbtn {
+        float: left;
+        width: 20%;
+    }
+
+    .deletebtn {
+        float: right;
+        width: 20%;
+    }
+
+    .cancelbtn {
+        background-color: white;
+        color: rgb(122, 122, 122);
+        border: 2px solid rgb(122, 122, 122);
+        height: 4vh;
+        border-radius: 10px;
+    }
+
+    .cancelbtn:hover {
+        background-color: rgba(104, 104, 104, 0.5);
+        color: rgb(255, 255, 255);
+        border-color: rgb(104, 104, 104);
+    }
+
+    /* Add a color to the delete button */
+    .deletebtn {
+        background-color: white;
+        color: blue;
+        border-color: blue;
+        height: 4vh;
+        border-radius: 10px;
+    }
+
+    .deletebtn:hover {
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white !important;
+        border-color: rgba(0, 0, 0, 0.85) !important;
+    }
+
+    /* Add padding and center-align text to the container */
+    .container {
+        padding: 5vh 2vh;
+        text-align: center;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        border: none !important;
+
+        display: none;
+
+        position: fixed;
+
+        z-index: 1;
+
+        width: 90%;
+
+        height: 100%;
+
+        padding-top: 10vh;
+
+        margin-left: 220px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        width: 80%;
+        box-shadow:
+            0px 10px 40px #405671,
+            0px -15px 40px #FF9B00,
+            -15px 0px 40px #FF9B00,
+            10px 0px 40px #405671;
+        border-radius: 50px;
+    }
+
+    .modal-content_remove {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        width: 80%;
+        box-shadow: 0px 0px 40px #f73a0196;
+        border-radius: 50px;
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* The Modal Close Button (x) */
+    .close {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #f1f1f1;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #f44336;
+        cursor: pointer;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Change styles for cancel button and delete button on extra small screens */
+    @media screen and (max-width: 300px) {
+
+        .cancelbtn,
+        .deletebtn {
+            width: 100%;
+        }
+    }
+
+    .content-wrapper {
+        display: flex;
+        align-items: center;
+        margin-top: 8%;
+
+    }
+
+    .image-container {
+        flex: 0 0 auto;
+        margin-right: 8%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        margin-bottom: 10%;
+    }
+
+    .instanceDescription {
+        flex: 1;
+    }
+
+    .readmore {
+        color: blue;
+        text-align: right;
+        align-items: right;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 10%;
+    }
+
+    .readmore:hover {
+        text-decoration: underline;
+        color: blue;
+    }
+</style>
+
+
+
+<!-- Main -->
+<main class="content">
+    <!-- This HTML code block represents the instances page of the dashboard. 
+        It displays a breadcrumb navigation bar, a header, and a list of instances. 
+        The user can add new instances, activate or deactivate all instances, and select specific instances to control. -->
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
@@ -26,7 +268,8 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href="#">Instances</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/instance"
+                            style="text-decoration: underline; color: #F79901;">Instances</a></li>
                 </ol>
             </nav>
             <h2 class="h4">Current Instances</h2>
@@ -34,7 +277,7 @@
         </div>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div>
-                <button class="btn btn-gray-800 d-inline-flex align-items-center dropdown-toggle"
+                <button class="btn btn-gray-800 d-inline-flex align-items-center dropdown-toggle newinstance"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -43,8 +286,16 @@
                     </svg>
                     New Instance
                 </button>
+                <div class="overlay guideInstanceAdd" style="display: none;"><a class=" description">You can add your
+                        desired instances here. </a>
+                    <br>
+                    <button class="btn btn-primary nextBtn" onclick="guideInstanceAddNext()">Next</button>
+                    <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                </div>
+
                 <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                    <a class="dropdown-item d-flex align-items-center" href="#" id="ec2_deploy">
+                    <a class="dropdown-item d-flex align-items-center" href="#"
+                        onclick="document.getElementById('id01').style.display='block'">
                         <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
@@ -54,7 +305,8 @@
                         </svg>
                         EC2
                     </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
+                    <a class="dropdown-item d-flex align-items-center" href="#"
+                        onclick="document.getElementById('id03').style.display='block'">
                         <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
@@ -62,23 +314,33 @@
                                 d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        RSD
+                        GCP
                     </a>
                 </div>
             </div>
 
-            <div class="btn-group ms-2 ms-lg-3">
-                <button type="button" class="btn btn-sm btn-outline-gray-600"
-                    onclick="ControlAllInstances(true)">Activate All</button>
-                <button type="button" class="btn btn-sm btn-outline-gray-600"
-                    onclick="ControlAllInstances(false)">Deactivate All</button>
+            <div>
+                <div class="btn-group ms-2 ms-lg-3">
+                    <button type="button" class="btn btn-sm btn-outline-gray-600"
+                        onclick="ControlAllInstances(true)">Activate All</button>
+                    <button type="button" class="btn btn-sm btn-outline-gray-600"
+                        onclick="ControlAllInstances(false)">Deactivate All</button>
+                </div>
+                <div class="overlay guideInstanceToggleAll" style="display: none; right: 0;"><a class="description">You
+                        can turn on / off all the instances instantly. </a>
+                    <br>
+                    <button class="btn btn-primary nextBtn" onclick="guideInstanceToggleAllNext()">Next</button>
+                    <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="card card-body border-0 shadow table-wrapper table-responsive" style="margin-top: 3%;">
 
+    <div class="card card-body border-0 shadow table-wrapper table-responsive" style="margin-top: 3%;">
         <div class="table-settings mb-4" style="margin-top: 1%;">
+            
+            <!-- This code block contains a search input field with a search icon and an error message. It also has an overlay with a description and two buttons for a tutorial. -->
             <div class="col col-md-6 col-lg-3 col-xl-4">
                 <div class="input-group me-2 me-lg-3 fmxw-800">
                     <span class="input-group-text">
@@ -95,22 +357,41 @@
                     <div id="errorMessage" class="text-danger mt-2"
                         style="display: none; font-size: 14px; margin-left: 1%;"> Enter at least 2 words</div>
                 </div>
+                <div class="overlay guideInstanceSearchbox" style="display: none; width: 35%; height: 45%;"><a
+                        class="description">You
+                        can search your instance ID / providers here. </a>
+                    <br>
+                    <button class="btn btn-primary nextBtn" onclick="guideInstanceSearchboxNext()">Next</button>
+                    <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                </div>
             </div>
 
-            <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-3"
-                onclick="refreshInstances()" style="margin-top: 2% !important; margin-right: 3% !important;"">
-                <a style="font-size: 20px; padding: 0% !important;">&#8635</a>
+            <!-- This code block contains a button and a div element. The button has an onclick event that calls the refreshInstances() function. 
+                 The div element has a class of "overlay" and contains a description and two buttons, "Next" and "Skip".
+                 This code block is used for refreshing the page and displaying a tutorial overlay. -->
+            <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-3 refreshicon"
+                onclick="refreshInstances()" style="margin-top: 3% !important; margin-right: 4% !important;">
+                <i class="fa fa-spinner refreshpause" aria-hidden="true" style="display: block; font-size: 20px;"></i>
+                <i class="fa fa-spinner fa-pulse refreshplay" style="display: none; font-size: 20px;"></i>
             </button>
-
-
-
+            <div class="overlay guiderefreshbtn"
+                style="display: none; width: 35%; height: 45%; right: 0; margin-top: 1.5%;"><a class="description">This
+                    button will refresh the page. It helps you to keep track with your
+                    current
+                    instances.</a>
+                <br>
+                <button class="btn btn-primary nextBtn" onclick="guiderefreshbtnNext()">Next</button>
+                <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+            </div>
         </div>
 
+        <!-- This table displays a list of instances with their company, name, private IP address, private DNS name, instance type, status, and action. 
+            The instances are dynamically added to the table body. -->
         <table class="table table-hover" style="margin-top: 3%;">
             <thead>
                 <tr>
                     <th class="border-gray-200">Company</th>
-                    <th class="border-gray-200">ID</th>
+                    <th class="border-gray-200">Name</th>
                     <th class="border-gray-200">Private Ip Address</th>
                     <th class="border-gray-200">Private DNS Name</th>
                     <th class="border-gray-200">Instance Type</th>
@@ -123,81 +404,261 @@
                 <!-- Instances go here -->
             </tbody>
         </table>
+
+        <!-- This HTML code block displays a message to the user if they do not have any instances yet. It also contains an overlay with a description and buttons for a tutorial on how to use the instances area. -->
+        <div>
+            <a id="noInstancesMessage"
+                style="text-align: center; font-size: 24px; font-weight: bold; color: rgb(136, 136, 136); padding-top: 8%; padding-bottom: 8%; display: none;">
+                You don't have any instances yet
+            </a>
+            <div class="overlay guideInstancesBoard"
+                style="display: none; width: 96%; height: 40%; top: 180; background-color: rgba(225, 183, 114, 0.95);">
+                <a class="description">Your current instances will appear here. You can see the details and control
+                    them in this area.</a>
+                <br>
+                <button class="btn btn-primary nextBtn" onclick="skipTutorial()">Finish</button>
+                <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+            </div>
+        </div>
+
     </div>
 
+
+    <!--
+    This code block represents a modal window for creating an Amazon Elastic Compute Cloud (Amazon EC2) instance. 
+    It contains a form with input fields for creating an EC2 instance, as well as a description of the benefits of using Amazon EC2. 
+    The modal window also includes buttons for cancelling the creation of the instance and for deploying the instance. 
+    -->
+    <div id="id01" class="modal">
+        <form class="modal-content" action="/action_page.php">
+            <div class="container">
+                <h1><a style="color: blue;">Create</a> Amazon EC2</h1>
+
+                <div class="content-wrapper" style="margin-bottom: 5% !important;">
+                    <div class="image-container">
+                        <img src="https://devopsdatacenter.files.wordpress.com/2024/04/amazon_ec2.png" alt="ec2">
+                    </div>
+                    <div class="instanceDescription">
+                        <p style="text-align: left;">
+                            ✔ Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable
+                            compute capacity in the cloud.<br><br>
+                            ✔ Access reliable, scalable infrastructure on demand. Scale capacity within minutes with SLA
+                            commitment of 99.99% availability.<br><br>
+                            ✔ Provide secure compute for your applications. Security is built into the foundation of
+                            Amazon EC2 with the AWS Nitro System.<br><br>
+                            ✔ Optimize performance and cost with flexible options like AWS Graviton-based instances,
+                            Amazon EC2 Spot instances, and AWS Savings Plans.<br><br>
+                        </p>
+                        <a class="readmore"
+                            href="https://aws.amazon.com/pm/ec2/?trk=a5f6fe36-4e3c-4c1b-a71a-b795de7b4ed7&sc_channel=ps&ef_id=Cj0KCQjwsp6pBhCfARIsAD3GZuYInf7Nt2EUQCA7bDeoicCd52_VLOgiKmfmXnVnzMhr_xAtEGsakvcaArI9EALw_wcB:G:s&s_kwcid=AL!4422!3!477014397245!e!!g!!amazon%20ec2!11539887591!114142402482">
+                            Read more ->
+                        </a>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <button type="button" class="cancelbtn" onclick="closeEC2CreateModal()">Cancel</button>
+                    <button type="button" class="deletebtn" onclick="ec2_deploy()">Add</button>
+                    <a id="EC2createloadingCircle" style="display: none;"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"
+                            style="color: orange !important;"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    
+    <!-- This code block represents a modal form for creating a Google GCP instance. 
+        It contains a form with input fields for creating a new instance, as well as a description of the benefits of using Google Cloud Platform. 
+        The form includes buttons for canceling the creation and adding the instance, as well as a loading spinner that appears when the instance is being created. -->
+    <div id="id03" class="modal">
+        <form class="modal-content" action="/action_page.php" style="box-shadow: 
+            0px 15px 40px #176BEF,
+            0px -15px 40px #FF3E30,
+            -25px 0px 40px #f7b31f,
+            25px 0px 40px #179C52;">
+            <div class="container">
+                <h1><a style="color: blue;">Create</a> Google GCP</h1>
+
+                <div class="content-wrapper" style="margin-bottom: 5% !important;">
+                    <div class="image-container">
+                        <img src="https://devopsdatacenter.files.wordpress.com/2024/04/amazon_ec2.png" alt="gcp">
+                    </div>
+                    <div class="instanceDescription">
+                        <p style="text-align: left;">
+                            ✔ Pricing is one of the significant factors that make Google Cloud stand out among the other
+                            cloud providers.<br><br>
+                            ✔ Google Cloud offers a monthly pricing.<br><br>
+                            ✔ Google Cloud provides its Google Cloud and Google App customers network speeds of up to
+                            10Tbs.<br><br>
+                            ✔ Google has many innovative tools for cloud warehousing like BigQuery and real-time data
+                            processing tools like Google Cloud Dataflow.<br><br>
+                        </p>
+                        <a class="readmore"
+                            href="https://www.simplilearn.com/google-cloud-platform-article#:~:text=Google%20Cloud%20Platform%20(GCP)%20is,to%2Duse%20tools%20and%20services.">
+                            Read more ->
+                        </a>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <button type="button" class="cancelbtn" onclick="closeGCPCreateModal()">Cancel</button>
+                    <button type="button" class="deletebtn" onclick="gcp_deploy()">Add</button>
+                    <a id="GCPcreateloadingCircle" style="display: none;"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"
+                            style="color: orange !important;"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- This code block represents a modal for removing an instance. 
+         It contains a form with instance details, including company, ID, private IP address, private DNS name, instance type, and status. 
+         The modal has two buttons, one for canceling the removal and one for removing the instance. -->
+    <div id="id02" class="modal">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
+        <form class="modal-content_remove" action="/action_page.php">
+            <div class="container">
+                <h1><a style="color: red;">Remove</a> the following instance</h1>
+
+                <div class="content-wrapper" style="margin-bottom: 5% !important;">
+                    <div class="image-container">
+                        <img src="https://devopsdatacenter.files.wordpress.com/2024/04/amazon_ec2.png" alt="ec2">
+                    </div>
+                    <div class="instanceDescription">
+                        <p>
+                            <a style="font-weight: bold;">Company</a><br><a id="company"></a> <br><br>
+                            <a style="font-weight: bold;">ID</a><br><a id="id"></a> <br><br>
+                            <a style="font-weight: bold;">Private IP Address</a><br><a id="ipaddress"></a> <br><br>
+                            <a style="font-weight: bold;">Private DNS Name</a><br><a id="dnsname"></a> <br><br>
+                            <a style="font-weight: bold;">Instance Type</a><br><a id="instancetype"></a> <br><br>
+                            <a style="font-weight: bold;">Status</a><br><a id="status"></a> <br><br>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <button type="button" class="cancelbtn" onclick="closeRemoveModal()">Cancel</button>
+                    <button type="button" class="deletebtn" onclick="deleteRow()"
+                        style="color: red; border-color: red;">Remove</button>
+                    <a id="removeloadingCircle" style="display: none;"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"
+                            style="color: orange !important;"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
 </main>
 
 
 
-<!-- Search Box function -->
+<!-- +======================================== -->
+<!-- +======================================== -->
+<!-- +======================================== -->
+
+
+
+
+
 <script>
+    // <!-- 
+    //     This code block adds an event listener to the search input field in the instances.html page. 
+    //     When the user types in the search input field, the filterInstances function is called with the input value as a parameter.
+    // -->
     document.addEventListener("DOMContentLoaded", function () {
         const searchInput = document.getElementById("searchInput");
-        const errorMessage = document.getElementById("errorMessage");
-        const tableRows = document.querySelectorAll("tbody tr");
 
         searchInput.addEventListener("input", function () {
-            const searchValue = searchInput.value.trim().toLowerCase();
-
-            if (searchValue.length >= 2) {
-                tableRows.forEach(function (row) {
-                    const text = row.textContent.trim().toLowerCase();
-                    row.style.display = text.includes(searchValue) ? "table-row" : "none";
-                });
-
-                // Hide the error message when the search query is valid
-                errorMessage.style.display = "none";
-            } else if (searchValue.length > 0) {
-                // Show the error message when the search query is too short
-                errorMessage.style.display = "block";
-
-                // Clear the table rows when the search query is too short
-                tableRows.forEach(function (row) {
-                    row.style.display = "none";
-                });
-            } else {
-                // Clear the table rows and hide the error message when the input is empty
-                errorMessage.style.display = "none";
-                tableRows.forEach(function (row) {
-                    row.style.display = "table-row";
-                });
-            }
+            const filterText = searchInput.value.toLowerCase();
+            filterInstances(filterText);
         });
     });
+
+    
+    // <!-- This function filters instances based on the given filter text. It takes in a string parameter 'filterText' and searches for matches in the company and id columns of the table. 
+    //     If a match is found, the corresponding row is displayed, otherwise it is hidden. -->
+    function filterInstances(filterText) {
+        const tableRows = document.querySelectorAll("tbody tr");
+        tableRows.forEach(function (row) {
+            const companyColumn = row.querySelector("td:nth-child(1)").textContent.toLowerCase();
+            const idColumn = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+
+            if (companyColumn.includes(filterText) || idColumn.includes(filterText)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
 </script>
 
 
+
+
+<!-- 
+This script tag is used to include the Axios library from a CDN. Axios is a popular promise-based HTTP client for making API requests in JavaScript. 
+-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
 <script>
 
-    // refreshInstances
+    // refresh the page
     function refreshInstances() {
         location.reload();
     }
 
 
-    // Retrieve Dashboard
+    
+    // <!-- 
+    // This function makes an asynchronous call to the dashboard API to retrieve the EC2 instances associated with the user's account. 
+    // It retrieves the user's ID and token from local storage and sends them in the request body. 
+    // If the request is successful, it logs the EC2 instances to the console and stores their instance IDs and names in local storage. 
+    // If the request fails, it logs the error to the console. 
+    // -->
     async function dashboardAPI() {
         const userId = localStorage.getItem("id");
         const token = localStorage.getItem("token");
-
-        console.log(userId, token);
 
         try {
             const response = await axios.post('http://localhost:3001/api/dashboard', {
                 "userId": userId,
                 "createToken": token,
             });
-            await localStorage.setItem("ec2", response.data.ec2);
+            console.log(response.data.ec2);
+            let ec2 = [];
+            let ec2Name = [];
+
+            response.data.ec2.forEach(async element => {
+                await ec2.push(element.instanceId);
+                await ec2Name.push(element.instanceName);
+            });
+
+            await localStorage.setItem("ec2", ec2);
+            await localStorage.setItem("ec2Name", ec2Name);
         } catch (error) {
             console.log(error);
         }
     }
 
 
-    // Creating a new instance
-    function createNewInstance(company, instanceId, InstanceType, PrivateIpAddress, PrivateDnsName, Status) {
 
+    // <!-- 
+    //     This function creates a new instance in the instances table.
+    //     It takes in the following parameters:
+    //     - company: the name of the company associated with the instance
+    //     - instanceName: the name of the instance
+    //     - InstanceType: the type of the instance
+    //     - PrivateIpAddress: the private IP address of the instance
+    //     - PrivateDnsName: the private DNS name of the instance
+    //     - Status: the status of the instance
+    //     - instanceId: the ID of the instance
+
+    //     The function creates a new row in the instances table with the instance details.
+    //     It also adds a toggle switch to start/stop the instance and a remove button to delete the instance.
+    //     If the instance is running or pending, the toggle switch and remove button are enabled.
+    //     If the instance is stopped, the toggle switch and remove button are disabled.
+    // -->
+    function createNewInstance(company, instanceName, InstanceType, PrivateIpAddress, PrivateDnsName, Status, instanceId) {
         var newRow = document.createElement('tr');
 
         var idCell = document.createElement('td');
@@ -205,11 +666,21 @@
         companyLink.href = '#';
         companyLink.classList.add('fw-bold');
         companyLink.textContent = company;
+
+        if (company == "AMAZON") {
+            companyLink.classList.add('text-warning');
+        }
+        else if (company == "GOOGLE") {
+            companyLink.classList.add('text-info');
+        }
+        else {
+        }
+
         idCell.appendChild(companyLink);
         newRow.appendChild(idCell);
 
         var otherCells = [
-            instanceId, PrivateIpAddress, PrivateDnsName, InstanceType, Status, '', ''
+            instanceName, PrivateIpAddress, PrivateDnsName, InstanceType, Status, '', ''
         ];
 
         for (var i = 0; i < otherCells.length; i++) {
@@ -217,9 +688,18 @@
             var span = document.createElement('span');
             span.classList.add('fw-normal');
             span.textContent = otherCells[i];
+            if (i == 4) {
+                if (otherCells[i] === "running") {
+                    span.classList.add('text-success');
+                } else if (otherCells[i] === "stopped") {
+                    span.classList.add('text-danger');
+                } else {
+                    span.classList.add('text-warning');
+                }
+            }
             cell.appendChild(span);
 
-            if (i === 4) {
+            if (i == 5) {
                 var divToggleSwitch = document.createElement('div');
                 divToggleSwitch.classList.add('form-check', 'form-switch');
 
@@ -243,7 +723,6 @@
                 inputToggleSwitch.addEventListener('change', async function () {
                     if (this.checked) {
                         await toggle(true, instanceId);
-
                     } else {
                         await toggle(false, instanceId);
                     }
@@ -264,7 +743,20 @@
                 var removeButton = document.createElement("button");
                 removeButton.classList.add("btn", "btn-danger", "btn-smaller");
                 removeButton.textContent = "Remove";
-                removeButton.onclick = function () { deleteRow(this, instanceId); };
+                removeButton.onclick = function () { removeModal(this, instanceId); };
+
+
+                if ((Status === "running") || (Status === "pending")) {
+                    inputToggleSwitch.checked = true;
+                    if (Status === "pending") {
+                        removeButton.disabled = true;
+                    }
+                } else {
+                    inputToggleSwitch.checked = false;
+                    if (Status !== "stopped") {
+                        removeButton.disabled = true;
+                    }
+                }
 
                 cell.appendChild(removeButton);
             }
@@ -279,8 +771,14 @@
 </script>
 
 
-<!-- Render Instances -->
+
 <script>
+    // <!-- 
+    // This code block listens for the DOMContentLoaded event and calls the dashboardAPI function. 
+    // It then retrieves the user ID and token from local storage, as well as EC2 and GCP instances. 
+    // If there are EC2 instances, it sends a POST request to the server to retrieve information about each instance and creates a new instance element for each one. 
+    // If there are GCP instances, it creates a new instance element for each one. If there are no instances to display, it shows a message. 
+    // -->
     document.addEventListener("DOMContentLoaded", async function () {
         console.log("Dashboard API calling..");
         await dashboardAPI();
@@ -290,16 +788,21 @@
         const token = localStorage.getItem("token");
         const tableBody = document.querySelector("tbody");
         const ec2Instances = localStorage.getItem("ec2");
+        const ec2Names = localStorage.getItem("ec2Name");
+        const gcpInstances = localStorage.getItem("gcp");
 
+        // render ec2 instances
         if (ec2Instances) {
+            console.log(ec2Instances);
             const instances = ec2Instances.split(",");
+            const names = ec2Names.split(",");
             console.log("EC2 instances list: " + instances);
 
             if (instances.length > 0) {
-                console.log("Instances list's length is: " + instances.length); 
+                console.log("EC2 Instances list's length is: " + instances.length);
+                let cnt = 0;
 
                 instances.forEach(function (instanceId) {
-                    console.log(instanceId);
 
                     axios.post("http://localhost:3001/api/sdk/ec2/describe",
                         {
@@ -309,59 +812,143 @@
                         }
                     )
                         .then(function (response) {
-                            console.log("response is back: " + response);
+                            // debugging
                             const InstanceStatus = response.data.ec2info[0];
                             console.log(InstanceStatus);
-                            createNewInstance("AMAZON", instanceId, InstanceStatus.InstanceType, InstanceStatus.PrivateIpAddress, InstanceStatus.PrivateDnsName, InstanceStatus.Status);
+                            createNewInstance("AMAZON", names[cnt], InstanceStatus.InstanceType, InstanceStatus.PrivateIpAddress, InstanceStatus.PrivateDnsName, InstanceStatus.Status, instanceId);
+                            cnt++;
                         })
                         .catch(function (error) {
                             console.log(error);
                         });
                 });
             }
-        } else {
-            displayNoInstancesMessage();
+            else {
+                console.log("Failed to display the instances");
+            }
+        }
+        // render gcp instances
+        if (gcpInstances) {
+            console.log("gcp instances cnt: " + gcpInstances);
+
+            if (gcpInstances > 0) {
+                console.log("GCP Instances list's length is: " + gcpInstances);
+
+                for (let cnt = 0; cnt < gcpInstances; cnt++)
+                    createNewInstance("GOOGLE", "Harold's GCP", "gcp_oceania", "173.17.11.162", "ns-cloud-d3-googledomains.com", "running", 111);
+            }
+            else {
+                console.log("Failed to display the instances");
+            }
+        }
+        else if ((ec2Instances == false)) {
+            console.log("There isn't any instances to display.");
+            noInstancesMessage.style.display = "block";
+        }
+        else {
+            console.log("Failed to display the instances");
         }
     });
 </script>
 
 
-<!-- Remove Instance -->
+
 <script>
-    async function deleteRow(button, instanceId) {
-        let msg = "Are you sure you want to remove the instance?";
-
-        if (confirm(msg) == false) {
-            return;
-        }
-
+    // <!--
+    //     This function is responsible for displaying the details of an EC2 instance and showing a remove modal.
+    //     It takes two parameters, a button and an instanceId.
+    //     It retrieves the instance details using axios and displays them on the modal.
+    //     The modal is then displayed to the user.
+    // -->
+    async function removeModal(button, instanceId) {
         const userId = localStorage.getItem("id");
         const token = localStorage.getItem("token");
+        console.log(button, instanceId);
+        // retrieve the instance details
+        await axios.post("http://localhost:3001/api/sdk/ec2/describe",
+            {
+                "userId": userId,
+                "createToken": token,
+                "InstanceId": instanceId,
+            }
+        )
+            .then(function (response) {
+                // debugging
+                const InstanceStatus = response.data.ec2info[0];
+                document.getElementById("company").innerHTML = "AMAZON";
+                document.getElementById("id").innerHTML = instanceId;
+                document.getElementById("ipaddress").innerHTML = InstanceStatus.PrivateIpAddress;
+                document.getElementById("dnsname").innerHTML = InstanceStatus.PrivateDnsName;
+                document.getElementById("instancetype").innerHTML = InstanceStatus.InstanceType;
+                document.getElementById("status").innerHTML = InstanceStatus.Status;
 
-        const row = button.closest("tr");
+                // Status color
+                if (InstanceStatus.Status == "running") {
+                    document.getElementById("status").style.color = "green";
+                }
+                else if (InstanceStatus.Status == "stopped") {
+                    document.getElementById("status").style.color = "red";
+                }
+                else {
+                    document.getElementById("status").style.color = "orange";
+                }
 
+                // Company color = amazon default yet
+                document.getElementById("company").style.color = "orange";
+
+                // show the remove modal
+                document.getElementById('id02').style.display = 'block';
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    
+    // <!-- 
+    //     This function deletes an EC2 instance by sending a POST request to the server with the instance ID, user ID, and token.
+    //     It then reloads the page to reflect the changes.
+    // -->
+    async function deleteRow() {
+        const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+        let instanceId = document.getElementById("id").innerHTML;
+        var removeloadingCircle = document.getElementById("removeloadingCircle");
+        removeloadingCircle.style.display = "block";
+
+        console.log(instanceId);
         await axios.post("http://localhost:3001/api/sdk/ec2/terminate", {
             "userId": userId,
             "createToken": token,
             "InstanceId": instanceId,
         })
             .then(function (response) {
-                console.log(response.data);
-                row.remove();
+                console.log(response);
             })
             .catch(function (error) {
                 console.log(error);
             });
+        location.reload();
     }
 </script>
 
 
-<!-- Control Toggles -->
 <script>
+    // <!-- 
+    //     FUNCTION: toggle
+    //     DESCRIPTION: This function toggles the state of an instance between start and stop. It takes in two parameters: state (boolean) and instanceId (integer). If the instanceId is 111, the function logs a message and returns. Otherwise, if the state is true, it sends a POST request to start the EC2 instance using the axios library. If the state is false, it sends a POST request to stop the EC2 instance using the axios library. The function also sends the userId and token as part of the request body.
+    // -->
     async function toggle(state, instanceId) {
         const userId = localStorage.getItem("id");
         const token = localStorage.getItem("token");
 
+        // only if the instance is gcp
+        if (instanceId == 111) {
+            console.log("gcp instance trigerred");
+            return;
+        }
+
+        //  if the instance is ec2
         if (state == true) {
             await axios.post("http://localhost:3001/api/sdk/ec2/start",
                 {
@@ -397,8 +984,13 @@
 </script>
 
 
-<!-- Controll All Toggles -->
+
 <script>
+    /**
+     * Turns on all EC2 instances associated with the user's account.
+     * @function TurnOnAllInstances
+     * @returns {void}
+     */
     function TurnOnAllInstances() {
         const userId = localStorage.getItem("id");
         const token = localStorage.getItem("token");
@@ -428,6 +1020,12 @@
     }
 
 
+    // <!--
+    // This function turns off all EC2 instances associated with the user's account.
+    // It retrieves the user's ID and token from local storage, as well as the list of EC2 instances.
+    // If there are instances, it sends a POST request to the server to stop each instance.
+    // If there are no instances, it logs a message to the console.
+    // -->
     function TurnOffAllInstances() {
         const userId = localStorage.getItem("id");
         const token = localStorage.getItem("token");
@@ -457,6 +1055,9 @@
     }
 
 
+    // <!-- 
+    //     DESCRIPTION: This function controls all instances based on the given status. If the status is true, it turns on all instances and reloads the page after 1 second. If the status is false, it turns off all instances and reloads the page after 1 second.
+    // -->
     async function ControlAllInstances(status) {
         if (status == true) {
             await TurnOnAllInstances();
@@ -474,55 +1075,230 @@
 </script>
 
 
-<!-- Display You don't have any items yet -->
-<script>
-    function displayNoInstancesMessage() {
-        const noInstancesRow = document.createElement("tr");
-        const noInstancesCell = document.createElement("td");
-
-        noInstancesCell.setAttribute("colspan", "7");
-        noInstancesCell.textContent = "You don't have any instances yet";
-
-        noInstancesCell.style.textAlign = "center";
-        noInstancesCell.style.fontSize = "24px";
-        noInstancesCell.style.fontWeight = "bold";
-        noInstancesCell.style.color = "#888888";
-        noInstancesCell.style.paddingTop = "2%";
-        noInstancesCell.style.paddingBottom = "2%";
-
-        noInstancesRow.appendChild(noInstancesCell);
-        tableBody.appendChild(noInstancesRow);
-    };
-</script>
-
 
 <script>
-    document.getElementById("ec2_deploy").addEventListener("click", function (event) {
-        let msg = "Are you sure you want to add a new EC2 instance?";
-
-        if (confirm(msg) == false) {
-            return;
-        }
-
+    /**
+     * Deploys an EC2 instance for the current user using their user ID and token.
+     * Displays a loading circle while the instance is being created.
+     */
+    async function ec2_deploy() {
         const userId = localStorage.getItem("id");
         const token = localStorage.getItem("token");
+        var EC2createloadingCircle = document.getElementById("EC2createloadingCircle");
+        EC2createloadingCircle.style.display = "block";
 
-        axios.post('http://localhost:3001/api/sdk/ec2/create',
+        await axios.post('http://localhost:3001/api/sdk/ec2/create',
             {
                 "userId": userId,
                 "createToken": token,
             },
         )
             .then(function (response) {
-                // setTimeout(function () {
-                //     location.reload();
-                // }, 1000);
                 location.reload();
             })
             .catch(function (error) {
                 console.log(error);
             });
-    });
+
+        location.reload();
+    }
 </script>
+
+
+<script>
+    // <!-- 
+    //     This function is used to deploy an instance on Google Cloud Platform (GCP).
+    //     It displays a loading circle while the instance is being created.
+    //     It also increments the "gcp" key in the local storage to keep track of the number of instances created.
+    //     After 3.5 seconds, it reloads the page.
+    // -->
+    async function gcp_deploy() {
+        var GCPcreateloadingCircle = document.getElementById("GCPcreateloadingCircle");
+        GCPcreateloadingCircle.style.display = "block";
+
+        if (!localStorage.getItem("gcp")) {
+            console.log("gcp is not set. Initiallising..");
+            await localStorage.setItem("gcp", 1);
+            console.log("gcp: " + gcpCnt);
+        }
+        else {
+            let gcpCnt = localStorage.getItem("gcp");
+            gcpCnt++;
+            await localStorage.setItem("gcp", gcpCnt);
+            console.log("gcp: " + gcpCnt);
+        }
+
+        // set timer
+        setTimeout(function () {
+            location.reload();
+        }, 3500);
+
+    }
+</script>
+
+
+<!--
+This script contains functions that control the behavior of the guide overlay for the instances page.
+The guide overlay provides step-by-step instructions for the user to navigate the page.
+The functions include:
+- guide(): opens the guide overlay
+- skipTutorial(): quits the tutorial instantly
+- guideInstanceAddNext(): moves to the next step of the guide overlay
+- guideInstanceToggleAllNext(): moves to the next step of the guide overlay
+- guideInstanceSearchboxNext(): moves to the next step of the guide overlay
+- guiderefreshbtnNext(): moves to the next step of the guide overlay
+-->
+<script>
+    // Default status
+    guideStatus = false;
+
+    // Opens the guide
+    function guide() {
+        if (guideStatus == false) {
+            var helperIcon = document.querySelector(".fa-question-circle");
+            helperIcon.style.color = "orange";
+            guideStatus = true;
+
+            let helper = document.querySelector(".guideInstanceAdd");
+            helper.style.display = "block";
+        }
+        else {
+            skipTutorial();
+            guideStatus = false;
+        }
+    }
+
+    // Quit tutorial instantly
+    function skipTutorial() {
+        console.log("tutorial skipped");
+        let helpers = document.querySelectorAll(".overlay");
+        helpers.forEach(function (helper) {
+            helper.style.display = "none";
+        });
+
+        var guideStatus = false;
+        var helperIcon = document.querySelector(".fa-question-circle");
+        helperIcon.style.color = "";
+    }
+
+    // ====================== //
+
+    function guideInstanceAddNext() {
+        let ex = document.querySelector(".guideInstanceAdd");
+        ex.style.display = "none";
+        let helper = document.querySelector(".guideInstanceToggleAll");
+        helper.style.display = "block";
+    }
+
+    function guideInstanceToggleAllNext() {
+        let ex = document.querySelector(".guideInstanceToggleAll");
+        ex.style.display = "none";
+        let helper = document.querySelector(".guideInstanceSearchbox");
+        helper.style.display = "block";
+    }
+
+    function guideInstanceSearchboxNext() {
+        let ex = document.querySelector(".guideInstanceSearchbox");
+        ex.style.display = "none";
+        let helper = document.querySelector(".guiderefreshbtn");
+        helper.style.display = "block";
+    }
+
+    function guiderefreshbtnNext() {
+        let ex = document.querySelector(".guiderefreshbtn");
+        ex.style.display = "none";
+        let helper = document.querySelector(".guideInstancesBoard");
+        helper.style.display = "block";
+    }
+</script>
+
+
+
+<!-- This script gets the modal element by its ID and sets it to a variable. 
+    It then listens for a click event on the window and checks if the clicked element is the modal. 
+    If it is, the modal is closed by setting its display style to "none". -->
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+
+
+<!-- 
+Description: This script defines a function that closes the EC2 create modal by setting its display style to "none".
+-->
+<script>
+    function closeEC2CreateModal() {
+        var modal = document.getElementById('id01');
+        modal.style.display = "none";
+    }
+</script>
+
+
+
+<!-- 
+Description: This script gets the modal element with id 'id02' and closes it when the user clicks anywhere outside of it.
+-->
+<script>
+    // Get the modal
+    var modal = document.getElementById('id02');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+
+
+<!-- 
+Function: closeRemoveModal()
+Description: This function is used to close the remove modal by setting the display style to "none".
+-->
+<script>
+    function closeRemoveModal() {
+        var modal = document.getElementById('id02');
+        modal.style.display = "none";
+    }
+</script>
+
+
+
+<!-- 
+Description: This script gets the modal element with id 'id03' and closes it when the user clicks anywhere outside of it.
+-->
+<script>
+    // Get the modal
+    var modal = document.getElementById('id03');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+
+
+<!-- 
+This script defines a function that closes a Google Cloud Platform (GCP) create modal by setting its display style to "none".
+-->
+<script>
+    function closeGCPCreateModal() {
+        var modal = document.getElementById('id03');
+        modal.style.display = "none";
+    }
+</script>
+
 
 {% endblock %}

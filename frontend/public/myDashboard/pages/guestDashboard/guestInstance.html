@@ -1,0 +1,598 @@
+{% extends 'template/guest_dashboard.html' %} {% block content %}
+
+
+<style>
+    .btn-smaller {
+        padding: 0.15rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .newinstance {
+        background-color: white;
+        color: blue;
+        border-color: blue;
+    }
+
+    .refreshicon {
+        color: black;
+    }
+
+    .refreshicon:hover {
+        background-color: white;
+    }
+
+    .refreshicon:hover .refreshpause {
+        display: none !important;
+    }
+
+    .refreshicon:hover .refreshplay {
+        display: block !important;
+        color: blue;
+    }
+
+    /* Overlay Helper */
+    .overlay {
+        position: absolute;
+        height: 15%;
+        width: 15%;
+        background-color: rgba(225, 183, 114, 0.7);
+        margin-top: 0.5%;
+        border-radius: 10px;
+        z-index: 1;
+    }
+
+    .nextBtn {
+        position: absolute;
+        bottom: 10;
+        right: 15;
+        border-radius: 5px;
+    }
+
+    .nextBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .skipBtn {
+        position: absolute;
+        bottom: 10;
+        left: 15;
+        border-radius: 5px;
+        background-color: rgb(99, 99, 99);
+        border-color: rgb(99, 99, 99);
+        ;
+    }
+
+    .skipBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .description {
+        position: absolute;
+        left: 15;
+        top: 10;
+        color: white;
+        font-size: 16px;
+    }
+</style>
+
+
+<!-- Popup Modal Design -->
+<style>
+    * {
+        box-sizing: border-box
+    }
+
+    button:hover {
+        opacity: 1;
+    }
+
+    .cancelbtn {
+        float: left;
+        width: 20%;
+    }
+
+    .deletebtn {
+        float: right;
+        width: 20%;
+    }
+
+    .cancelbtn {
+        background-color: white;
+        color: rgb(122, 122, 122);
+        border: 2px solid rgb(122, 122, 122);
+        height: 4vh;
+        border-radius: 10px;
+    }
+
+    .cancelbtn:hover {
+        background-color: rgba(104, 104, 104, 0.5);
+        color: rgb(255, 255, 255);
+        border-color: rgb(104, 104, 104);
+    }
+
+    /* Add a color to the delete button */
+    .deletebtn {
+        background-color: white;
+        color: blue;
+        border-color: blue;
+        height: 4vh;
+        border-radius: 10px;
+    }
+
+    .deletebtn:hover {
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white !important;
+        border-color: rgba(0, 0, 0, 0.85) !important;
+    }
+
+    /* Add padding and center-align text to the container */
+    .container {
+        padding: 5vh 2vh;
+        text-align: center;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        border: none !important;
+
+        display: none;
+
+        position: fixed;
+
+        z-index: 1;
+
+        width: 90%;
+
+        height: 100%;
+
+        padding-top: 10vh;
+
+        margin-left: 220px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        width: 80%;
+        box-shadow: 0px 0px 40px #f7990196;
+        border-radius: 50px;
+    }
+
+    .modal-content_remove {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        width: 80%;
+        box-shadow: 0px 0px 40px #f73a0196;
+        border-radius: 50px;
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* The Modal Close Button (x) */
+    .close {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #f1f1f1;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #f44336;
+        cursor: pointer;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Change styles for cancel button and delete button on extra small screens */
+    @media screen and (max-width: 300px) {
+
+        .cancelbtn,
+        .deletebtn {
+            width: 100%;
+        }
+    }
+
+    .content-wrapper {
+        display: flex;
+        align-items: center;
+        margin-top: 8%;
+
+    }
+
+    .image-container {
+        flex: 0 0 auto;
+        margin-right: 8%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        margin-bottom: 10%;
+    }
+
+    .instanceDescription {
+        flex: 1;
+    }
+
+    .readmore {
+        color: blue;
+        text-align: right;
+        align-items: right;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 10%;
+    }
+
+    .readmore:hover {
+        text-decoration: underline;
+        color: blue;
+    }
+</style>
+
+
+
+<!-- Main -->
+<main class="content">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+
+        <!-- This HTML code block displays a breadcrumb navigation bar, a header, and a paragraph for the guest dashboard instances page. 
+            The breadcrumb navigation bar allows the user to navigate back to the home page and to the My Dashboard page. 
+            The header displays the title "Current Instances" and the paragraph displays the text "Effectively Control Your Instances Here." -->
+        <div class="d-block mb-4 mb-md-0">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="#">Instances</a></li>
+                </ol>
+            </nav>
+            <h2 class="h4">Current Instances</h2>
+            <p class="mb-0">Effectively Control Your Instances Here.</p>
+        </div>
+
+        
+        <div class="btn-toolbar mb-2 mb-md-0">
+
+            <!-- This code block represents a dropdown menu for creating new instances. It contains a button for creating a new instance, and a dropdown menu with options for EC2 and RSD. -->
+            <div>
+                <button class="btn btn-gray-800 d-inline-flex align-items-center dropdown-toggle newinstance"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    New Instance
+                </button>
+                <div class="overlay guideInstanceAdd" style="display: none;"><a class=" description">You can add your
+                        desired instances here. </a>
+                    <br>
+                    <button class="btn btn-primary nextBtn" onclick="guideInstanceAddNext()">Next</button>
+                    <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                </div>
+
+                <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
+                    <a class="dropdown-item d-flex align-items-center" href="#"
+                        onclick="document.getElementById('id01').style.display='block'">
+                        <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
+                            <path fill-rule="evenodd"
+                                d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        EC2
+                    </a>
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                        <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
+                            <path fill-rule="evenodd"
+                                d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        RSD
+                    </a>
+                </div>
+            </div>
+
+            <!-- This code block contains a div element with two buttons that activate or deactivate all instances. 
+                It also contains an overlay element with a description and two buttons for a tutorial. -->
+            <div>
+                <div class="btn-group ms-2 ms-lg-3">
+                    <button type="button" class="btn btn-sm btn-outline-gray-600"
+                        onclick="ControlAllInstances(true)">Activate All</button>
+                    <button type="button" class="btn btn-sm btn-outline-gray-600"
+                        onclick="ControlAllInstances(false)">Deactivate All</button>
+                </div>
+                <div class="overlay guideInstanceToggleAll" style="display: none; right: 0;"><a class="description">You
+                        can turn on / off all the instances instantly. </a>
+                    <br>
+                    <button class="btn btn-primary nextBtn" onclick="guideInstanceToggleAllNext()">Next</button>
+                    <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card card-body border-0 shadow table-wrapper table-responsive" style="margin-top: 3%;">
+
+        <div class="table-settings mb-4" style="margin-top: 1%;">
+
+            <!-- This code block contains a search input field with a search icon and an error message. It also includes an overlay with a description and two buttons for a tutorial. -->
+            <div class="col col-md-6 col-lg-3 col-xl-4">
+                <div class="input-group me-2 me-lg-3 fmxw-800">
+                    <span class="input-group-text">
+                        <svg class="icon icon-xs" x-description="Heroicon name: solid/search"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </span>
+                    <input type="text" class="form-control me-2" placeholder="Search Instance..." id="searchInput"
+                        style="border-radius: 0 10px 10px 0px;">
+                    <div id="errorMessage" class="text-danger mt-2"
+                        style="display: none; font-size: 14px; margin-left: 1%;"> Enter at least 2 words</div>
+                </div>
+                <div class="overlay guideInstanceSearchbox" style="display: none; width: 35%; height: 45%;"><a
+                        class="description">You
+                        can search your instance ID / providers here. </a>
+                    <br>
+                    <button class="btn btn-primary nextBtn" onclick="guideInstanceSearchboxNext()">Next</button>
+                    <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                </div>
+            </div>
+
+
+            <!-- This code block contains a button and a div element. The button has an onclick event that calls the refreshInstances() function. 
+                The div element has a class of "overlay" and contains a description and two buttons, one for moving to the next step of a tutorial and one for skipping the tutorial. -->
+            <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-3 refreshicon"
+                onclick="refreshInstances()" style="margin-top: 3% !important; margin-right: 4% !important;">
+                <i class="fa fa-spinner refreshpause" aria-hidden="true" style="display: block; font-size: 20px;"></i>
+                <i class="fa fa-spinner fa-pulse refreshplay" style="display: none; font-size: 20px;"></i>
+            </button>
+            <div class="overlay guiderefreshbtn"
+                style="display: none; width: 35%; height: 45%; right: 0; margin-top: 1.5%;"><a class="description">This
+                    button will refresh the page. It helps you to keep track with your
+                    current
+                    instances.</a>
+                <br>
+                <button class="btn btn-primary nextBtn" onclick="guiderefreshbtnNext()">Next</button>
+                <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+            </div>
+        </div>
+
+        <!-- This table displays a list of instances with their respective details such as company, name, private IP address, private DNS name, instance type, status, and action buttons. -->
+        <table class="table table-hover" style="margin-top: 3%;">
+            <thead>
+                <tr>
+                    <th class="border-gray-200">Company</th>
+                    <th class="border-gray-200">Name</th>
+                    <th class="border-gray-200">Private Ip Address</th>
+                    <th class="border-gray-200">Private DNS Name</th>
+                    <th class="border-gray-200">Instance Type</th>
+                    <th class="border-gray-200">Status</th>
+                    <th class="border-gray-200">Action</th>
+                    <th class="border-gray-200"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-warning">AMAZON</td>
+                    <td>Amazon Instance 1</td>
+                    <td>171.00.00.001</td>
+                    <td>ip-170-01-01-001.ap-southeast-2.compute.internal</td>
+                    <td>t2.micro</td>
+                    <td class="text-success">running</td>
+                    <td>
+                        <span class="fw-normal"></span>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="toggle6">
+                            <label class="form-check-label" for="toggle6"></label>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="fw-normal"></span>
+                        <button class="btn btn-danger btn-smaller">Remove</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="text-info">GOOGLE</td>
+                    <td>Google Instance 1</td>
+                    <td>171.00.00.001</td>
+                    <td>ip-170-01-01-001.ap-southeast-2.compute.internal</td>
+                    <td>t2.micro</td>
+                    <td class="text-warning">pending</td>
+                    <td>
+                        <span class="fw-normal"></span>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="toggle6">
+                            <label class="form-check-label" for="toggle6"></label>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="fw-normal"></span>
+                        <button class="btn btn-danger btn-smaller">Remove</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="text-info">GOOGLE</td>
+                    <td>Google Instance 2</td>
+                    <td>171.00.00.001</td>
+                    <td>ip-170-01-01-001.ap-southeast-2.compute.internal</td>
+                    <td>t2.micro</td>
+                    <td class="text-danger">stopped</td>
+                    <td>
+                        <span class="fw-normal"></span>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="toggle6">
+                            <label class="form-check-label" for="toggle6"></label>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="fw-normal"></span>
+                        <button class="btn btn-danger btn-smaller">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- This section displays a message to the user if they do not have any instances yet. It also contains an overlay with a description and buttons for a tutorial. -->
+        <div>
+            <a id="noInstancesMessage"
+                style="text-align: center; font-size: 24px; font-weight: bold; color: rgb(136, 136, 136); padding-top: 8%; padding-bottom: 8%; display: none;">
+                You don't have any instances yet
+            </a>
+            <div class="overlay guideInstancesBoard"
+                style="display: none; width: 96%; height: 40%; top: 180; background-color: rgba(225, 183, 114, 0.95);">
+                <a class="description">Your current instances will appear here. You can see the details and control
+                    them in this area.</a>
+                <br>
+                <button class="btn btn-primary nextBtn" onclick="skipTutorial()">Finish</button>
+                <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
+
+<!-- +======================================== -->
+<!-- +======================================== -->
+<!-- +======================================== -->
+
+
+
+<!--
+This script contains functions to handle the guide for the guest instance dashboard.
+The guide can be opened and closed, and it consists of several steps that guide the user through the dashboard.
+The functions guideInstanceAddNext(), guideInstanceToggleAllNext(), guideInstanceSearchboxNext(), and guiderefreshbtnNext() are used to navigate through the steps of the guide.
+The function skipTutorial() can be used to quit the tutorial instantly.
+-->
+<script>
+    // Default status
+    guideStatus = false;
+
+    // Opens the guide
+    function guide() {
+        if (guideStatus == false) {
+            var helperIcon = document.querySelector(".fa-question-circle");
+            helperIcon.style.color = "orange";
+            guideStatus = true;
+
+            let helper = document.querySelector(".guideInstanceAdd");
+            helper.style.display = "block";
+        }
+        else {
+            skipTutorial();
+            guideStatus = false;
+        }
+    }
+
+    // Quit tutorial instantly
+    function skipTutorial() {
+        console.log("tutorial skipped");
+        let helpers = document.querySelectorAll(".overlay");
+        helpers.forEach(function (helper) {
+            helper.style.display = "none";
+        });
+
+        var guideStatus = false;
+        var helperIcon = document.querySelector(".fa-question-circle");
+        helperIcon.style.color = "";
+    }
+
+    // ====================== //
+
+    function guideInstanceAddNext() {
+        let ex = document.querySelector(".guideInstanceAdd");
+        ex.style.display = "none";
+        let helper = document.querySelector(".guideInstanceToggleAll");
+        helper.style.display = "block";
+    }
+
+    function guideInstanceToggleAllNext() {
+        let ex = document.querySelector(".guideInstanceToggleAll");
+        ex.style.display = "none";
+        let helper = document.querySelector(".guideInstanceSearchbox");
+        helper.style.display = "block";
+    }
+
+    function guideInstanceSearchboxNext() {
+        let ex = document.querySelector(".guideInstanceSearchbox");
+        ex.style.display = "none";
+        let helper = document.querySelector(".guiderefreshbtn");
+        helper.style.display = "block";
+    }
+
+    function guiderefreshbtnNext() {
+        let ex = document.querySelector(".guiderefreshbtn");
+        ex.style.display = "none";
+        let helper = document.querySelector(".guideInstancesBoard");
+        helper.style.display = "block";
+    }
+</script>
+
+
+
+
+<!-- 
+This script filters instances based on the search input value.
+-->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        guide();
+
+        const searchInput = document.getElementById("searchInput");
+
+        searchInput.addEventListener("input", function () {
+            const filterText = searchInput.value.toLowerCase();
+            filterInstances(filterText);
+        });
+    });
+
+    function filterInstances(filterText) {
+        const tableRows = document.querySelectorAll("tbody tr");
+        tableRows.forEach(function (row) {
+            const companyColumn = row.querySelector("td:nth-child(1)").textContent.toLowerCase();
+            const idColumn = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+
+            if (companyColumn.includes(filterText) || idColumn.includes(filterText)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+</script>
+
+{% endblock %}

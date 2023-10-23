@@ -1,7 +1,30 @@
+// ```
+//     This route is used authorize a user to access the application. 
+//     It accepts a JSON Web Token (JWT) in the request header and returns 
+//     a response indicating whether the user is authorized or not.
+//     POST: /auth
+//     Description: Authorize user
+//     Request: {
+//         "createToken": "string"
+//         "userId": "string"
+//     }
+//     Response: {
+//         "code": "string",
+//         "message": "string",
+//         "isAuth": "boolean"
+//     }
+    
+// ```;
+
+// import modules
 const express = require("express");
 const router = express.Router();
+
+// import middleware
 const { auth } = require("../middleware/auth");
-const { User } = require("../models/account");
+
+// import models
+const { User } = require("../models/accountModel");
 
 router.post("/", auth, (req, res) => {
     // #swagger.tags = ['Authentication']
@@ -15,11 +38,6 @@ router.post("/", auth, (req, res) => {
     res.status(200).json({
         code: "OK",
         message: "User authenticated successfully",
-        // _id: req.user._id,
-        // email: req.user.email,
-        // surname: req.user.surname,
-        // firstName: req.user.firstName,
-        // title: req.user.title,
         isAuth: true,
     });
 });

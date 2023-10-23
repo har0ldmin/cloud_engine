@@ -1,0 +1,438 @@
+{% extends 'template/guest_dashboard.html' %} {% block content %}
+
+
+<style>
+    /* .wishlistItem:hover {
+        background-color: rgba(128, 128, 128, 0.199);
+        transition: 0.5s;
+    } */
+
+    .wishlistItem:hover {
+        /* gradient from orange to blue from left to right */
+        background: linear-gradient(to right, #f799014e, #00a7cc15);
+        transition: 0.5s;
+        transform: translateY(-10px);
+    }
+
+    .unavailableItem {
+        background-color: rgba(128, 128, 128, 0.2);
+    }
+
+    .deployBtn {
+        background-color: #02779180;
+        border: none;
+        color: white;
+    }
+
+    .deployBtn:hover {
+        background-color: #027791b0;
+        border: none;
+        color: white;
+    }
+
+    /* Overlay helper */
+    .overlay {
+        position: absolute;
+        height: 20%;
+        width: 15%;
+        background-color: rgba(225, 183, 114, 0.7);
+        margin-top: 0.5%;
+        border-radius: 10px;
+        z-index: 1;
+    }
+
+    .nextBtn {
+        position: absolute;
+        bottom: 10;
+        right: 15;
+        border-radius: 5px;
+    }
+
+    .nextBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .skipBtn {
+        position: absolute;
+        bottom: 10;
+        left: 15;
+        border-radius: 5px;
+        background-color: rgb(99, 99, 99);
+        border-color: rgb(99, 99, 99);
+        ;
+    }
+
+    .skipBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .description {
+        position: absolute;
+        left: 15;
+        top: 10;
+        color: white;
+        font-size: 16px;
+    }
+</style>
+
+
+
+<main class="content">
+
+    <!-- This HTML code block represents the header section of the "My Wishlist" page in the user's dashboard. It includes a breadcrumb navigation bar, a heading, and a brief description of the page. -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
+        style="margin-bottom: 5%;">
+        <div class="d-block mb-4 mb-md-0">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/wishlist"
+                            style="text-decoration: underline; color: #F79901;">My Wishlist</a></li>
+                </ol>
+            </nav>
+            <h2 class="h4">My Wishlist</h2>
+            <p class="mb-0">From wishlist to Cloud. Elevate Your Experience Instantly.</p>
+        </div>
+    </div>
+
+
+
+    <!-- This HTML code block represents the wishlist page of the user's dashboard. It contains a row with two columns. 
+        The left column displays the user's wishlist items, and if there are no items in the wishlist, a message is displayed. 
+        The right column displays a card with a header and a list of services that the user can activate. -->
+    <div class="row my-4">
+        <div class="col-12 col-lg-6" id="wishlistContents">
+            <!-- Wishlist 1 -->
+            <a href="#" onclick="addToFinal()" style="text-decoration: none;">
+                <div class="card border-0 shadow wishlistItem"
+                    style="margin-bottom: 3%; border-radius: 30px; padding: 5px 0px">
+
+                    <!-- Helper -->
+                    <div class="overlay guideAvailable" style="display: none; height: 100%; width: 100%; background-color: rgba(225, 183, 114, 0.9);">
+                        <a class=" description">This service is the avaiable service that are ready to be deployed.
+                        </a>
+                        <br>
+                        <button class="btn btn-primary nextBtn" onclick="guideAvailableNext()">Next</button>
+                        <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div
+                                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                                    <img src="https://w7.pngwing.com/pngs/723/352/png-transparent-amazon-com-amazon-pay-computer-icons-online-shopping-amazon-logo-miscellaneous-text-retail-thumbnail.png"
+                                        alt="amazonLogo" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-7 px-xl-0">
+                                <div class="d-none d-sm-block">
+                                    <h2 class="h6 text-gray-400 mb-0"> AWS</h2>
+                                    <h5 class="fw-extrabold mb-2"> EC2</h5>
+                                </div>
+                                <small class="d-flex align-items-center text-success">
+                                    Available
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Wishlist 2 -->
+            <a href="#" style="text-decoration: none;">
+                <div class="card border-0 shadow unavailableItem"
+                    style="margin-bottom: 3%; border-radius: 30px; padding: 5px 0px">
+
+                    <!-- Helper -->
+                    <div class="overlay guideAvailableNot" style="display: none; height: 350%; width: 100%; background-color: rgba(225, 183, 114, 0.9);">
+                        <a class=" description">These instances are currently not avaiable. The services are not ready to be deployed.
+                        </a>
+                        <br>
+                        <button class="btn btn-primary nextBtn" onclick="guideAvailableNotNext()">Next</button>
+                        <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div
+                                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                                    <img src="https://live.staticflickr.com/3501/3470094947_c490b367e6_o.png"
+                                        alt="amazonLogo" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-7 px-xl-0">
+                                <div class="d-none d-sm-block">
+                                    <h2 class="h6 text-gray-400 mb-0"> Google Cloud Platform</h2>
+                                    <h5 class="fw-extrabold mb-2"> Service Name 1</h5>
+                                </div>
+                                <small class="d-flex align-items-center text-danger">
+                                    Currently Unavailable
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Wishlist 3 -->
+            <a href="#" style="text-decoration: none;">
+                <div class="card border-0 shadow unavailableItem"
+                    style="margin-bottom: 3%; border-radius: 30px; padding: 5px 0px">
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div
+                                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                                    <img src="https://live.staticflickr.com/3501/3470094947_c490b367e6_o.png"
+                                        alt="amazonLogo" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-7 px-xl-0">
+                                <div class="d-none d-sm-block">
+                                    <h2 class="h6 text-gray-400 mb-0"> Microsoft Azure</h2>
+                                    <h5 class="fw-extrabold mb-2"> Service Name 2</h5>
+                                </div>
+                                <small class="d-flex align-items-center text-danger">
+                                    Currently Unavailable
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Wishlist 4 -->
+            <a href="#" style="text-decoration: none;">
+                <div class="card border-0 shadow unavailableItem"
+                    style="margin-bottom: 3%; border-radius: 30px; padding: 5px 0px">
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div
+                                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                                    <img src="https://w7.pngwing.com/pngs/723/352/png-transparent-amazon-com-amazon-pay-computer-icons-online-shopping-amazon-logo-miscellaneous-text-retail-thumbnail.png"
+                                        alt="amazonLogo" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-7 px-xl-0">
+                                <div class="d-none d-sm-block">
+                                    <h2 class="h6 text-gray-400 mb-0"> AWS</h2>
+                                    <h5 class="fw-extrabold mb-2"> Service Name 3</h5>
+                                </div>
+                                <small class="d-flex align-items-center text-danger">
+                                    Currently Unavailable
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- no wishlist msg -->
+            <div class="card border-0 shadow" id="emptyMsg"
+                style="margin-bottom: 3%; background-color: rgba(128, 128, 128, 0.199); display: none;">
+                <div class="card-body">
+                    There is nothing in the wishlist yet
+                </div>
+            </div>
+            <!-- no wishlist msg end -->
+
+        </div>
+
+        <!-- Deploy Final Stage -->
+        <div class="col-12 col-lg-6">
+            <div class=" card border-0 card-body shadow p-0 p-md-4" style="overflow-y: auto; border-radius: 25px;">
+
+                <!-- Helper -->
+                <div class="overlay guideFinal" style="display: none; height: 80%; width: 85%; background-color: rgba(225, 183, 114, 0.98);">
+                    <a class=" description">You can delete the selected items here, or simply add to here by clicking available services from the left side. You can add to the dashboard by clicking the deploy button.
+                    </a>
+                    <br>
+                    <button class="btn btn-primary nextBtn" onclick="guideFinalNext()">Finish</button>
+                    <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                </div>
+
+                <div>
+                    <div class="card-header border-bottom p-3">
+                        <a id="loadingCircle" style="display: none; float: right;">
+                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="color: orange !important;"></i>
+                        </a>
+                        <h3 class="h5" style="font-weight: bold;">Try Services Now</h3>
+                        <p class="mb-0">Activate Your Desired Instances Here.</p>
+                    </div>
+                </div>
+                <div class="card-body px-0 py-0">
+                    <ul class="list-group" id="finalStage">
+                        <!-- Final contents go here -->
+                        <li class="list-group-item border-bottom py-3">
+                            <div class="row align-items-center" style="padding: 10px 0px;">
+                                <div class="col">
+                                    <h3 class="h6 mb-1">
+                                        EC2
+                                    </h3>
+                                    <small class="text-gray-700">
+                                        AWS
+                                    </small>
+                                </div>
+                                <i style="font-size:24px; margin-right: 20px" class="fa">
+                                    <a href="#" onclick="removeItem(this)" style="color:red;">&#xf00d;</a>
+                                </i>
+                                <div class="col-auto">
+                                    <button class="btn btn-sm deployBtn">Deploy</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+<script>
+    // <!--
+    //     This function adds a new item to the final stage of the wishlist.
+    //     It takes in two parameters, provider and serviceName, and generates a new list item with the given information.
+    //     If the service name is "Amazon EC2", it adds an onclick event to the deploy button that calls the ec2_deploy function.
+    //     The generated list item includes a remove button that calls the removeItem function when clicked.
+    // -->
+    function addToFinal(provider, serviceName) {
+        let output2 = document.getElementById('finalStage').innerHTML;
+        let apiDeploy = '';
+
+        output2 +=
+            `
+                <li class="list-group-item border-bottom py-3">
+                    <div class="row align-items-center" style="padding: 10px 0px;">
+                        <div class="col">
+                            <h3 class="h6 mb-1">
+                                EC2
+                            </h3> 
+                            <small class="text-gray-700">
+                                AWS
+                            </small>
+                        </div>
+                        <i style="font-size:24px; margin-right: 20px" class="fa">
+                            <a href="#" onclick="removeItem(this)" style = "color:red;">&#xf00d;</a>
+                        </i>
+                        <div class="col-auto">
+                            <button class="btn btn-sm deployBtn">Deploy</button>
+                        </div>
+                    </div>
+                </li>
+            `;
+
+        document.getElementById('finalStage').innerHTML = output2;
+    }
+
+    function removeItem(element) {
+        console.log("Item removed");
+        element.parentElement.parentElement.parentElement.remove();
+    }
+</script>
+
+
+
+
+<!-- 
+This script defines functions to open and close a tutorial guide for the guest user dashboard. The guide can be opened by clicking on a question mark icon and closed by clicking on the icon again or by skipping the tutorial. The guide consists of three sections, each with a "next" button to proceed to the next section. The guide is automatically opened when the page is loaded.
+
+Functions:
+- guide(): opens the guide if it is closed, or skips the tutorial if it is open
+- skipTutorial(): closes the guide and skips the tutorial
+- guideAvailableNext(): proceeds to the next section of the guide
+- guideAvailableNotNext(): proceeds to the next section of the guide
+- guideFinalNext(): closes the guide and skips the tutorial
+-->
+<script>
+    // Default status
+    guideStatus = false;
+
+    // Opens the guide
+    function guide() {
+        if (guideStatus == false) {
+            var helperIcon = document.querySelector(".fa-question-circle");
+            helperIcon.style.color = "orange";
+            guideStatus = true;
+
+            let helper = document.querySelector(".guideAvailable");
+            helper.style.display = "block";
+        }
+        else {
+            skipTutorial();
+            guideStatus = false;
+        }
+    }
+
+    // Quit tutorial instantly
+    function skipTutorial() {
+        event.preventDefault();
+
+        console.log("tutorial skipped");
+        let helpers = document.querySelectorAll(".overlay");
+        helpers.forEach(function (helper) {
+            helper.style.display = "none";
+        });
+
+        var guideStatus = false;
+        var helperIcon = document.querySelector(".fa-question-circle");
+        helperIcon.style.color = "";
+    }
+
+    // ====================== //
+
+    function guideAvailableNext() {
+        event.preventDefault();
+
+        let helper = document.querySelector(".guideAvailable");
+        helper.style.display = "none";
+
+        let helper2 = document.querySelector(".guideAvailableNot");
+        helper2.style.display = "block";
+    }
+
+    function guideAvailableNotNext() {
+        event.preventDefault();
+
+        let helper = document.querySelector(".guideAvailableNot");
+        helper.style.display = "none";
+
+        let helper2 = document.querySelector(".guideFinal");
+        helper2.style.display = "block";
+    }
+
+    function guideFinalNext() {
+        event.preventDefault();
+
+        let helper = document.querySelector(".guideFinal");
+        helper.style.display = "none";
+
+        skipTutorial();
+    }
+
+
+    // Auto run guide
+    document.addEventListener("DOMContentLoaded", function () {
+        guide();
+    });
+</script>
+
+
+
+{% endblock %}

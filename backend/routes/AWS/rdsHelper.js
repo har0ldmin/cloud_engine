@@ -130,51 +130,6 @@ function deleteRDSInstance(dbName) {
     });
 }
 function infoRDSInstance(dbName) {
-    // let result = {
-    //     name: dbName,
-    //     rdsinfo: [],
-    //     isError: false,
-    //     message: null,
-    // };
-    // let DescribeParams;
-    // // if dbName is string
-    // if (typeof dbName === "string") {
-    //     DescribeParams = { DBInstanceIdentifier: dbName };
-    //     // if (dbName) {
-    //     //     DescribeParams = { DBInstanceIdentifier: dbName };
-    // } else {
-    //     DescribeParams = {};
-    // }
-
-    // return new Promise((resolve, reject) => {
-    //     rds.describeDBInstances(DescribeParams, async (err, data) => {
-    //         if (err) {
-    //             if (err.statusCode == 404) {
-    //                 result.isError = true;
-    //                 result.message = "No such instance found";
-    //                 result.rawErr = err;
-    //             } else {
-    //                 result.isError = true;
-    //                 result.message = "Error retrieving information from a RDS instance";
-    //                 result.rawErr = err;
-    //             }
-    //             reject(result);
-    //         } else {
-    //             if (debug) console.log(data);
-    //             for (let i = 0; i < data.DBInstances.length; i++) {
-    //                 result.rdsinfo[i] = {
-    //                     Identifier: data.DBInstances[i].DBInstanceIdentifier,
-    //                     Status: data.DBInstances[i].DBInstanceStatus,
-    //                     Arn: data.DBInstances[i].DBInstanceArn,
-    //                     Endpoint: data.DBInstances[i].Endpoint,
-    //                     Engine: data.DBInstances[i].Engine,
-    //                     EngineVersion: data.DBInstances[i].EngineVersion,
-    //                 };
-    //             }
-    //             resolve(result);
-    //         }
-    //     });
-    // });
     let result = {
         name: dbName,
         rdsinfo: [],

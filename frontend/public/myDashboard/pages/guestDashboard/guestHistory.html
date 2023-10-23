@@ -1,0 +1,402 @@
+{% extends 'template/guest_dashboard.html' %} {% block content %}
+
+<style>
+    .btn-smaller {
+        padding: 0.2rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .btn-primary {
+        background-color: rgb(105, 105, 105);
+        border-color: rgb(105, 105, 105);
+    }
+
+    .btn-primary:hover {
+        background-color: rgb(95, 95, 95);
+        border-color: rgb(95, 95, 95);
+    }
+
+    .btn-info {
+        background-color: rgba(0, 100, 255);
+        border-color: rgba(0, 100, 255);
+    }
+
+    .btn-info:hover {
+        background-color: rgba(0, 90, 255);
+        border-color: rgba(0, 90, 255);
+    }
+
+    /* Overlay helper */
+    .overlay {
+        position: absolute;
+        height: 15%;
+        width: 15%;
+        background-color: rgba(225, 183, 114, 0.7);
+        margin-top: 0.5%;
+        border-radius: 10px;
+        z-index: 1;
+    }
+
+    .nextBtn {
+        position: absolute;
+        bottom: 10;
+        right: 15;
+        border-radius: 5px;
+    }
+
+    .nextBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .skipBtn {
+        position: absolute;
+        bottom: 10;
+        left: 15;
+        border-radius: 5px;
+        background-color: rgb(99, 99, 99);
+        border-color: rgb(99, 99, 99);
+        ;
+    }
+
+    .skipBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .description {
+        position: absolute;
+        left: 15;
+        top: 10;
+        color: white;
+        font-size: 16px;
+    }
+
+    #pdfContent {
+        background-image: url('../../../images/logo2.png');
+        background-size: 300px;
+        padding: 50px 50px;
+        background-repeat: repeat;
+        background-position: center center;
+        ;
+    }
+</style>
+
+
+<main class="content">
+
+    <!-- This HTML code block displays a breadcrumb navigation bar and a header for the usage history page in the guest dashboard. 
+        The breadcrumb navigation bar allows users to easily navigate back to the previous pages. 
+        The header displays the title "Usage History" and a brief description "Effectively Control Your History Here." -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-block mb-4 mb-md-0">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="#">History</a></li>
+                </ol>
+            </nav>
+            <h2 class="h4">Usage History</h2>
+            <p class="mb-0">Effectively Control Your History Here.</p>
+        </div>
+    </div>
+
+
+    <div class="card card-body border-0 shadow table-wrapper table-responsive" style="margin-top: 3%;">
+
+        <!-- This code block contains a search bar and a download button for the guest history page. 
+            The search bar allows users to search for specific instances in their history, while the download button allows users to download all history logs. -->
+        <div class="table-settings mb-4" style="margin-top: 1%;">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 col-xl-4">
+                    <div class="input-group me-2 me-lg-3 fmxw-800">
+                        <span class="input-group-text">
+                            <svg class="icon icon-xs" x-description="Heroicon name: solid/search"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                        <input type="text" class="form-control me-2" placeholder="Search History..." id="searchInput"
+                            style="border-radius: 0 10px 10px 0px;">
+                        <div id="errorMessage" class="text-danger mt-2"
+                            style="display: none; font-size: 14px; margin-left: 1%;"> Enter at least 2 words</div>
+                    </div>
+
+                    <div class="overlay guideSearchHistory" style="display: none; height: 35%;"><a
+                            class=" description">You can search
+                            your desired instances here. </a>
+                        <br>
+                        <button class="btn btn-primary nextBtn" onclick="guideSearchHistoryNext()">Next</button>
+                        <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-9 col-xl-8 text-end" style="padding-right: 2%;">
+                    <button type="button" class="btn btn-secondary text-dark btn-sm me-2"
+                        onclick="downloadPDF()">Download All</button>
+                </div>
+                <div class="overlay guideDownloadAll" style="display: none; right: 0; margin-top: 3%; height: 40%;">
+                    <a class=" description">You can download all history logs through this button. </a>
+                    <br>
+                    <button class="btn btn-primary nextBtn" onclick="guideDownloadAllNext()">Next</button>
+                    <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- This table displays the guest history with the company name, ID, and log status. 
+            It also provides the option to view and download the logs. -->
+        <table class="table table-hover" style="margin-top: 3%;">
+            <thead>
+                <tr>
+                    <th class="border-gray-200">Company</th>
+                    <th class="border-gray-200">ID</th>
+                    <th class="border-gray-200">Log</th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="#" class="fw-bold">AMAZON</a></td>
+                    <td><span class="fw-normal">i-0010176dd0e1e0d82</span></td>
+                    <td><span class="fw-normal text-success">Created</span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span><button
+                            class="btn btn-primary btn-smaller">View</button>&nbsp;&nbsp;<button
+                            class="btn btn-info btn-smaller">Download</button></td>
+                </tr>
+                <tr>
+                    <td><a href="#" class="fw-bold">GOOGLE</a></td>
+                    <td><span class="fw-normal">i-0e8285cc6c5fad9c7</span></td>
+                    <td><span class="fw-normal text-success">Created</span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span><button
+                            class="btn btn-primary btn-smaller">View</button>&nbsp;&nbsp;<button
+                            class="btn btn-info btn-smaller">Download</button></td>
+                </tr>
+                <tr>
+                    <td><a href="#" class="fw-bold">GOOGLE</a></td>
+                    <td><span class="fw-normal">i-0ea37f5e6c0c1e590</span></td>
+                    <td><span class="fw-normal text-success">Created</span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span><button
+                            class="btn btn-primary btn-smaller">View</button>&nbsp;&nbsp;<button
+                            class="btn btn-info btn-smaller">Download</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <!-- This HTML code block displays the guest's history logs. If there is no history to display, the message "There isn't any history to display." will be shown. 
+            If the user is currently in a tutorial, the overlay guideLogBoard will be displayed with a description and buttons to skip or finish the tutorial. -->
+        <div>
+            <a id="noHistoryMessage"
+                style="text-align: center; font-size: 24px; font-weight: bold; color: rgb(136, 136, 136); padding-top: 8%; padding-bottom: 8%; display: none;">
+                There isn't any history to display.
+            </a>
+            <div class="overlay guideLogBoard"
+                style="display: none; width: 96%; height: 40%; top: 200; background-color: rgba(225, 183, 114, 0.95);">
+                <a class="description">Your current history logs will appear here. <br><br>
+                    You can see the details and download them in this area.</a>
+                <br>
+                <button class="btn btn-primary nextBtn" onclick="skipTutorial()">Finish</button>
+                <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
+
+
+<!-- This table displays the history logs of a user. It contains the company name, ID, and log status of each entry. 
+    The table is initially hidden and can be displayed when needed for downloading the log. -->
+<table id="pdfContent" style="display: none;" class="table table-hover" style="margin-top: 3%;">
+    <thead>
+        <tr>
+            <th class="border-gray-200" colspan="3">
+                <h2><a id="usernamePDF">User Name</a>'s History Logs</h2>
+            </th>
+        </tr>
+        <tr>
+            <th class="border-gray-200">Company</th>
+            <th class="border-gray-200">ID</th>
+            <th class="border-gray-200">Log</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="PDF">
+        <tr>
+            <td><a href="#" class="fw-bold">AMAZON</a></td>
+            <td><span class="fw-normal">i-0010176dd0e1e0d82</span></td>
+            <td><span class="fw-normal text-success">Created</span></td>
+            <td><span class="fw-normal"></span></td>
+            <td><span class="fw-normal"></span></td>
+        </tr>
+        <tr>
+            <td><a href="#" class="fw-bold">GOOGLE</a></td>
+            <td><span class="fw-normal">i-0e8285cc6c5fad9c7</span></td>
+            <td><span class="fw-normal text-success">Created</span></td>
+            <td><span class="fw-normal"></span></td>
+            <td><span class="fw-normal"></span></td>
+        </tr>
+        <tr>
+            <td><a href="#" class="fw-bold">GOOGLE</a></td>
+            <td><span class="fw-normal">i-0ea37f5e6c0c1e590</span></td>
+            <td><span class="fw-normal text-success">Created</span></td>
+            <td><span class="fw-normal"></span></td>
+            <td><span class="fw-normal"></span></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+<!-- This script tag is used to import the html2pdf library from the specified URL. This library is used to convert HTML content to PDF format. -->
+<script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+
+<!-- This script defines a function called downloadPDF() that generates a PDF file from the content of an HTML element with the ID "pdfContent". 
+    The PDF file is created using the html2pdf library with the specified configuration options. The generated PDF file is named "Guest_CloudEngine_Instances_Log.pdf". -->
+<script>
+    function downloadPDF() {
+        // Get the content of the <p> element
+        var pdfContent = document.getElementById("pdfContent");
+        pdfContent.style.display = "block";
+
+        // Create a configuration object for html2pdf
+        var pdfOptions = {
+            margin: 10,
+            filename: `Guest_CloudEngine_Instances_Log.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Use html2pdf to create the PDF
+        html2pdf(pdfContent, pdfOptions);
+
+    }
+</script>
+
+
+<!--
+This script defines functions for guiding the user through the search history page.
+It includes functions for opening and closing the guide, skipping the tutorial, and advancing to the next step of the guide.
+-->
+<script>
+    // Default status
+    guideStatus = false;
+
+    // Opens the guide
+    function guide() {
+        if (guideStatus == false) {
+            var helperIcon = document.querySelector(".fa-question-circle");
+            helperIcon.style.color = "orange";
+            guideStatus = true;
+
+            let helper = document.querySelector(".guideSearchHistory");
+            helper.style.display = "block";
+        }
+        else {
+            skipTutorial();
+            guideStatus = false;
+        }
+    }
+
+    // Quit tutorial instantly
+    function skipTutorial() {
+        console.log("tutorial skipped");
+        let helpers = document.querySelectorAll(".overlay");
+        helpers.forEach(function (helper) {
+            helper.style.display = "none";
+        });
+
+        var guideStatus = false;
+        var helperIcon = document.querySelector(".fa-question-circle");
+        helperIcon.style.color = "";
+    }
+
+    // ====================== //
+
+    function guideSearchHistoryNext() {
+        let helper = document.querySelector(".guideSearchHistory");
+        helper.style.display = "none";
+
+        let helper2 = document.querySelector(".guideDownloadAll");
+        helper2.style.display = "block";
+    }
+
+    function guideDownloadAllNext() {
+        let helper = document.querySelector(".guideDownloadAll");
+        helper.style.display = "none";
+
+        let helper2 = document.querySelector(".guideLogBoard");
+        helper2.style.display = "block";
+    }
+</script>
+
+
+
+<!-- 
+This script filters table rows based on user input in the searchInput field.
+-->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        guide();
+        const searchInput = document.getElementById("searchInput");
+
+        searchInput.addEventListener("input", function () {
+            const filterText = searchInput.value.toLowerCase();
+            filterInstances(filterText);
+        });
+    });
+
+    function filterInstances(filterText) {
+        const tableRows = document.querySelectorAll("tbody tr");
+        tableRows.forEach(function (row) {
+            const companyColumn = row.querySelector("td:nth-child(1)").textContent.toLowerCase();
+            const idColumn = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+
+            if (companyColumn.includes(filterText) || idColumn.includes(filterText)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+</script>
+
+
+{% endblock %}

@@ -17,300 +17,576 @@
   <img src="../solution/assets/img/cover.png" width=100% height="50%" class="img-fluid" alt="Responsive image">
 </div>
 
+<style>
+  .portfolio-flters {
+    margin-top: 5vh !important;
+  }
 
+  .portfolio-flters li {
+    margin-left: 1.5% !important;
+    margin-right: 1.5% !important;
+  }
+</style>
 <!-- End Hero Section -->
 
 <main id="main">
 
-  <!-- ======= Our Services Section ======= -->
-  <section id="services" class="services sections-bg">
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-header">
-        <h2>Our Services</h2>
-        <p>Aperiam dolorum et et wuia molestias qui eveniet numquam nihil porro incidunt dolores placeat sunt id nobis
-          omnis tiledo stran delop</p>
-      </div>
-
-      <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="col-lg-4 col-md-6">
-          <div class="service-item  position-relative">
-            <div class="icon">
-              <i class="bi bi-activity"></i>
-            </div>
-            <h3>Nesciunt Mete</h3>
-            <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis
-              tempore et consequatur.</p>
-            <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div><!-- End Service Item -->
-
-        <div class="col-lg-4 col-md-6">
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-broadcast"></i>
-            </div>
-            <h3>Eosle Commodi</h3>
-            <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut
-              nesciunt dolorem.</p>
-            <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div><!-- End Service Item -->
-
-        <div class="col-lg-4 col-md-6">
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-easel"></i>
-            </div>
-            <h3>Ledo Markt</h3>
-            <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci
-              eos earum corrupti.</p>
-            <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div><!-- End Service Item -->
-
-        <div class="col-lg-4 col-md-6">
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-bounding-box-circles"></i>
-            </div>
-            <h3>Asperiores Commodit</h3>
-            <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident
-              adipisci neque.</p>
-            <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div><!-- End Service Item -->
-
-        <div class="col-lg-4 col-md-6">
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-calendar4-week"></i>
-            </div>
-            <h3>Velit Doloremque</h3>
-            <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem
-              alias eius labore.</p>
-            <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div><!-- End Service Item -->
-
-        <div class="col-lg-4 col-md-6">
-          <div class="service-item position-relative">
-            <div class="icon">
-              <i class="bi bi-chat-square-text"></i>
-            </div>
-            <h3>Dolori Architecto</h3>
-            <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti
-              recusandae ducimus enim.</p>
-            <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div><!-- End Service Item -->
-
-      </div>
-
-    </div>
-  </section><!-- End Our Services Section -->
-
-
-  <!-- ======= Deploy Action Section ======= -->
-  <section id="call-to-action" class="call-to-action">
-    <div class="container text-center" data-aos="zoom-out">
-      <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
-      <h3>EC2</h3>
-      <p> Explore your EC2 Experience here!
-      </p>
-      <button class="cta-btn add-instance" id="ec2_deploy">Try now</button>
-    </div>
-  </section><!-- End Call To Action Section -->
-
-  <!-- ======= Deploy Action Section ======= -->
-  <section id="call-to-action" class="call-to-action">
-    <div class="container text-center" data-aos="zoom-out">
-      <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
-      <h3>GCP</h3>
-      <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-      <a class="cta-btn" href="#">Try now</a>
-    </div>
-  </section><!-- End Call To Action Section -->
-
-
   <!-- ======= Portfolio Section ======= -->
+
+  <!-- This section displays the services provided by the company. It includes a breadcrumb navigation, a section header, and a portfolio of services. 
+    The portfolio isotope allows filtering by service type. Each service item includes an image, a title, and a description. Clicking on the image opens a modal with more details about the service. -->
   <section id="portfolio" class="portfolio sections-bg">
-    <div class="container" data-aos="fade-up">
 
-      <div class="section-header">
-        <h2>Services</h2>
-        <p>Our services are provided to customer this is solution page This
-          is the solution page
-        </p>
-      </div>
+    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent" style="margin-left: 14%; margin-bottom: 5%;">
+      <li class="breadcrumb-item"">
+          <a href=" /">
+        <i class="fa-solid fa-house" style="color: rgb(70, 70, 70) !important;"></i>
+        </a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="/service" style="color: rgb(70, 70, 70) !important;">Our Services</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <a href="/solution" style="text-decoration: underline;"">Solutions</a>
+      </li>
+    </ol>
 
-      <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
-        data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
+    <div class=" container" data-aos="fade-up">
 
-        <div>
-          <ul class="portfolio-flters">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Product</li>
-            <li data-filter=".filter-branding">Branding</li>
-            <li data-filter=".filter-books">Books</li>
-          </ul><!-- End Portfolio Filters -->
-        </div>
+          <div class="section-header">
+            <h2>Services</h2>
+            <p>We provide each service's descriptions and usage examples.</p>
+          </div>
 
-        <div class="row gy-4 portfolio-container">
+          <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
+            data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">App 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
+            <div>
+              <ul class="portfolio-flters">
+                <li data-filter="*" class="filter-active">All</li>
+                <li data-filter=".filter-app">Amazon Web Services</li>
+                <li data-filter=".filter-product">Microsoft Azure</li>
+                <li data-filter=".filter-branding">Google Cloud Platform</li>
+              </ul><!-- End Portfolio Filters -->
             </div>
-          </div><!-- End Portfolio Item -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/product-1.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/product-1.jpg" class="img-fluid"
-                  alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Product 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
+            <div class="row gy-4 portfolio-container">
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/branding-1.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/branding-1.jpg" class="img-fluid"
-                  alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Branding 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/books-1.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Books 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
+              <!-- This code block displays a portfolio item for AWS Lambda service. It includes an image of the service and a modal that provides a brief description of the service. 
+                The modal is triggered when the user clicks on the image. 
+                This code block is an standard modal contents and we used this repeatedly-->
+              <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal1'
+                    style='display: none; border-radius: 30px; box-shadow: 0px 10px 20px rgba(0,0,0,0.2);'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AwsLambda.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>AWS Lambda is a serverless compute service that automatically scales and manages the
+                      infrastructure needed to run your code in response to events.</p>
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/app-2.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">App 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
+                  </div>
+                  <!-- Modal End -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/product-2.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/product-2.jpg" class="img-fluid"
-                  alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Product 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
+                  <a href="#myModal1" data-glightbox="type: inline; href: #myModal1" style='justify-content: center;'
+                    class="glightbox">
+                    <img src="../solution/assets/img/services/AwsLambda.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/branding-2.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/branding-2.jpg" class="img-fluid"
-                  alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Branding 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
+                    <h4><a href="" title="More Details">AWS Lambda</a></h4>
+                    <!-- <p>AWS Lambda is a serverless compute service that automatically scales and manages the infrastructure needed to run your code in response to events.</p> -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/books-2.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/books-2.jpg" class="img-fluid" alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/app-3.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/app-3.jpg" class="img-fluid" alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
+              <div class="col-xl-4 col-md-6 portfolio-item filter-product">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal2' style='display: none;'>
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/product-3.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/product-3.jpg" class="img-fluid"
-                  alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AzureAppService.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Azure App Service is a fully managed platform for building, deploying, and scaling web apps and
+                      APIs.</p>
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/branding-3.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/branding-3.jpg" class="img-fluid"
-                  alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal2" data-glightbox="type: inline; href: #myModal2"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/AzureAppService.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Azure App Service</a></h4>
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-            <div class="portfolio-wrap">
-              <a href="../solution/assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app"
-                class="glightbox"><img src="../solution/assets/img/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div><!-- End Portfolio Item -->
+                    <!-- <p>Azure App Service is a fully managed platform for building, deploying, and scaling web apps and APIs.</p> -->
 
-        </div><!-- End Portfolio Container -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
 
-      </div>
+              <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal3' style='display: none;'>
 
-    </div>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/GoogleAppEngine.jpg"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Google App Engine is a serverless platform for building and deploying applications, allowing you
+                      to focus on writing code without managing the underlying infrastructure.</p>
+
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal3" data-glightbox="type: inline; href: #myModal3"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/GoogleAppEngine.jpg" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Google App Engine</a></h4>
+
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+
+                  <!-- Modal -->
+                  <div id='myModal4' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AmazonRds.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p style="font-size: larger; font-family: Arial, Helvetica, sans-serif; font-weight: 600;">Amazon
+                      RDS (Relational Database Service) is a web service provided by Amazon Web Services (AWS)
+                      that makes it easier to set up, operate, and scale a relational database in the cloud.</p>
+                    <p style="font-family: Arial, Helvetica, sans-serif;">provides
+                      cost-efficient and resizable capacity while automating time-consuming administration tasks such as
+                      hardware provisioning, database setup, patching, and backups. This allows developers to focus on
+                      their applications rather than on managing infrastructure.</p>
+
+                    <p style="font-style: italic; font-weight: 300; font-size: large;">Here are some key features of
+                      Amazon RDS:</p>
+
+                    <p style="font-size: larger; font-weight:700; margin: 0;">Database Service: </p>
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 300;">Amazon RDS takes care of
+                      routine database tasks such as patch
+                      management, failure detection, recovery, backups, and software updates.</p>
+                    <p style="font-size: larger; font-weight:700; margin: 0;">Scalability:</p>
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 300;"> With just a few clicks or
+                      an API call, you can scale your database's compute and
+                      storage resources up or down to meet the needs of your application. You can also use auto-scaling
+                      to automatically adjust capacity based on your application's usage patterns.</p>
+                    <p style="font-size: larger; font-weight:700; margin: 0;">High Availability & Reliability:</p>
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 300;"> Amazon RDS offers automated
+                      backups, database snapshots,
+                      automatic host replacement for failures and Multi-AZ (Availability Zone) replication for high
+                      availability and reliability.</h2>
+                    <p style="font-size: larger; font-weight:700; margin: 0;">Security:</p>
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 300;"> Amazon RDS makes it easy to
+                      control network access to your databases with VPC
+                      integration for isolation purposes. It also supports encryption at rest for data stored in its DB
+                      instances and snapshots as well as encryption in transit using SSL/TLS.</p>
+                    <p style="font-size: larger; font-weight:700; margin: 0;">Supports Multiple Database Engines:</p>
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 300;"> Amazon RDS supports several
+                      widely used relational database
+                      engines including MySQL, PostgreSQL, MariaDB, Oracle Database Server & Microsoft SQL Server along
+                      with AWS's own Aurora which is compatible with both MySQL & PostgreSQL.</p>
+                    <p style="font-size: larger; font-weight:700; margin: 0;">Performance Insights:</p>
+                    <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 300;"> An easy-to-use tool that
+                      helps you quickly detect performance problems in
+                      your workload by visualizing the performance metrics of your DB instances.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal4" data-glightbox="type: inline; href: #myModal4"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/AmazonRds.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Amazon RDS</a></h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-product">
+                <div class="portfolio-wrap">
+
+                  <!-- Modal -->
+                  <div id='myModal5' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services//AzureCloudDatabase.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Azure SQL Database is a fully managed relational database service in Microsoft Azure that
+                      provides high availability and security for your data.</p>
+
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal5" data-glightbox="type: inline; href: #myModal5"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services//AzureCloudDatabase.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Azure SQL Database</a></h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
+                <div class="portfolio-wrap">
+
+                  <!-- Modal -->
+                  <div id='myModal6' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/GoogleCloudSQL.jpg"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Google Cloud SQL is a managed database service for MySQL, PostgreSQL, and SQL Server that handles
+                      administrative tasks like backups and updates.</p>
+
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal6" data-glightbox="type: inline; href: #myModal6"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/GoogleCloudSQL.jpg" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Google Cloud SQL</a></h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+
+                  <!-- Modal -->
+                  <div id='myModal7' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AmazonEC2.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Amazon Elastic Compute Cloud (EC2) provides resizable compute capacity in the cloud and allows
+                      you to run virtual servers, known as instances.</p>
+
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal7" data-glightbox="type: inline; href: #myModal7"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/AmazonEC2.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+
+                    <h4><a href="portfolio-details.html" title="More Details">Amazon EC2</a></h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-product">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal8' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AzureVirtualMachine.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Azure Virtual Machines offer on-demand scalable computing resources for running virtualized
+                      Windows or Linux servers in the cloud.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal8" data-glightbox="type: inline; href: #myModal8"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/AzureVirtualMachine.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+
+                    <h4><a href="portfolio-details.html" title="More Details">Azure Virtual Machines</a></h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal9' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/GoogleComputeEngine.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Azure Virtual Machines offer on-demand scalable computing resources for running virtualized
+                      Windows or Linux servers in the cloud.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal9" data-glightbox="type: inline; href: #myModal9"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/GoogleComputeEngine.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Google Compute Engine</a></h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal10' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AmazonECS.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Amazon ECS is a container management service for running Docker containers on a scalable
+                      infrastructure.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal10" data-glightbox="type: inline; href: #myModal10"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/AmazonECS.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Amazon Elastic Container Service (ECS)</a>
+                    </h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal11' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/GoogleGKE.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Google Kubernetes Engine is a managed Kubernetes service for deploying, managing, and scaling
+                      containerized applications using Google Cloud infrastructure.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal11" data-glightbox="type: inline; href: #myModal11"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/GoogleGKE.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Google Kubernetes Engine (GKE)</a>
+                    </h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-product">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal12' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AzureAKS.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Azure Kubernetes Service is a managed Kubernetes container orchestration service that simplifies
+                      deploying, managing, and scaling containerized applications.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal12" data-glightbox="type: inline; href: #myModal12"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/AzureAKS.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Azure Kubernetes Service</a>
+                    </h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal13' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AmazonStepFun.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>AWS Step Functions is a serverless orchestration service that lets you coordinate multiple AWS
+                      services into serverless workflows.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal13" data-glightbox="type: inline; href: #myModal13"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/AmazonStepFun.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">AWS Step Functions</a>
+                    </h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-product">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal14' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AzureFunc.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Azure Functions is a serverless compute service that enables you to run event-driven code without
+                      managing infrastructure.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal14" data-glightbox="type: inline; href: #myModal14"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/AzureFunc.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Azure Functions</a>
+                    </h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal15' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/GoogleCloudFunc.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Google Cloud Functions is a serverless compute service that executes event-driven functions in
+                      response to cloud events.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal15" data-glightbox="type: inline; href: #myModal15"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/GoogleCloudFunc.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Google Cloud Functions</a>
+                    </h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal16' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AmazonVPC.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Amazon Virtual Private Cloud (VPC) is a network service that allows you to create a logically
+                      isolated section of the AWS cloud where you can launch resources.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal16" data-glightbox="type: inline; href: #myModal16"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/AmazonVPC.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Amazon Virtual Private Cloud (VPC)</a>
+                    </h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-product">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal17' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/AzureVirtualNetwork.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Azure Virtual Network is a network service that provides private and isolated communication for
+                      Azure resources.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal17" data-glightbox="type: inline; href: #myModal17"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/AzureVirtualNetwork.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Azure Virtual Network</a>
+                    </h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
+                <div class="portfolio-wrap">
+                  <!-- Modal -->
+                  <div id='myModal18' style='display: none;'>
+                    <!-- Add image here -->
+                    <img src="../solution/assets/img/services/GoogleVPC.png"
+                      style='display:block;margin-left:auto;margin-right:auto;width:30%;' alt="Your Image Description">
+                    <p>Google Virtual Private Cloud (VPC) is a network service that allows you to create a global and
+                      private network for your Google Cloud resources.</p>
+                  </div>
+                  <!-- Modal End -->
+                  <a href="#myModal18" data-glightbox="type: inline; href: #myModal18"
+                    data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="../solution/assets/img/services/GoogleVPC.png" class="img-fluid" alt="">
+                  </a>
+                  <div class="portfolio-info">
+                    <h4><a href="portfolio-details.html" title="More Details">Google Virtual Private Cloud (VPC)</a>
+                    </h4>
+                    <!-- <p>Google App Engine is a serverless platform for building and deploying applications, allowing you to focus on writing code without managing the underlying infrastructure.</p> -->
+                  </div>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+            </div><!-- End Portfolio Container -->
+
+          </div>
+
+          </div>
   </section><!-- End Portfolio Section -->
 
 
 
+
+  <!-- This code block contains two sections that users deploy about EC2 and GCP respectively. 
+    Each section contains a video link, a title, a description, and a button to try the experience. -->
+  <div class="row" style="margin-top: 5%;">
+    <!-- ======= Deploy Action Section ======= -->
+    <section id="call-to-action" class="call-to-action col-lg-6" style="padding-left: 20px; padding-right: 10px;">
+      <div class="container text-center" data-aos="zoom-out">
+        <a href="https://www.youtube.com/watch?v=TsRBftzZsQo" class="glightbox play-btn"></a>
+        <h3>Amazon EC2</h3>
+        <p> Explore EC2 Experience now
+        </p>
+        <div id="ec2_deploy_btn" style="display: block;">
+          <a class="cta-btn" href="#" id="ec2_deploy">Try now</a>
+        </div>
+        <div id="ec2_deploy_loading" style="text-align: center; display: flex; justify-content: center; align-items: center; display: none;">
+          <a><i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="color:orange; margin-top: 3.5%;"></i></a>
+        </div>
+      </div>
+    </section><!-- End Call To Action Section -->
+
+    <!-- ======= Deploy Action Section ======= -->
+    <section id="call-to-action" class="call-to-action col-lg-6" style="padding-left: 10px; padding-right: 20px;">
+      <div class="container text-center" data-aos="zoom-out">
+        <a href="https://www.youtube.com/watch?v=4D3X6Xl5c_Y" class="glightbox play-btn"></a>
+        <h3>Google GCP</h3>
+        <p> Explore GCP Experience now
+        </p>
+        <a class="cta-btn" href="#">Try now</a>
+      </div>
+    </section><!-- End Call To Action Section -->
+  </div>
+
+
+
   <!-- ======= Frequently Asked Questions Section ======= -->
-  <section id="faq" class="faq">
+  <section id="faq" class="faq" style="margin-top: 5%;">
     <div class="container" data-aos="fade-up">
 
       <div class="row gy-4">
@@ -318,10 +594,7 @@
         <div class="col-lg-4">
           <div class="content px-xl-5">
             <h3>Frequently Asked <strong>Questions</strong></h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Duis aute irure dolor in reprehenderit
-            </p>
+
           </div>
         </div>
 
@@ -334,14 +607,20 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#faq-content-1">
                   <span class="num">1.</span>
-                  Non consectetur a erat nam at lectus urna duis?
+                  What is the pricing structure?
                 </button>
               </h3>
               <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                 <div class="accordion-body">
-                  Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur
-                  gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                  That is the beauty of our meta-interface! You choose your pricing structure and then
+                  we can recommend you a service that best fits your needs from a range of providers.
                 </div>
+                <!-- 
+
+              This section contains the HTML code for the Frequently Asked Questions (FAQ) section of a website. The FAQ section includes five accordion items, each with a question and answer. The questions cover topics such as which cloud services can be run from the website, how to monitor cloud resources, and which cloud provider is best. The answers provide information and guidance for users, including links to dashboards and recommendations for suitable services. 
+
+              The HTML code uses Bootstrap classes to create the accordion items and make them collapsible. The section is enclosed in a div with the class "container" and a section with the class "faq" for styling purposes. 
+              -->
               </div>
             </div><!-- # Faq item-->
 
@@ -350,14 +629,14 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#faq-content-2">
                   <span class="num">2.</span>
-                  Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
+                  Which cloud services can I run from this website?
                 </button>
               </h3>
               <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                 <div class="accordion-body">
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id
-                  donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque
-                  elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  At the moment we have the options to run Amazon RDS and Amazon EC2 on
+                  this platform but sign up to be on our mailing list to recieve real time updates for any new services
+                  we start running.
                 </div>
               </div>
             </div><!-- # Faq item-->
@@ -367,15 +646,14 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#faq-content-3">
                   <span class="num">3.</span>
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
+                  How do I monitor my cloud resources?
                 </button>
               </h3>
               <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                 <div class="accordion-body">
-                  Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar
-                  elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque
-                  eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis
-                  sed odio morbi quis
+                  You can view your instances on your dashboard (insert link) and for any services that we recommend
+                  from other providers, you should be able to navigate to their dashboard and manage your resources
+                  there.
                 </div>
               </div>
             </div><!-- # Faq item-->
@@ -385,14 +663,15 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#faq-content-4">
                   <span class="num">4.</span>
-                  Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
+                  What is the best way to get started?
                 </button>
               </h3>
               <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                 <div class="accordion-body">
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id
-                  donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque
-                  elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  Well that depends. Are you new to cloud computing? If so, check out our recommendations page to see a
+                  list of suitable services that fits your goal. If not, we
+                  would suggest you fill out our quick recommendation form to get the most appropriate recommendation of
+                  services from us.
                 </div>
               </div>
             </div><!-- # Faq item-->
@@ -402,14 +681,15 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#faq-content-5">
                   <span class="num">5.</span>
-                  Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
+                  Which cloud provider is the best for me?
                 </button>
               </h3>
               <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                 <div class="accordion-body">
-                  Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in.
-                  Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est.
-                  Purus gravida quis blandit turpis cursus in
+                  Fill in our quick recommendations form to find out. All of our providers make up 67% of the cloud
+                  computing market share.
+                  They each have different pricing schemes and take different approach to the products they deliver,
+                  according to their strengths.
                 </div>
               </div>
             </div><!-- # Faq item-->
@@ -423,37 +703,36 @@
   </section><!-- End Frequently Asked Questions Section -->
 
   <!-- ======= Recent Blog Posts Section ======= -->
-  <section id="recent-posts" class="recent-posts sections-bg">
+  <section id="recent-posts" class="recent-posts sections-bg" style="margin-top: 5%;">
     <div class="container" data-aos="fade-up">
 
       <div class="section-header">
-        <h2>Recent Blog Posts</h2>
-        <p>Consequatur libero assumenda est voluptatem est quidem illum et officia imilique qui vel architecto
-          accusamus fugit aut qui distinctio</p>
+        <h2>Discover Recent News</h2>
       </div>
 
       <div class="row gy-4">
 
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xl-4 col-md-6" style="height: 45vh;">
           <article>
 
             <div class="post-img">
-              <img src="../solution/assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+              <img src="../solution/assets/img/blog/herald2.png" alt="" class="img-fluid">
             </div>
 
-            <p class="post-category">Politics</p>
+            <!-- <p class="post-category">Technology</p> -->
 
             <h2 class="title">
-              <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
+              <a
+                href="https://www.nzherald.co.nz/technology/use-an-old-cellphone-save-the-world/PYBIHLJ2IAJMY577SWRY25PF44/">Use
+                an old cellphone - save the world</a>
             </h2>
 
             <div class="d-flex align-items-center">
-              <img src="../solution/assets/img/blog/blog-author.jpg" alt=""
-                class="img-fluid post-author-img flex-shrink-0">
+              <img src="../solution/assets/img/blog/jamie.png" alt="" class="img-fluid post-author-img flex-shrink-0">
               <div class="post-meta">
-                <p class="post-author">Maria Doe</p>
+                <p class="post-author">Jamie Morton</p>
                 <p class="post-date">
-                  <time datetime="2022-01-01">Jan 1, 2022</time>
+                  <time datetime="2022-01-01">6 Aug, 2016</time>
                 </p>
               </div>
             </div>
@@ -461,26 +740,27 @@
           </article>
         </div><!-- End post list item -->
 
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xl-4 col-md-6" style="height: 45vh;">
           <article>
 
             <div class="post-img">
-              <img src="../solution/assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
+              <img src="../solution/assets/img/blog/teachingteam.jpg" alt="" class="img-fluid">
             </div>
 
-            <p class="post-category">Sports</p>
+            <!-- <p class="post-category">News and Opinions</p> -->
 
             <h2 class="title">
-              <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+              <a
+                href="https://www.auckland.ac.nz/en/news/2017/05/18/teaching-programmes-help-to-raise-sustainability-awareness.html">Teaching
+                programmes help to raise sustainability awareness</a>
             </h2>
 
             <div class="d-flex align-items-center">
-              <img src="../solution/assets/img/blog/blog-author-2.jpg" alt=""
-                class="img-fluid post-author-img flex-shrink-0">
+              <img src="../solution/assets/img/blog/uoa.png" alt="" class="img-fluid post-author-img flex-shrink-0">
               <div class="post-meta">
-                <p class="post-author">Allisa Mayer</p>
+                <p class="post-author">The University of Auckland</p>
                 <p class="post-date">
-                  <time datetime="2022-01-01">Jun 5, 2022</time>
+                  <time datetime="2022-01-01">18 May, 2017</time>
                 </p>
               </div>
             </div>
@@ -488,24 +768,24 @@
           </article>
         </div><!-- End post list item -->
 
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xl-4 col-md-6" style="height: 45vh;">
           <article>
 
             <div class="post-img">
-              <img src="../solution/assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
+              <img src="../solution/assets/img/blog/AdobeStock_532861151-980x502.jpeg" alt="" class="img-fluid">
             </div>
 
-            <p class="post-category">Entertainment</p>
+            <!-- <p class="post-category"><br>Research</p> -->
 
             <h2 class="title">
-              <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
+              <a href="https://www.ethicalcomputing.auckland.ac.nz/green-computing-hub-2/">Green Computing
+                Hub<br><br></a>
             </h2>
 
             <div class="d-flex align-items-center">
-              <img src="../solution/assets/img/blog/blog-author-3.jpg" alt=""
-                class="img-fluid post-author-img flex-shrink-0">
+              <img src="../solution/assets/img/blog/uoa.png" alt="" class="img-fluid post-author-img flex-shrink-0">
               <div class="post-meta">
-                <p class="post-author">Mark Dower</p>
+                <p class="post-author">The University of Auckland</p>
                 <p class="post-date">
                   <time datetime="2022-01-01">Jun 22, 2022</time>
                 </p>
@@ -525,10 +805,15 @@
 </main><!-- End #main -->
 
 
-
-<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
 <div id="preloader"></div>
+
+
+
+<!-- =====================================================================================
+    ======================================================================================
+    ====================================================================================== -->
+
+
 
 <!-- Vendor JS Files -->
 <script src="../solution/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -537,17 +822,36 @@
 <script src="../solution/assets/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="../solution/assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="../solution/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="../solution/assets/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
 <script src="../solution/assets/js/main.js"></script>
 
+<!-- modal js -->
+<script src="path/to/glightbox.min.js"></script>
+
+
 <!-- EC2 Deploy -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- 
+This script listens for a click event on an element with the id "ec2_deploy". When clicked, it retrieves the user's id and token from local storage and sends a POST request to create an EC2 instance using the AWS SDK. 
+If successful, it redirects the user to the "/instance" page. If the user is not logged in, it redirects them to the login page.
+-->
 <script>
   document.getElementById("ec2_deploy").addEventListener("click", function (event) {
+    event.preventDefault();
+
+    var ec2_deploy_btn = document.getElementById("ec2_deploy_btn");
+    ec2_deploy_btn.style.display = "none";
+    var ec2_deploy_loading = document.getElementById("ec2_deploy_loading");
+    ec2_deploy_loading.style.display = "block";
+
     const userId = localStorage.getItem("id");
     const token = localStorage.getItem("token");
+
+    if (!userId) {
+      window.location.href = "../auth/login";
+      return;
+    }
 
     axios.post('http://localhost:3001/api/sdk/ec2/create',
       {
@@ -557,18 +861,27 @@
     )
       .then(function (response) {
         window.location.href = "/instance";
-
       })
       .catch(function (error) {
-        console.log(error);
+        alert("Failed due to an error: " + error);
+        location.reload();
       });
   });
 </script>
 
 
-<!-- Google GCP -->
+<!-- This script adds visibility to the chat box and chat box to GPT button when the DOM content is loaded. -->
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var chatBox = document.getElementById("helpContactBtn");
+    chatBox.style.visibility = "visible";
+
+    var chatBoxToGPT = document.getElementById("helpContactBtnToGPT");
+    chatBoxToGPT.style.visibility = "visible";
+  });
 </script>
+
+
 
 
 {% endblock %}

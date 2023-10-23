@@ -1,10 +1,19 @@
-{% extends 'template/index_services.html' %}
+{% extends 'template/index.html' %}
 
 {% block content %}
 
 <style>
     .serv-cell {
         height: 100vh;
+
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 0px 4px 8px rgba(59, 58, 58, 0.2);
+        border-radius: 20px;
+    }
+
+    .serv-cell:hover {
+
+        transform: scale(1.02);
     }
 
     .serv-cell a {
@@ -17,16 +26,19 @@
 
     .serv-cell a:hover {
         color: #e9a530;
+        transform: scale(1.05);
     }
 
     .recom a:hover {
-        color: #302ade;
+        color: #e9a530;
     }
 
     .serv-solution-cell {
         background-image: url('../service/images/solutions_bg.jpeg');
         background-size: cover;
         background-position: center;
+
+
     }
 
     .serv-solution-cell a {
@@ -36,6 +48,8 @@
         align-items: center;
         width: 100%;
         height: 100%;
+
+
     }
 
     .serv-recomm-cell {
@@ -53,9 +67,6 @@
         height: 100%;
     }
 
-    header {
-        background-image: linear-gradient(to bottom, #3b17be4f, #ffffff26) !important;
-    }
 
     header a:hover {
         color: rgb(255, 255, 255) !important;
@@ -65,25 +76,24 @@
         background: linear-gradient(to right, #303ce9d0, #f8c76d7a);
         border: none;
         border-radius: 5px;
-        padding: 0.5rem 1.25rem;
+        padding: 0.75rem 1.5rem;
         color: #fff;
-        font-size: 1rem;
+        font-size: 1.2rem;
         font-weight: 700 !important;
         margin-top: 2rem;
     }
-
 </style>
 
 
 
+
+<!-- This code block represents a container with two service cells, one for recommendations and the other for solutions. Each service cell contains a link to a different page. -->
 <div class="container-fluid m-0">
     <div class="row">
         <div class="col-md-6 serv-cell recom serv-recomm-cell">
             <a href="/selection">
                 <span class="serv-text">
                     Recommendations
-                    <br>
-                    <button type="exploreMore">Explore more</button>
                 </span>
             </a>
         </div>
@@ -92,12 +102,22 @@
             <a href="/solution">
                 <span class="serv-text">
                     Solutions
-                    <br>
-                    <button type="exploreMore">Explore more</button>
                 </span>
             </a>
         </div>
     </div>
 </div>
+
+
+<!-- This script adds event listener to the document object and sets the visibility of two chat boxes with ids "helpContactBtn" and "helpContactBtnToGPT" to "visible" once the DOM content is loaded. -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var chatBox = document.getElementById("helpContactBtn");
+        chatBox.style.visibility = "visible";
+
+        var chatBoxToGPT = document.getElementById("helpContactBtnToGPT");
+        chatBoxToGPT.style.visibility = "visible";
+    });
+</script>
 
 {% endblock %}

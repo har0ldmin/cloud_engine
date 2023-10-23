@@ -271,3 +271,16 @@ section {
   font-size: 14px;
 }
 
+/*--------------------------------------------------------------
+# Filtering Section with animation
+--------------------------------------------------------------*/
+@keyframes slide-in {
+  from { left: 0; opacity: 0;}
+  to { left: 29%; opacity: 1;} /* adjust as needed */
+}
+
+@keyframes disappeared {
+  from {left: 29%; opacity: 1;}
+  to {left: 0; opacity: 0;}
+}
+

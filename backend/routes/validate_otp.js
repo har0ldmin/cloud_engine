@@ -1,3 +1,20 @@
+// ```
+//     This route is used to validate the OTP sent to the user's email address.
+//     It accepts the user's email address and the OTP in the request body and returns a response indicating whether the OTP was successfully validated or not.
+
+//     POST: /validate_otp
+//     Description: Validate OTP sent to user's email address
+//     Request: {
+//         "email": "string",
+//         "otp": "string"
+//     }
+//     Response: {
+//         "code": "string",
+//         "message": "string",
+//         "success": "boolean"
+//     }   
+// ```;
+
 const express = require("express");
 const router = express.Router();
 const { OTP } = require("../models/otpModel"); // import your otp model

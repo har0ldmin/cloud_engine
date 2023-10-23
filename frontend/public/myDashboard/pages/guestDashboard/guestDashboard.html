@@ -1,0 +1,461 @@
+{% extends 'template/guest_dashboard.html' %} {% block content %}
+
+<style>
+  /* Overlay helper */
+  .overlay {
+    position: absolute;
+    height: 20%;
+    width: 15%;
+    background-color: rgba(225, 183, 114, 0.7);
+    margin-top: 0.5%;
+    border-radius: 10px;
+    z-index: 1;
+  }
+
+  .nextBtn {
+    position: absolute;
+    bottom: 10;
+    right: 15;
+    border-radius: 5px;
+  }
+
+  .nextBtn:hover {
+    background-color: rgb(78, 78, 78) !important;
+    border-color: rgb(78, 78, 78) !important;
+  }
+
+  .skipBtn {
+    position: absolute;
+    bottom: 10;
+    left: 15;
+    border-radius: 5px;
+    background-color: rgb(99, 99, 99);
+    border-color: rgb(99, 99, 99);
+    ;
+  }
+
+  .skipBtn:hover {
+    background-color: rgb(78, 78, 78) !important;
+    border-color: rgb(78, 78, 78) !important;
+  }
+
+  .description {
+    position: absolute;
+    left: 15;
+    top: 10;
+    color: white;
+    font-size: 16px;
+  }
+</style>
+
+
+<main class="content">
+
+  <!-- This HTML code block represents the header section of the guest dashboard page. It includes a breadcrumb navigation bar, a heading, and a description. -->
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div class="d-block mb-4 mb-md-0">
+      <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
+        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+          <li class="breadcrumb-item">
+            <a href="/">
+              <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                </path>
+              </svg>
+            </a>
+          </li>
+          <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><a href="#">Dashboard</a></li>
+        </ol>
+      </nav>
+      <h2 class="h4">My Dashboard</h2>
+      <p class="mb-0">Effectively Overview Your Dashboard Here.</p>
+    </div>
+  </div>
+
+
+  <div class="row">
+    
+    <!--
+    This code block represents a card element that displays an overview of instances. 
+    It contains a header with the title "Instances Overview" and a small section that displays the percentage change from yesterday. 
+    It also includes a button to view the overview for the week. The card body contains a chart that displays sales value. 
+    Additionally, there is an overlay element that displays a tutorial message when the user hovers over the chart. 
+    -->
+    <div class="col-12 mb-4">
+      <div class="card bg-yellow-100 border-0 shadow">
+        <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+          <div class="d-block mb-3 mb-sm-0">
+            <div class="fs-5 fw-normal mb-2">Instances Overview</div>
+            <div class="small mt-2">
+              <span class="fw-normal me-2">Yesterday</span>
+              <span class="fas fa-angle-up text-success"></span>
+              <span class="text-success fw-bold">10.57%</span>
+            </div>
+          </div>
+          <div class="d-flex ms-auto">
+            <a href="#" class="btn btn-secondary text-dark btn-sm me-2">Week</a>
+          </div>
+        </div>
+
+        <div class="overlay guideDashboardOverview" style="display: none; height: 25%; width: 25%; margin-left: 17%;"><a
+            class=" description">You can see your dashboard overview through this graph. </a>
+          <br>
+          <button class="btn btn-primary nextBtn" onclick="guideDashboardOverviewNext()">Next</button>
+          <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+        </div>
+
+        <div class="card-body p-2">
+          <div class="ct-chart-sales-value ct-double-octave ct-series-g"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- This code block represents a card element that displays information about Amazon instances. 
+      It includes an overlay with helper guides, an Amazon logo, the number of current instances, the year, and the country. -->
+    <div class="col-12 col-sm-6 col-xl-4 mb-4" style="padding-top: 3%;">
+      <div class="card border-0 shadow">
+
+        <!-- Helper guides -->
+        <div class="overlay guideAmazonCards"
+          style="display: none; height: 100%; width: 100%; background-color: rgba(225, 183, 114, 0.95);"><a
+            class=" description">This section
+            gives you a brief details of your instances from Amazon. </a>
+          <br>
+          <button class="btn btn-primary nextBtn" onclick="guideAmazonCardsNext()">Next</button>
+          <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+        </div>
+
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div
+              class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+              <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
+                <img
+                  src="https://w7.pngwing.com/pngs/723/352/png-transparent-amazon-com-amazon-pay-computer-icons-online-shopping-amazon-logo-miscellaneous-text-retail-thumbnail.png"
+                  alt="amazonLogo" />
+              </div>
+              <!-- <div class="d-sm-none">
+                <h2 class="h5">Customers</h2>
+                <h3 class="fw-extrabold mb-1">345,678</h3>
+              </div> -->
+            </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h6 text-gray-400 mb-0"> Amazon</h2>
+                <h3 class="fw-extrabold mb-2" id="currentInstances">1</h3>
+              </div>
+              <small class="d-flex align-items-center text-gray-500">
+                2023
+                <svg class="icon icon-xxs text-gray-500 ms-2 me-1" fill="currentColor" viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                USA
+              </small>
+              <div class="small d-flex mt-1">
+                <div>Relative to others <svg class="icon icon-xs text-warning" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                      clip-rule="evenodd"></path>
+                  </svg><span class="text-warning fw-bolder">33%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- This code block represents a card element that displays information about the user's instances from Google. 
+      It includes an overlay with helper guides, an Amazon logo, the number of instances, the year, and the country. -->
+    <div class="col-12 col-sm-6 col-xl-4 mb-4" style="padding-top: 3%;">
+      <div class="card border-0 shadow">
+
+        <!-- Helper guides -->
+        <div class="overlay guideGoogleCards"
+          style="display: none; height: 100%; width: 100%; background-color: rgba(225, 183, 114, 0.95);"><a
+            class=" description">This section
+            gives you a brief details of your instances from Google. </a>
+          <br>
+          <button class="btn btn-primary nextBtn" onclick="guideGoogleCardsNext()">Next</button>
+          <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+        </div>
+
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div
+              class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+              <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                <img src="https://live.staticflickr.com/3501/3470094947_c490b367e6_o.png" alt="amazonLogo" />
+              </div>
+              <!-- <div class="d-sm-none">
+                <h2 class="fw-extrabold h5">Revenue</h2>
+                <h3 class="mb-1">$43,594</h3>
+              </div> -->
+            </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h6 text-gray-400 mb-0"> Google</h2>
+                <h3 class="fw-extrabold mb-2">2</h3>
+              </div>
+              <small class="d-flex align-items-center text-gray-500">
+                2023
+                <svg class="icon icon-xxs text-gray-500 ms-2 me-1" fill="currentColor" viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                USA
+              </small>
+              <div class="small d-flex mt-1">
+                <div>
+                  Relative to others
+                  <!-- <svg class="icon icon-xs" fill="currentColor" height="1em" width="1em" viewBox="0 0 16 16">
+                    <line x1="4" y1="8" x2="18" y2="8" stroke="currentColor" stroke-width="2" />
+                  </svg> -->
+                  <svg class="icon icon-xs text-success" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-success fw-bolder">67%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- This code block displays a card that shows the percentage of over-reliance on a single entity. 
+      It contains an icon, the percentage value, and additional information such as the year and the percentage change since last month. 
+      It also includes a helper guide that can be skipped or navigated through using the Next button. -->
+    <div class="col-12 col-sm-6 col-xl-4 mb-4" style="padding-top: 3%;">
+      <div class="card border-0 shadow">
+
+        <!-- Helper guides -->
+        <div class="overlay guideSingleEntity"
+          style="display: none; height: 100%; width: 100%; background-color: rgba(225, 183, 114, 0.95);"><a
+            class=" description">This section shows you how much the user relies on a single entity
+          </a>
+          <br>
+          <button class="btn btn-primary nextBtn" onclick="guideSingleEntityNext()">Next</button>
+          <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+        </div>
+
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div
+              class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+              <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
+                <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <!-- <div class="d-sm-none">
+                <h2 class="fw-extrabold h5"> Bounce Rate</h2>
+                <h3 class="mb-1">50.88%</h3>
+              </div> -->
+            </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h6 text-gray-400 mb-0"> Over-reliance on a single entity</h2>
+                <h3 class="fw-extrabold text-warning mb-2">63%</h3>
+              </div>
+              <small class="text-gray-500">
+                2023
+              </small>
+              <div class="small d-flex mt-1">
+                <div>Since last month <svg class="icon icon-xs" fill="currentColor" height="1em" width="1em"
+                    viewBox="0 0 16 16">
+                    <line x1="4" y1="8" x2="18" y2="8" stroke="currentColor" stroke-width="2" />
+                  </svg><span class="fw-bolder"> 0%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- 
+  This HTML code block displays a table of instances in the guest dashboard page. 
+  It shows the company, name, private IP address, private DNS name, instance type, and status of each instance. 
+  The table is responsive and can be viewed in different screen sizes. The code also includes a helper guide overlay that can be skipped or finished. 
+  -->
+  <div class="row" style="padding-top: 3%;">
+    <div class="col-12 col-xl-12">
+      <div class="row">
+        <div class="col-12 mb-4">
+          <div class="card border-0 shadow">
+
+            <!-- Helper guides -->
+            <div class="overlay guideCurrentInstances"
+              style="display: none; height: 100%; width: 100%; background-color: rgba(225, 183, 114, 0.95);"><a
+                class=" description">This section shows you how much the user relies on a single entity
+              </a>
+              <br>
+              <button class="btn btn-primary nextBtn" onclick="skipTutorial()">Finish</button>
+              <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+            </div>
+
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h2 class="fs-5 fw-bold mb-0">You currently have <a style="font-weight: bold;">3</a> instances</h2>
+                </div>
+                <div class="col text-end">
+                  <a href="/instance" class="btn btn-sm btn-primary">View All</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th class="border-gray-200">Company</th>
+                    <th class="border-gray-200">Name</th>
+                    <th class="border-gray-200">Private Ip Address</th>
+                    <th class="border-gray-200">Private DNS Name</th>
+                    <th class="border-gray-200">Instance Type</th>
+                    <th class="border-gray-200">Status</th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-warning">AMAZON</td>
+                    <td>Amazon Instance 1</td>
+                    <td>171.00.00.001</td>
+                    <td>ip-170-01-01-001.ap-southeast-2.compute.internal</td>
+                    <td>t2.micro</td>
+                    <td class="text-success">running</td>
+                  </tr>
+
+                  <tr>
+                    <td class="text-info">GOOGLE</td>
+                    <td>Google Instance 1</td>
+                    <td>171.00.00.001</td>
+                    <td>ip-170-01-01-001.ap-southeast-2.compute.internal</td>
+                    <td>t2.micro</td>
+                    <td class="text-warning">pending</td>
+                  </tr>
+
+                  <tr>
+                    <td class="text-info">GOOGLE</td>
+                    <td>Google Instance 2</td>
+                    <td>171.00.00.001</td>
+                    <td>ip-170-01-01-001.ap-southeast-2.compute.internal</td>
+                    <td>t2.micro</td>
+                    <td class="text-danger">stopped</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+
+
+<!--
+This script defines functions for guiding the user through the dashboard overview.
+It includes functions for opening and closing the guide, skipping the tutorial, and navigating through the tutorial steps.
+The script also automatically runs the guide when the page is loaded.
+-->
+<script>
+  // Default status
+  guideStatus = false;
+
+  // Opens the guide
+  function guide() {
+    if (guideStatus == false) {
+      var helperIcon = document.querySelector(".fa-question-circle");
+      helperIcon.style.color = "orange";
+      guideStatus = true;
+
+      let helper = document.querySelector(".guideDashboardOverview");
+      helper.style.display = "block";
+    }
+    else {
+      skipTutorial();
+      guideStatus = false;
+    }
+  }
+
+  // Quit tutorial instantly
+  function skipTutorial() {
+    console.log("tutorial skipped");
+    let helpers = document.querySelectorAll(".overlay");
+    helpers.forEach(function (helper) {
+      helper.style.display = "none";
+    });
+
+    var guideStatus = false;
+    var helperIcon = document.querySelector(".fa-question-circle");
+    helperIcon.style.color = "";
+  }
+
+  // ====================== //
+
+  function guideDashboardOverviewNext() {
+    let helper = document.querySelector(".guideDashboardOverview");
+    helper.style.display = "none";
+
+    let helper2 = document.querySelector(".guideAmazonCards");
+    helper2.style.display = "block";
+  }
+
+  function guideAmazonCardsNext() {
+    let helper = document.querySelector(".guideAmazonCards");
+    helper.style.display = "none";
+
+    let helper2 = document.querySelector(".guideGoogleCards");
+    helper2.style.display = "block";
+  }
+
+  function guideGoogleCardsNext() {
+    let helper = document.querySelector(".guideGoogleCards");
+    helper.style.display = "none";
+
+    let helper2 = document.querySelector(".guideSingleEntity");
+    helper2.style.display = "block";
+  }
+
+  function guideSingleEntityNext() {
+    let helper = document.querySelector(".guideSingleEntity");
+    helper.style.display = "none";
+
+    let helper2 = document.querySelector(".guideCurrentInstances");
+    helper2.style.display = "block";
+  }
+
+
+  // Auto run guide
+  document.addEventListener("DOMContentLoaded", function () {
+    guide();
+  });
+</script>
+
+
+{% endblock %}

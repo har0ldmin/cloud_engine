@@ -1,9 +1,31 @@
+// ```
+//     This file contains the route for resetting password
+//     It accepts a resetToken in the request parameter and returns a response containing the user profile.
+    
+//     POST: /reset_password/:resetToken
+//     Description: Reset user password
+//     Request: {
+//         "password": "string"
+//     }
+//     Response: {
+//         "code": "string",
+//         "message": "string",
+//         "success": "boolean"
+//     }
+
+// ```;
+
+// import modules
 const express = require("express");
-const resetSender = require("../middleware/reset-middleware");
-const { Reset } = require("../models/resetModel");
-const { User } = require("../models/account");
 const validator = require("validator");
 const router = express.Router();
+
+// import middleware
+const resetSender = require("../middleware/reset-middleware");
+
+// import models
+const { Reset } = require("../models/resetModel");
+const { User } = require("../models/accountModel");
 
 router.post("/:resetToken", async (req, res) => {
     try {

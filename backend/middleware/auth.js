@@ -1,4 +1,17 @@
-const { User } = require("../models/account");
+// ```
+//     This is the middleware that is used to authenticate the user.
+//     It accepts a JSON Web Token (JWT) in the request body and returns a response indicating whether the user is authorized or not.
+//     Follwing payload must contain in the request body. Except when the token is stored in cookie.
+
+//     Request: {
+//         "createToken": "string"
+//         "userId": "string"
+//     }
+
+// ```;
+
+// import models
+const { User } = require("../models/accountModel");
 
 let auth = (req, res, next) => {
     // get token from client cookie

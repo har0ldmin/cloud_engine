@@ -45,6 +45,7 @@ const ec2Routes = require("./routes/AWS/ec2Route");
 const rdsRoutes = require("./routes/AWS/rdsRoute");
 const iamRoutes = require("./routes/AWS/iamRoute");
 const dashboardRoutes = require("./routes/AWS/dashboardHelper");
+const autoreplyRoutes = require("./routes/autoreply");
 
 // Route Definitions
 app.use("/api/sdk/iam", iamRoutes);
@@ -61,6 +62,7 @@ app.use("/api/reset_password", resetPasswordRoutes);
 app.use("/api/sdk/ec2", ec2Routes);
 app.use("/api/sdk/rds", rdsRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/autoreply", autoreplyRoutes);
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);

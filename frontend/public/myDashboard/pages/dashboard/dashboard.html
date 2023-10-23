@@ -1,33 +1,84 @@
 {% extends 'template/dashboard.html' %} {% block content %}
 
+<style>
+  /* Overlay helper */
+  .overlay {
+    position: absolute;
+    height: 20%;
+    width: 15%;
+    background-color: rgba(225, 183, 114, 0.7);
+    margin-top: 0.5%;
+    border-radius: 10px;
+    z-index: 1;
+  }
+
+  .nextBtn {
+    position: absolute;
+    bottom: 10;
+    right: 15;
+    border-radius: 5px;
+  }
+
+  .nextBtn:hover {
+    background-color: rgb(78, 78, 78) !important;
+    border-color: rgb(78, 78, 78) !important;
+  }
+
+  .skipBtn {
+    position: absolute;
+    bottom: 10;
+    left: 15;
+    border-radius: 5px;
+    background-color: rgb(99, 99, 99);
+    border-color: rgb(99, 99, 99);
+    ;
+  }
+
+  .skipBtn:hover {
+    background-color: rgb(78, 78, 78) !important;
+    border-color: rgb(78, 78, 78) !important;
+  }
+
+  .description {
+    position: absolute;
+    left: 15;
+    top: 10;
+    color: white;
+    font-size: 16px;
+  }
+</style>
+
 
 <main class="content">
 
-
+  <!-- This code block displays a breadcrumb navigation bar and a header for the "My Dashboard" page. The breadcrumb navigation bar allows users to easily navigate back to the homepage or the previous page. 
+    The header displays the title of the page and a brief description. -->
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
     <div class="d-block mb-4 mb-md-0">
-        <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                    <a href="/">
-                        <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                            </path>
-                        </svg>
-                    </a>
-                </li>
-                <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="#">Dashboard</a></li>
-            </ol>
-        </nav>
-        <h2 class="h4">My Dashboard</h2>
-        <p class="mb-0">Effectively Overview Your Dashboard Here.</p>
+      <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
+        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+          <li class="breadcrumb-item">
+            <a href="/">
+              <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                </path>
+              </svg>
+            </a>
+          </li>
+          <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><a href="/myDashboard" style="text-decoration: underline; color: #F79901;">Dashboard</a></li>
+        </ol>
+      </nav>
+      <h2 class="h4">My Dashboard</h2>
+      <p class="mb-0">Effectively Overview Your Dashboard Here.</p>
     </div>
-</div>
+  </div>
 
 
+  <!-- This code block represents a card component that displays an overview of instances. It contains a graph, a title, and a button to view the data for the week. 
+    It also includes an overlay element that provides a tutorial for the dashboard overview graph. -->
   <div class="row">
     <div class="col-12 mb-4">
       <div class="card bg-yellow-100 border-0 shadow">
@@ -44,37 +95,57 @@
             <a href="#" class="btn btn-secondary text-dark btn-sm me-2">Week</a>
           </div>
         </div>
+
+        <div class="overlay guideDashboardOverview" style="display: none; height: 25%; width: 25%; margin-left: 17%;"><a
+            class=" description">You can see your dashboard overview through this graph. </a>
+          <br>
+          <button class="btn btn-primary nextBtn" onclick="guideDashboardOverviewNext()">Next</button>
+          <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+        </div>
+
         <div class="card-body p-2">
           <div class="ct-chart-sales-value ct-double-octave ct-series-g"></div>
         </div>
       </div>
     </div>
 
+
+    
+    <!-- This code block represents a card element that displays information about Amazon instances. 
+      It contains an overlay for helper guides, the Amazon logo, the number of current instances, the year, and the country. -->
     <div class="col-12 col-sm-6 col-xl-4 mb-4" style="padding-top: 3%;">
       <div class="card border-0 shadow">
+
+        <!-- Helper guides -->
+        <div class="overlay guideAmazonCards" style="display: none; height: 100%; width: 100%; background-color: rgba(225, 183, 114, 0.95);"><a
+            class=" description">This section
+            gives you a brief details of your instances from Amazon. </a>
+          <br>
+          <button class="btn btn-primary nextBtn" onclick="guideAmazonCardsNext()">Next</button>
+          <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+        </div>
+
         <div class="card-body">
           <div class="row d-block d-xl-flex align-items-center">
             <div
               class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
               <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
-                <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                  </path>
-                </svg>
+                <img
+                  src="https://w7.pngwing.com/pngs/723/352/png-transparent-amazon-com-amazon-pay-computer-icons-online-shopping-amazon-logo-miscellaneous-text-retail-thumbnail.png"
+                  alt="amazonLogo" />
               </div>
-              <div class="d-sm-none">
+              <!-- <div class="d-sm-none">
                 <h2 class="h5">Customers</h2>
                 <h3 class="fw-extrabold mb-1">345,678</h3>
-              </div>
+              </div> -->
             </div>
             <div class="col-12 col-xl-7 px-xl-0">
               <div class="d-none d-sm-block">
-                <h2 class="h6 text-gray-400 mb-0">Customers</h2>
-                <h3 class="fw-extrabold mb-2">345k</h3>
+                <h2 class="h6 text-gray-400 mb-0"> Amazon</h2>
+                <h3 class="fw-extrabold mb-2" id="currentInstances"></h3>
               </div>
               <small class="d-flex align-items-center text-gray-500">
-                Feb 1 - Apr 1,
+                2023
                 <svg class="icon icon-xxs text-gray-500 ms-2 me-1" fill="currentColor" viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
@@ -84,12 +155,12 @@
                 USA
               </small>
               <div class="small d-flex mt-1">
-                <div>Since last month <svg class="icon icon-xs text-success" fill="currentColor" viewBox="0 0 20 20"
+                <div>Relative to others <svg class="icon icon-xs text-success" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                       d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
                       clip-rule="evenodd"></path>
-                  </svg><span class="text-success fw-bolder">22%</span></div>
+                  </svg><span class="text-success fw-bolder">100%</span></div>
               </div>
             </div>
           </div>
@@ -97,46 +168,57 @@
       </div>
     </div>
 
+    
+    <!-- This code block represents a card element that displays information about Google instances. 
+      It includes an overlay with helper guides, an icon for the Google logo, the number of instances (currently set to 0), the year (currently set to 2023), and the country (currently set to USA). 
+      It also includes a small section that displays the percentage relative to others. -->
     <div class="col-12 col-sm-6 col-xl-4 mb-4" style="padding-top: 3%;">
       <div class="card border-0 shadow">
+
+        <!-- Helper guides -->
+        <div class="overlay guideGoogleCards" style="display: none; height: 100%; width: 100%; background-color: rgba(225, 183, 114, 0.95);"><a
+            class=" description">This section
+            gives you a brief details of your instances from Google. </a>
+          <br>
+          <button class="btn btn-primary nextBtn" onclick="guideGoogleCardsNext()">Next</button>
+          <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+        </div>
+
         <div class="card-body">
           <div class="row d-block d-xl-flex align-items-center">
             <div
               class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
               <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
-                <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
-                    clip-rule="evenodd"></path>
-                </svg>
+                <img src="https://live.staticflickr.com/3501/3470094947_c490b367e6_o.png" alt="amazonLogo" />
               </div>
-              <div class="d-sm-none">
+              <!-- <div class="d-sm-none">
                 <h2 class="fw-extrabold h5">Revenue</h2>
                 <h3 class="mb-1">$43,594</h3>
-              </div>
+              </div> -->
             </div>
             <div class="col-12 col-xl-7 px-xl-0">
               <div class="d-none d-sm-block">
-                <h2 class="h6 text-gray-400 mb-0">Revenue</h2>
-                <h3 class="fw-extrabold mb-2">$43,594</h3>
+                <h2 class="h6 text-gray-400 mb-0"> Google</h2>
+                <h3 class="fw-extrabold mb-2">0</h3>
               </div>
               <small class="d-flex align-items-center text-gray-500">
-                Feb 1 - Apr 1,
+                2023
                 <svg class="icon icon-xxs text-gray-500 ms-2 me-1" fill="currentColor" viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
                     clip-rule="evenodd"></path>
                 </svg>
-                GER
+                USA
               </small>
               <div class="small d-flex mt-1">
-                <div>Since last month <svg class="icon icon-xs text-danger" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"></path>
-                  </svg><span class="text-danger fw-bolder">2%</span></div>
+                <div>
+                  Relative to others
+                  <svg class="icon icon-xs" fill="currentColor" height="1em" width="1em" viewBox="0 0 16 16">
+                    <line x1="4" y1="8" x2="18" y2="8" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                  <span class="fw-bolder">0%</span>
+                </div>
               </div>
             </div>
           </div>
@@ -144,8 +226,21 @@
       </div>
     </div>
 
+    
+    <!-- This code block represents a card element that displays the over-reliance on a single entity. It contains a helper guide that is hidden by default, but can be shown by clicking on the "Next" button. 
+      The card displays a percentage value of 100% and a small description of "Since last month". -->
     <div class="col-12 col-sm-6 col-xl-4 mb-4" style="padding-top: 3%;">
       <div class="card border-0 shadow">
+
+        <!-- Helper guides -->
+        <div class="overlay guideSingleEntity" style="display: none; height: 100%; width: 100%; background-color: rgba(225, 183, 114, 0.95);"><a
+            class=" description">This section shows you how much the user relies on a single entity
+          </a>
+          <br>
+          <button class="btn btn-primary nextBtn" onclick="guideSingleEntityNext()">Next</button>
+          <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+        </div>
+
         <div class="card-body">
           <div class="row d-block d-xl-flex align-items-center">
             <div
@@ -157,26 +252,26 @@
                     clip-rule="evenodd"></path>
                 </svg>
               </div>
-              <div class="d-sm-none">
+              <!-- <div class="d-sm-none">
                 <h2 class="fw-extrabold h5"> Bounce Rate</h2>
                 <h3 class="mb-1">50.88%</h3>
-              </div>
+              </div> -->
             </div>
             <div class="col-12 col-xl-7 px-xl-0">
               <div class="d-none d-sm-block">
-                <h2 class="h6 text-gray-400 mb-0"> Bounce Rate</h2>
-                <h3 class="fw-extrabold mb-2">50.88%</h3>
+                <h2 class="h6 text-gray-400 mb-0"> Over-reliance on a single entity</h2>
+                <h3 class="fw-extrabold text-danger mb-2">100%</h3>
               </div>
               <small class="text-gray-500">
-                Feb 1 - Apr 1
+                2023
               </small>
               <div class="small d-flex mt-1">
-                <div>Since last month <svg class="icon icon-xs text-success" fill="currentColor" viewBox="0 0 20 20"
+                <div>Since last month <svg class="icon icon-xs text-danger" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                       d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
                       clip-rule="evenodd"></path>
-                  </svg><span class="text-success fw-bolder">4%</span></div>
+                  </svg><span class="text-danger fw-bolder">100%</span></div>
               </div>
             </div>
           </div>
@@ -185,15 +280,31 @@
     </div>
   </div>
 
+  <!--   
+  This HTML code block represents a dashboard page that displays a table of instances. The instances are displayed in a table with columns for Company, Name, Private IP Address, Private DNS Name, Instance Type, and Status. 
+  The number of instances is displayed at the top of the table. The table is responsive and can be viewed on different devices. The code also includes a helper guide overlay that can be skipped or finished. 
+  -->
   <div class="row" style="padding-top: 3%;">
     <div class="col-12 col-xl-12">
       <div class="row">
         <div class="col-12 mb-4">
           <div class="card border-0 shadow">
+ 
+            <!-- Helper guides -->
+            <div class="overlay guideCurrentInstances" style="display: none; height: 100%; width: 100%; background-color: rgba(225, 183, 114, 0.95);"><a
+                class=" description">This section shows you how much the user relies on a single entity
+              </a>
+              <br>
+              <button class="btn btn-primary nextBtn" onclick="skipTutorial()">Finish</button>
+              <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+            </div>
+
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col">
-                  <h2 class="fs-5 fw-bold mb-0">Current Instances</h2>
+                  <h2 class="fs-5 fw-bold mb-0">You currently have &nbsp<a id="currentInstances2"
+                      style="font-weight: 800;">0
+                    </a>&nbsp instances</h2>
                 </div>
                 <div class="col text-end">
                   <a href="/instance" class="btn btn-sm btn-primary">View All</a>
@@ -204,73 +315,18 @@
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th class="border-bottom" scope="col">ID</th>
-                    <th class="border-bottom" scope="col">Private DNS Name</th>
-                    <th class="border-bottom" scope="col">Instance Type</th>
-                    <th class="border-bottom" scope="col">Status</th>
+                    <th class="border-gray-200">Company</th>
+                    <th class="border-gray-200">Name</th>
+                    <th class="border-gray-200">Private Ip Address</th>
+                    <th class="border-gray-200">Private DNS Name</th>
+                    <th class="border-gray-200">Instance Type</th>
+                    <th class="border-gray-200">Status</th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th class="text-gray-900" scope="row">
-                      i-0e0662c7afc7edacf
-                    </th>
-                    <td class="fw-bolder text-gray-500">
-                      Amazon
-                    </td>
-                    <td class="fw-bolder text-gray-500">
-                      2023/09/21
-                    </td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                  </tr>
-                  <tr>
-                    <th class="text-gray-900" scope="row">
-                      i-0e0662c7afc7edacf
-                    </th>
-                    <td class="fw-bolder text-gray-500">
-                      Amazon
-                    </td>
-                    <td class="fw-bolder text-gray-500">
-                      2023/09/21
-                    </td>
-                    <td><span class="fw-bold text-warning">Due</span></td>
-                  </tr>
-                  <tr>
-                    <th class="text-gray-900" scope="row">
-                      i-0e0662c7afc7edacf
-                    </th>
-                    <td class="fw-bolder text-gray-500">
-                      Amazon
-                    </td>
-                    <td class="fw-bolder text-gray-500">
-                      2023/09/21
-                    </td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                  </tr>
-                  <tr>
-                    <th class="text-gray-900" scope="row">
-                      i-0e0662c7afc7edacf
-                    </th>
-                    <td class="fw-bolder text-gray-500">
-                      Amazon
-                    </td>
-                    <td class="fw-bolder text-gray-500">
-                      2023/09/21
-                    </td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                  </tr>
-                  <tr>
-                    <th class="text-gray-900" scope="row">
-                      i-0e0662c7afc7edacf
-                    </th>
-                    <td class="fw-bolder text-gray-500">
-                      Amazon
-                    </td>
-                    <td class="fw-bolder text-gray-500">
-                      2023/09/21
-                    </td>
-                    <td><span class="fw-bold text-danger">Deactive</span></td>
-                  </tr>
+                  <!-- Instances go in here -->
                 </tbody>
               </table>
             </div>
@@ -282,5 +338,255 @@
 
 </main>
 
+
+
+<!-- 
+This script tag imports the Axios library from a CDN. Axios is a popular Promise-based HTTP client for JavaScript which can be used in both browser and Node.js environments. 
+It simplifies the process of making HTTP requests and handling responses. 
+-->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+<!-- 
+Description: This script retrieves the dashboard data from the server using an asynchronous function named dashboardAPI(). 
+It retrieves the user ID and token from the local storage and sends a POST request to the server with the user ID and token as parameters.
+The response data contains an array of EC2 instances, which are then stored in the local storage as an array of instance IDs and an array of instance names.
+-->
+<script>
+  // Retrieve Dashboard
+  async function dashboardAPI() {
+    const userId = localStorage.getItem("id");
+    const token = localStorage.getItem("token");
+
+    console.log(userId, token);
+
+    try {
+      const response = await axios.post('http://localhost:3001/api/dashboard', {
+        "userId": userId,
+        "createToken": token,
+      });
+      console.log(response.data.ec2);
+      let ec2 = [];
+      let ec2Name = [];
+
+      response.data.ec2.forEach(async element => {
+        await ec2.push(element.instanceId);
+        await ec2Name.push(element.instanceName);
+      });
+
+      await localStorage.setItem("ec2", ec2);
+      await localStorage.setItem("ec2Name", ec2Name);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+</script>
+
+
+
+<!-- 
+This script is responsible for calling the dashboard API and displaying the EC2 instances on the dashboard page. 
+It retrieves the user ID and token from local storage and uses them to make a POST request to the EC2 describe API. 
+The response data is used to create a new instance on the dashboard page. 
+If there are no instances to display, a message is displayed. 
+-->
+<script>
+  document.addEventListener("DOMContentLoaded", async function () {
+    console.log("Dashboard API calling..");
+    await dashboardAPI();
+    console.log("Dashboard API called..");
+
+    const userId = localStorage.getItem("id");
+    const token = localStorage.getItem("token");
+    const tableBody = document.querySelector("tbody");
+    const ec2Instances = localStorage.getItem("ec2");
+    const ec2Names = localStorage.getItem("ec2Name");
+
+    const currentInstances = document.getElementById("currentInstances");
+    document.getElementById("currentInstances").innerHTML = ec2Instances.split(",").length;
+    document.getElementById("currentInstances2").innerHTML = ec2Instances.split(",").length;
+
+    if (ec2Instances) {
+      const instances = ec2Instances.split(",");
+      const names = ec2Names.split(",");
+      console.log("EC2 instances list: " + instances);
+
+      if (instances.length > 0) {
+        console.log("Instances list's length is: " + instances.length);
+
+        instances.forEach(function (instanceId) {
+          console.log(instanceId);
+          let cnt = 0;
+
+          axios.post("http://localhost:3001/api/sdk/ec2/describe",
+            {
+              "userId": userId,
+              "createToken": token,
+              "InstanceId": instanceId,
+            }
+          )
+            .then(function (response) {
+              // debugging
+              const InstanceStatus = response.data.ec2info[0];
+              console.log(InstanceStatus);
+              createNewInstance("AMAZON", names[cnt], InstanceStatus.InstanceType, InstanceStatus.PrivateIpAddress, InstanceStatus.PrivateDnsName, InstanceStatus.Status);
+              cnt++;
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        });
+      }
+      else {
+        console.log("Failed to display the instances");
+      }
+    }
+    else if (ec2Instances == false) {
+      console.log("There isn't any instances to display.");
+      noInstancesMessage.style.display = "block";
+    }
+    else {
+      console.log("Failed to display the instances");
+    }
+  });
+</script>
+
+
+
+<!-- 
+DESCRIPTION: This function creates a new row in the table with the given parameters. It takes in the company name, instance ID, instance type, private IP address, private DNS name, and status. 
+It then creates a new row with the company name as a link, and adds the other parameters as table cells. 
+The function also adds classes to the company name link and status cell based on the company name and status respectively.
+-->
+<script>
+  function createNewInstance(company, instanceId, InstanceType, PrivateIpAddress, PrivateDnsName, Status) {
+
+    var newRow = document.createElement('tr');
+
+    var idCell = document.createElement('td');
+    var companyLink = document.createElement('a');
+    companyLink.href = '#';
+    companyLink.classList.add('fw-bold');
+    companyLink.textContent = company;
+
+    if (company == "AMAZON") {
+      companyLink.classList.add('text-warning');
+    }
+    // Add other companies here
+    // else if (company == "GOOGLE") {
+    //   companyLink.classList.add('text-warning');
+    // }
+
+    idCell.appendChild(companyLink);
+    newRow.appendChild(idCell);
+
+    var otherCells = [
+      instanceId, PrivateIpAddress, PrivateDnsName, InstanceType, Status, '', ''
+    ];
+
+    for (var i = 0; i < otherCells.length; i++) {
+      var cell = document.createElement('td');
+      var span = document.createElement('span');
+      span.classList.add('fw-normal');
+
+      if (i == 4) {
+        if (otherCells[i] == "running") {
+          span.classList.add('text-success');
+        }
+        else if (otherCells[i] == "stopped") {
+          span.classList.add('text-danger');
+        }
+        else {
+          span.classList.add('text-warning');
+        }
+      }
+
+      span.textContent = otherCells[i];
+      cell.appendChild(span);
+      newRow.appendChild(cell);
+    }
+
+    var tableBody = document.querySelector("tbody");
+    tableBody.appendChild(newRow);
+  }
+</script>
+
+
+
+<!--
+This script defines functions to open and close a guide for the dashboard page. 
+It also defines functions to navigate through the guide. 
+The guide is displayed as a series of overlays with instructions for the user. 
+The guide can be skipped instantly by calling the skipTutorial() function. 
+The guide can be opened by clicking on an icon with the class "fa-question-circle". 
+The guide is closed by clicking on the same icon or by completing the guide. 
+-->
+<script>
+  // Default status
+  guideStatus = false;
+
+  // Opens the guide
+  function guide() {
+    if (guideStatus == false) {
+      var helperIcon = document.querySelector(".fa-question-circle");
+      helperIcon.style.color = "orange";
+      guideStatus = true;
+
+      let helper = document.querySelector(".guideDashboardOverview");
+      helper.style.display = "block";
+    }
+    else {
+      skipTutorial();
+      guideStatus = false;
+    }
+  }
+
+  // Quit tutorial instantly
+  function skipTutorial() {
+    console.log("tutorial skipped");
+    let helpers = document.querySelectorAll(".overlay");
+    helpers.forEach(function (helper) {
+      helper.style.display = "none";
+    });
+
+    var guideStatus = false;
+    var helperIcon = document.querySelector(".fa-question-circle");
+    helperIcon.style.color = "";
+  }
+
+  // ====================== //
+
+  function guideDashboardOverviewNext() {
+    let helper = document.querySelector(".guideDashboardOverview");
+    helper.style.display = "none";
+
+    let helper2 = document.querySelector(".guideAmazonCards");
+    helper2.style.display = "block";
+  }
+
+  function guideAmazonCardsNext() {
+    let helper = document.querySelector(".guideAmazonCards");
+    helper.style.display = "none";
+
+    let helper2 = document.querySelector(".guideGoogleCards");
+    helper2.style.display = "block";
+  }
+
+  function guideGoogleCardsNext() {
+    let helper = document.querySelector(".guideGoogleCards");
+    helper.style.display = "none";
+
+    let helper2 = document.querySelector(".guideSingleEntity");
+    helper2.style.display = "block";
+  }
+
+  function guideSingleEntityNext() {
+    let helper = document.querySelector(".guideSingleEntity");
+    helper.style.display = "none";
+
+    let helper2 = document.querySelector(".guideCurrentInstances");
+    helper2.style.display = "block";
+  }
+</script>
 
 {% endblock %}

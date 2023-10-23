@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,14 +34,120 @@
     </header>
 
 
-    <!-- <div class="container-lg"> -->
     {% block content %}
 
     {% endblock %}
-    <!-- </div> -->
+
+
+    <!-- Scroll to top -->
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Toggle Chat to Staff-->
+    <a href="#" class="help-contact d-flex align-items-center justify-content-center" id="helpContactBtn"
+        onclick="toggleChat()"><i class="bi bi-chat-dots"></i></a>
+
+    <!-- Toggle Chat to GPT-->
+    <a href="#" class="help-contact-toGPT d-flex align-items-center justify-content-center" id="helpContactBtnToGPT"
+        onclick="toggleChatToGPT()"><i class="fa-solid fa-robot"></i></a>
+
+
+    <!-- Chat Service -->
+    
+    <!-- This section contains the HTML code for the chat service. It includes the header, main chat area, and input area. 
+        The chat service is initially hidden with "display: none" until activated. The chat service also includes an image for the profile photo and a message bubble for the chat messages. -->
+    <section class="msger" style="display: none; padding: 0 !important;">
+        <header class="msger-header">
+            <div class="msger-header-title">
+                &nbsp; &nbsp; <i class="fa fa-circle" style="font-size: 10px; color: green;" aria-hidden="true"></i>
+                &nbsp;
+                Gerald Weber
+            </div>
+        </header>
+
+        <main class="msger-chat">
+            <div class="msg left-msg">
+                <div id="profilePhotoContainer">
+                    <div class="msg-img" style="background-image: url(../images/gerald.png);" id="geraldPhoto"></div>
+                </div>
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">Gerald Weber</div>
+                        <div class="msg-info-time" id="currentTime"></div>
+                    </div>
+
+                    <div class="msg-text">
+                        Hi, thank you for using Cloud Engine. <br>My name is Gerald Weber, how can I help you
+                            today?
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <form class="msger-inputarea">
+            <div class="input-icons">
+                <i class="fa fa-paper-plane icon" onclick="submit()" style="color: #F79901;"></i>
+                <textarea type="text" class="msger-input" placeholder="Enter your message..."></textarea>
+            </div>
+        </form>
+    </section>
+    <!-- Chat Service end -->
+
+
+    <!-- Chat Service with GPT-->
+    <section class="custom-msger" style="display: none; padding: 0 !important;">
+        <header class="custom-msger-header">
+            <div class="msger-header-title">
+                &nbsp; &nbsp; <i class="fa fa-circle" style="font-size: 10px; color: green;" aria-hidden="true"></i>
+                &nbsp;
+                Chat GPT
+            </div>
+        </header>
+
+        <main class="custom-msger-chat">
+            <div class="custom-msg custom-left-msg">
+                <div id="profilePhotoContainer">
+                    <div class="custom-msg-img" style="background-image: url(../images/team/gpt.png);" id="geraldPhoto">
+                    </div>
+                </div>
+                <div class="custom-msg-bubble">
+                    <div class="custom-msg-info">
+                        <div class="custom-msg-info-name">Chat GPT</div>
+                        <div class="custom-msg-info-time" id="currentTime"></div>
+                    </div>
+
+                    <div class="custom-msg-text">
+                        Hi, thank you for using Cloud Engine. <br>My name is Chat GPT, how can I help you
+                        today?
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+        <form class="custom-msger-inputarea">
+            <div class="input-icons">
+                <i class="fa fa-paper-plane icon" onclick="submitGPT()" style="color: #F79901;"></i>
+                <textarea type="text" class="custom-msger-input" placeholder="Enter your message..."></textarea>
+            </div>
+        </form>
+    </section>
+    <!-- Chat Service end -->
+
+
+    <!-- Footer -->
     <footer>
         {% include 'template/footer.html' %}
     </footer>
+    <!-- Footer End -->
+
+
+
+
+    <!-- ==================================================================================== -->
+    <!-- ==================================================================================== -->
+
+
 
     <script src="../styles/style.js"></script>
     <script src="https://kit.fontawesome.com/1fde6da9d6.js" crossorigin="anonymous"></script>
@@ -52,6 +158,257 @@
         integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
         crossorigin="anonymous"></script>
 
+
+    <!-- Chat Service -->
+    <script>
+        async function toggleChat() {
+            event.preventDefault();
+
+            var chatBox = document.querySelector(".msger");
+            var chatBoxToGPT = document.querySelector(".custom-msger");
+            if (chatBoxToGPT.style.display == "block") {
+                chatBoxToGPT.style.display = "none";
+            }
+
+            if (chatBox.style.display == "block") {
+                chatBox.style.display = "none";
+            } else {
+                chatBox.style.display = "block";
+
+                // add current time automatically
+                let newTime = formatDate(new Date())
+                document.getElementById("currentTime").innerText = newTime;
+            }
+        }
+
+        function toggleChatToGPT() {
+            event.preventDefault();
+
+            var chatBox = document.querySelector(".msger");
+            if (chatBox.style.display == "block") {
+                chatBox.style.display = "none";
+            }
+
+            var chatBoxToGPT = document.querySelector(".custom-msger");
+            if (chatBoxToGPT.style.display == "block") {
+                chatBoxToGPT.style.display = "none";
+            } else {
+                chatBoxToGPT.style.display = "block";
+
+                // add current time automatically
+                let newTime = formatDate(new Date())
+                document.getElementById("currentTime").innerText = newTime;
+            }
+        }
+
+
+
+
+        //////////////////////////////////////////
+        // chatbox function
+
+        const msgerForm = get(".msger-inputarea");
+        const msgerInput = get(".msger-input");
+        const msgerChat = get(".msger-chat");
+
+        const BOT_MSGS = [
+            "Hi, Harold :) Do you need any help?"];
+
+        const BOT_IMG = "../images/gerald.png";
+        const PERSON_IMG = "../images/min.png";
+        const BOT_NAME = "Gerald Weber";
+        const PERSON_NAME = "Harold Min";
+
+
+
+        function submit() {
+            const msgText = msgerInput.value;
+            if (!msgText) return;
+
+            appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+            msgerInput.value = "";
+
+            botResponse();
+
+            msgerChat.scrollTop = msgerChat.scrollHeight;
+        }
+
+
+        msgerForm.addEventListener("submit", event => {
+            event.preventDefault();
+            submit();
+        });
+
+
+        function appendMessage(name, img, side, text) {
+            const msgHTML = `
+                <div class="msg ${side}-msg">
+                    <div class="msg-img" style="background-image: url(${img})"></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">${name}</div>
+                        <div class="msg-info-time">${formatDate(new Date())}</div>
+                    </div>
+
+                    <div class="msg-text">${text}</div>
+                    </div>
+                </div>
+                `;
+
+            msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+        }
+
+        function botResponse() {
+            const r = random(0, BOT_MSGS.length - 1);
+            const msgText = BOT_MSGS[r];
+            const delay = msgText.split(" ").length * 300;
+
+            setTimeout(() => {
+                appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+
+                msgerChat.scrollTop = msgerChat.scrollHeight;
+            }, delay);
+        }
+
+        // Utils
+        function get(selector, root = document) {
+            return root.querySelector(selector);
+        }
+
+        function formatDate(date) {
+            const h = "0" + date.getHours();
+            const m = "0" + date.getMinutes();
+
+            return `${h.slice(-2)}:${m.slice(-2)}`;
+        }
+
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+    </script>
+
+
+    <!-- Only for GPT -->
+    <script>
+        const API_KEY = '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';
+        const GPTmsgerChat = get(".custom-msger-chat");
+
+        async function submitGPT() {
+            // Retrieve values from the form
+            const msgerForm = get(".custom-msger-inputarea");
+            const msgerInput = get(".custom-msger-input");
+
+            // if msg is null
+            const msgText = msgerInput.value;
+            if (!msgText) return;
+
+            // Append user's msg
+            appendMessageToGPT(PERSON_NAME, PERSON_IMG, "right", msgText);
+            GPTmsgerChat.scrollTop = GPTmsgerChat.scrollHeight;
+
+            // trim input to send msg to gpt
+            const mytext = msgerInput.value.trim();
+            console.log(mytext);
+
+            // clear input
+            msgerInput.value = "";
+
+            if (mytext) {
+                try {
+                    showLoadingGPT();
+                    GPTmsgerChat.scrollTop = GPTmsgerChat.scrollHeight;
+
+                    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + `${API_KEY}`,
+                        },
+                        body: JSON.stringify({
+                            "model": 'gpt-3.5-turbo',
+                            "messages":
+                                [{
+                                    "role": 'user',
+                                    "content": mytext
+                                }]
+                        }),
+                    });
+                    if (response.ok) {
+                        var loadingAnimation = document.getElementById("showLoadingGPT");
+                        loadingAnimation.remove();
+
+                        console.log("response ok received");
+                        const data = await response.json();
+                        // save response from gpt to variable
+                        var responseFromGPT = data.choices[0].message.content;
+                        // check response from gpt
+                        console.log(responseFromGPT);
+
+                        appendMessageToGPT("Chat GPT", "../images/team/gpt.png", "left", responseFromGPT);
+
+                    } else {
+                        var loadingAnimation = document.getElementById("showLoadingGPT");
+                        loadingAnimation.remove();
+
+                        console.log(response);
+                        var responseFromGPT = 'Error: Unable to process the request.  Please try again.';
+                        appendMessageToGPT("Chat GPT", "../images/team/gpt.png", "left", responseFromGPT);
+                    }
+                } catch (error) {
+                    var loadingAnimation = document.getElementById("showLoadingGPT");
+                    loadingAnimation.remove();
+
+                    console.error(error);
+                    var responseFromGPT = 'Error Occured: Unable to process the request. Please try again.';
+                    appendMessageToGPT("Chat GPT", "../images/team/gpt.png", "left", responseFromGPT);
+                }
+            }
+        }
+
+
+        function appendMessageToGPT(name, img, side, text) {
+            const msgHTML = `
+                <div class="msg ${side}-msg">
+                    <div class="msg-img" style="background-image: url(${img})"></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">${name}</div>
+                        <div class="msg-info-time">${formatDate(new Date())}</div>
+                    </div>
+
+                    <div class="msg-text">${text}</div>
+                    </div>
+                </div>
+                `;
+
+            GPTmsgerChat.insertAdjacentHTML("beforeend", msgHTML);
+            GPTmsgerChat.scrollTop = GPTmsgerChat.scrollHeight;
+        }
+
+        function showLoadingGPT() {
+            const msgHTML = `
+                <div class="msg left-msg" id="showLoadingGPT" style="block;">
+                    <div class="msg-img" style="background-image: url(../images/team/gpt.png)"></div>
+
+                    <div class="msg-bubble">
+                        <div class="msg-info">
+                            <div class="msg-info-name">Chat GPT</div>
+                            <div class="msg-info-time">${formatDate(new Date())}</div>
+                        </div>
+
+                        <div class="msg-text">
+                            <i class="fa fa-spinner fa-pulse fa-fw" style="color:orange;"></i>
+                        </div>
+                    </div>
+                </div>
+                `;
+
+            GPTmsgerChat.insertAdjacentHTML("beforeend", msgHTML);
+        }
+    </script>
+    <!-- Chat gpt chat box end -->
 
 </body>
 

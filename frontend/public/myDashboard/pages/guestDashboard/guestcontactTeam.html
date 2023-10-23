@@ -1,0 +1,429 @@
+{% extends 'template/guest_dashboard.html' %} {% block content %}
+
+
+<style>
+    /* Chat Now Button */
+    :root {
+        --custom-body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        --custom-msger-bg: #fff;
+        --custom-border: 2px solid #ddd;
+        --custom-left-msg-bg: #ececec;
+        --custom-right-msg-bg: #579ffb;
+    }
+
+    .chatNow {
+        background-color: #F79901;
+        border-color: #F79901;
+        border-radius: 10px;
+    }
+
+    .chatNow:hover {
+        background-color: #dd8800;
+        border-color: #dd8800;
+    }
+
+    /* Overlay helper */
+    .overlay {
+        position: absolute;
+        height: 20%;
+        width: 15%;
+        background-color: rgba(225, 183, 114, 0.7);
+        margin-top: 0.5%;
+        border-radius: 10px;
+        z-index: 1;
+    }
+
+    .nextBtn {
+        position: absolute;
+        bottom: 10;
+        right: 15;
+        border-radius: 5px;
+    }
+
+    .nextBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .skipBtn {
+        position: absolute;
+        bottom: 10;
+        left: 15;
+        border-radius: 5px;
+        background-color: rgb(99, 99, 99);
+        border-color: rgb(99, 99, 99);
+        ;
+    }
+
+    .skipBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .description {
+        position: absolute;
+        left: 15;
+        top: 10;
+        color: white;
+        font-size: 16px;
+    }
+</style>
+
+
+
+
+<main class="content">
+
+    <!-- This HTML code block displays a breadcrumb navigation bar and a heading for the "Contact Support Center" page. 
+        It also includes a brief description of the page and a link to the support team. -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
+        style="margin-bottom: 2%;">
+        <div class="d-block mb-4 mb-md-0">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="/">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/contactTeam"
+                            style="text-decoration: underline; color: #F79901;">Support Center</a></li>
+                </ol>
+            </nav>
+            <div>
+                <h2 class="h4">Contact Support Center</h2>
+                <p class="mb-0">Get in touch with our support team at any time.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Loading animation -->
+    <div style="display: none;" id="loadingCircle">
+        <div style="display: flex; justify-content: center; align-items: center; height: 40vh;">
+            <a>
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="color: orange !important;"></i>
+            </a>
+        </div>
+    </div>
+
+
+    <!-- Assistants -->
+    <div id="assistants" style="display: block;">
+
+        <!-- Online Assistants -->
+        <div class="row">
+            <div class="col-12 col-xl-12">
+                <div class="card card-body bg-white border-light shadow-sm mb-4">
+                    <h2 class="h5 mb-4"><i class="fa fa-circle"
+                            style="font-size: 18px; color: green; padding-left: 2%; padding-top: 1%; padding-bottom: 1%;"
+                            aria-hidden="true"></i>&nbsp; Online</h2>
+                    <div style="padding: 0px 25px;">
+                        <form>
+                            <div class="row">
+                                <!-- Gerald -->
+                                <div class="col-md-2 mb-3">
+                                    <div>
+                                        <!-- add photo -->
+                                        <img src="../images/team/gerald.png" alt="..." class="rounded-circle mb-2"
+                                            width="128" height="128" />
+                                    </div>
+                                    <a style="margin-left: 7%; font-weight: bolder;">Gerald Weber</a>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary chatNow" style="margin-left: 7%;"
+                                        onclick="talkToGerald()">Chat Now</button>
+                                </div>
+
+                                <!-- Asma -->
+                                <div class="col-md-2 mb-2">
+                                    <div>
+                                        <!-- add photo -->
+                                        <img src="../images/team/asma.png" alt="..." class="rounded-circle mb-2"
+                                            width="128" height="128" />
+                                    </div>
+                                    <a style="margin-left: 10%; font-weight: bolder;">Asma Shakil</a>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary chatNow" style="margin-left: 7%;"
+                                        onclick="talkToAsma()">Chat Now</button>
+                                </div>
+
+                                <!-- Chat GPT -->
+                                <div class="col-md-2 mb-2">
+                                    <div>
+                                        <!-- add photo -->
+                                        <img src="../images/team/gpt.png" alt="..." class="rounded-circle mb-2"
+                                            width="128" height="128" />
+                                    </div>
+                                    <a style="margin-left: 14%; font-weight: bolder;">GPT-3.5</a>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary chatNow" style="margin-left: 7%;"
+                                        onclick="talkToGpt()">Chat Now</button>
+                                </div>
+
+                                <!-- Helper modal -->
+                                <div class="col-md-2 mb-2">
+                                    <div class="overlay guideAvailableStaffs" style="display: none; height: 55%; width: 25%; background-color: rgba(225, 183, 114, 0.95);"><a
+                                        class=" description">This section shows you the available staffs you can talk to. You can simply click on "Chat Now" to start talking to them. </a>
+                                      <br>
+                                      <button class="btn btn-primary nextBtn" onclick="guideAvailableStaffsNext()">Next</button>
+                                      <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Offline -->
+        <div class="row">
+            <div class="col-12 col-xl-12">
+                <div class="card card-body bg-white border-light shadow-sm mb-4">
+                    <h2 class="h5 mb-4"><i class="fa fa-circle"
+                            style="font-size: 18px; color: red; padding-left: 2%; padding-top: 1%; padding-bottom: 1%;"
+                            aria-hidden="true"></i>&nbsp; Offline</h2>
+                    <div style="padding: 0px 25px;">
+                        <form>
+                            <div class="row">
+                                <!-- Harold -->
+                                <div class="col-md-2 mb-2">
+                                    <div>
+                                        <img src="../images/team/min.png" alt="..." class="rounded-circle mb-2"
+                                            width="128" height="128" />
+                                    </div>
+                                    <a style="margin-left: 7%; font-weight: bolder;">Sangjun Min</a>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary chatNow" style="margin-left: 7%;" disabled>Chat
+                                        Now</button>
+                                </div>
+
+                                <!-- Han -->
+                                <div class="col-md-2 mb-2">
+                                    <div>
+                                        <img src="../images/team/han.png" alt="..." class="rounded-circle mb-2"
+                                            width="128" height="128" />
+                                    </div>
+                                    <a style="margin-left: 10%; font-weight: bolder;">Junhee Han</a>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary chatNow" style="margin-left: 7%;" disabled>Chat
+                                        Now</button>
+                                </div>
+
+                                <!-- Shinbeom -->
+                                <div class="col-md-2 mb-2">
+                                    <div>
+                                        <img src="../images/team/shin.png" alt="..." class="rounded-circle mb-2"
+                                            width="128" height="128" />
+                                    </div>
+                                    <a style="margin-left: 1%; font-weight: bolder;">Shinbeom Kwon</a>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary chatNow" style="margin-left: 7%;" disabled>Chat
+                                        Now</button>
+                                </div>
+
+                                <!-- Tanvi -->
+                                <div class="col-md-2 mb-2">
+                                    <div>
+                                        <img src="../images/team/tanvi.png" alt="..." class="rounded-circle mb-2"
+                                            width="128" height="128" />
+                                    </div>
+                                    <a style="margin-left: 11%; font-weight: bolder;">Tanvi Kher</a>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary chatNow" style="margin-left: 7%;" disabled>Chat
+                                        Now</button>
+                                </div>
+
+                                <!-- su -->
+                                <div class="col-md-2 mb-2">
+                                    <div>
+                                        <img src="../images/team/kim.png" alt="..." class="rounded-circle mb-2"
+                                            width="128" height="128" />
+                                    </div>
+                                    <a style="margin-left: 11%; font-weight: bolder;">Minsu Kim</a>
+                                    <br>
+                                    <br>
+                                    <button class="btn btn-primary chatNow" style="margin-left: 7%;" disabled>Chat
+                                        Now</button>
+                                </div>
+
+                                <!-- Helper modal -->
+                                <div class="col-md-2 mb-2">
+                                    <div class="overlay guideNotAvailableStaffs" style="display: none; height: 65%; width: 30%; margin-left: -20%; background-color: rgba(225, 183, 114);"><a
+                                        class=" description">This section shows you the staffs who are currently unavailable.</a>
+                                      <br>
+                                      <button class="btn btn-primary nextBtn" onclick="guideNotAvailableStaffsNext()">Finish</button>
+                                      <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Open Chat Box-->
+    <div id="chatBox" style="display: none;">
+        <!-- Go back button on right of the screen -->
+        <a href="/contactTeam" style="float: right; margin-top: -4%;">
+            <i class="fa fa-chevron-circle-left goBackIcon" style="font-size:36px"></i>
+        </a>
+
+        <div class=" row">
+
+
+            <!-- This code represents the header section of the contact team page. It includes a custom header with a title and a green circle icon. 
+                The title is dynamically generated and will be filled in by JavaScript. -->
+            <header class="custom-msger-header">
+                <div class="custom-msger-header-title">
+                    &nbsp; &nbsp; <i class="fa fa-circle" style="font-size: 10px; color: green;" aria-hidden="true"></i>
+                    &nbsp;
+                    <a id="assistantName"></a>
+                </div>
+            </header>
+
+            <!-- 
+            This HTML code block represents the chat interface for the user to contact the Cloud Engine assistant. 
+            It contains a main element with a class of "custom-msger-chat" that holds the chat messages. The chat messages are represented by a div element with a class of "custom-msg". 
+            The first message is a welcome message from the assistant with a profile photo container. The second message is the assistant's introduction with a name that is dynamically set using the "assistantName3" id. 
+            The current time is displayed at the bottom right corner of the chat interface using the "custom-msg-info-time" class and "currentTime" id.
+            -->
+            <main class="custom-msger-chat">
+                <div class="custom-msg custom-left-msg">
+                    <div id="profilePhotoContainer">
+                        <!-- Link goes in here -->
+                    </div>
+
+                    <div class="custom-msg-bubble">
+                        <div class="custom-msg-info">
+                            <div class="custom-msg-info-name"><a id="assistantName2"></a></div>
+                        </div>
+
+                        <div class="custom-msg-text">
+                            Hi, thank you for using Cloud Engine. <br>My name is <a id="assistantName3"></a>, how
+                            can I help
+                            you today?
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-msg-info-time" style="color: grey; margin-left: 4%;" id="currentTime"></div>
+            </main>
+
+            <!-- 
+            This is a form for user input. It contains a textarea for the user to enter their message and two icons for submitting the message. 
+            The first icon is for submitting the message using GPT and is initially hidden. The second icon is for submitting the message using the assistant and is initially displayed. 
+            -->
+            <form class="custom-msger-inputarea">
+                <div class="custom-input-icons">
+                    <i class="fa fa-paper-plane custom-icon" onclick="submitGPT()" id="gpt-submit"
+                        style="display: none; color: #F79901;"></i>
+                    <i class="fa fa-paper-plane custom-icon" onclick="submit()" id="assistant-submit"
+                        style="display: block; color: #F79901;"></i>
+                    <textarea type="text" class="custom-msger-input" placeholder="Enter your message..."></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</main>
+
+
+
+<!-- ============================================================================================================== -->
+<!-- ============================================================================================================== -->
+
+
+
+<!-- 
+This script defines functions to open and close a tutorial guide for available and not available staffs. It also sets the default status of the guide to false and auto runs the guide when the page is loaded.
+
+Functions:
+- guide(): opens the guide and changes the color of the helper icon to orange.
+- skipTutorial(): quits the tutorial instantly and hides all the helper overlays.
+- guideAvailableStaffsNext(): moves to the next step of the guide, which shows available staffs.
+- guideNotAvailableStaffsNext(): moves to the next step of the guide, which shows not available staffs.
+
+Variables:
+- guideStatus: a boolean variable that stores the status of the guide.
+-->
+<script>
+    // Default status
+    guideStatus = false;
+
+    // Opens the guide
+    function guide() {
+        if (guideStatus == false) {
+            var helperIcon = document.querySelector(".fa-question-circle");
+            helperIcon.style.color = "orange";
+            guideStatus = true;
+
+            let helper = document.querySelector(".guideAvailableStaffs");
+            helper.style.display = "block";
+        }
+        else {
+            skipTutorial();
+            guideStatus = false;
+        }
+    }
+
+    // Quit tutorial instantly
+    function skipTutorial() {
+        event.preventDefault();
+
+        console.log("tutorial skipped");
+        let helpers = document.querySelectorAll(".overlay");
+        helpers.forEach(function (helper) {
+            helper.style.display = "none";
+        });
+
+        var guideStatus = false;
+        var helperIcon = document.querySelector(".fa-question-circle");
+        helperIcon.style.color = "";
+    }
+
+    // ====================== //
+
+    function guideAvailableStaffsNext() {
+        event.preventDefault();
+
+        let helper = document.querySelector(".guideAvailableStaffs");
+        helper.style.display = "none";
+
+        let helper2 = document.querySelector(".guideNotAvailableStaffs");
+        helper2.style.display = "block";
+    }
+
+    function guideNotAvailableStaffsNext() {
+        event.preventDefault();
+
+        let helper = document.querySelector(".guideNotAvailableStaffs");
+        helper.style.display = "none";
+
+        skipTutorial();
+    }
+
+
+
+    // Auto run guide
+    document.addEventListener("DOMContentLoaded", function () {
+        guide();
+    });
+</script>
+
+{% endblock %}

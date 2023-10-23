@@ -3,28 +3,28 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- Primary Meta Tags -->
-    <title>Volt - Free Bootstrap 5 Dashboard</title>
+    <title>Cloud Engine</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link rel="canonical" href="https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard">
+
+    <!-- <link rel="canonical" href="https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard"> -->
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
+    <!-- <meta property="og:type" content="website">
     <meta property="og:url" content="https://demo.themesberg.com/volt-pro">
     <meta property="og:title" content="Volt - Free Bootstrap 5 Dashboard">
     <meta property="og:description"
         content="Volt Pro is a Premium Bootstrap 5 Admin Dashboard featuring over 800 components, 10+ plugins and 20 example pages using Vanilla JS.">
     <meta property="og:image"
-        content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg">
+        content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg"> -->
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
+    <!-- <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://demo.themesberg.com/volt-pro">
     <meta property="twitter:title" content="Volt - Free Bootstrap 5 Dashboard">
     <meta property="twitter:description"
         content="Volt Pro is a Premium Bootstrap 5 Admin Dashboard featuring over 800 components, 10+ plugins and 20 example pages using Vanilla JS.">
     <meta property="twitter:image"
-        content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg">
+        content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg"> -->
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="120x120" href="../myDashboard/assets/img/favicon/apple-touch-icon.png">
@@ -44,7 +44,35 @@
     <!-- Volt CSS -->
     <link type="text/css" href="../myDashboard/css/volt.css" rel="stylesheet">
 
+    <!-- Import Fa fa icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
+<style>
+    @media screen and (max-width: 995px) {
+        #guide {
+            display: none;
+        }
+    }
+
+    #guide:hover i {
+        transform: scale(1.3) rotate(360deg);
+        color: #F79901;
+        transition: transform 0.77s ease, color 0.5s ease;
+    }
+
+    #sidebar {
+        position: absolute;
+        top: 15;
+        left: 15;
+    }
+
+    #sidebar:hover {
+        transform: translateX(10px);
+        transition: transform 1s ease;
+    }
+</style>
+
 
 <body>
     <header>
@@ -55,9 +83,10 @@
     <body style="padding: 2rem 2rem;">
 
 
-
         <!-- Top Navbar -->
-        <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark ps-0 pe-2 pb-0">
+        <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark ps-0 pe-2 pb-0"
+            style="padding-right: 5% !important;">
+
             <div class="container-fluid px-0">
                 <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
                     <div class="d-flex align-items-center">
@@ -66,17 +95,33 @@
                         </form>
                     </div>
 
-                    <!-- Top Navbar Profile -->
+                    <!-- Top Navbar -->
                     <ul class="navbar-nav align-items-center">
+
+                        <!-- Side nav toggle -->
+                        <li style="margin-right: 14%;" id="sidebar">
+                            <a href="#">
+                                <i class="fa fa-bars toggle-btn" style="font-size: 30px; color: orange;"></i>
+                            </a>
+                        </li>
+
+                        <!-- Guide -->
+                        <li style="margin-right: 20%;" id="guide">
+                            <a href="#">
+                                <i class="fa fa-question-circle" style="font-size: 32px;" onclick="guide()"></i>
+                            </a>
+                        </li>
+
+                        <!-- Profile -->
                         <li class="nav-item dropdown ms-lg-3">
                             <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <div class="media d-flex align-items-center">
                                     <img class="rounded-circle" alt="Image placeholder" width="50" height="50"
-                                        src="../myDashboard/assets/img/team/profile-picture-3.jpg">
+                                        src="../myDashboard/assets/img/team/min.png">
                                     <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                                         <span class="mb-0 font-small fw-bold text-gray-900" id="user-name"
-                                            style="font-size: 18px; padding-left: 3%; font-weight: 600 !important;">Rendering...</span>
+                                            style="font-size: 18px; padding-left: 3%; font-weight: 600 !important; padding-right: 2rem !important;">Rendering...</span>
                                     </div>
                                 </div>
                             </a>
@@ -101,7 +146,7 @@
                                     Contact Us
                                 </a>
                                 <div role="separator" class="dropdown-divider my-1"></div>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="#" onclick="logout()">
                                     <svg class="dropdown-icon text-danger me-2" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -131,6 +176,8 @@
 
     </body>
 
+    <!-- Logout function import -->
+    <script src="../scripts/navbar.js"></script>
 
     <!-- Core -->
     <script src="../myDashboard/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
@@ -186,7 +233,7 @@
                     "createToken": token,
                 },
             )
-                .then(function (response) {                
+                .then(function (response) {
                     let fullName = response.data.firstName + " " + response.data.surname;
                     document.getElementById("user-name").innerHTML = fullName;
                     document.getElementById("sidebar-user-name").innerHTML = fullName;
@@ -196,6 +243,32 @@
                 });
         }
         window.onload = UserProfile();
+    </script>
+
+    <!-- side nav effect -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var sidebar = document.querySelector('.sidebar');
+            var toggleBtn = document.querySelector('.toggle-btn');
+            var toggleBtn2 = document.querySelector('.toggle-btn2');
+            var content = document.querySelector('.content');
+
+            sidebar.classList.add('active');
+            toggleBtn.style.display = "none";
+
+            toggleBtn2.addEventListener('click', function () {
+                sidebar.classList.toggle('active');
+                content.style.marginLeft = "0px";
+                toggleBtn.style.display = "block";
+            });
+
+            toggleBtn.addEventListener('click', function () {
+                toggleBtn.style.display = "none";
+                sidebar.classList.toggle('active');
+                content.style.marginLeft = "260px";
+            });
+
+        });
     </script>
 
 </body>

@@ -1,8 +1,30 @@
+
+// This route is used to register a new user.
+// It accepts the user's details in the request body and returns a response indicating whether
+// the user was successfully registered or not.
+
+// POST: /register
+// Description: Register a new user
+// Request: {
+//     "surname": "string",
+//     "firstName": "string",
+//     "email": "string",
+//     "password": "string"
+// }
+// Response: {
+//     "code": "string",
+//     "message": "string",
+//     "success": "boolean"
+// }
+
+
+// import modules
 const express = require("express");
 const router = express.Router();
 const { body, validationResult, check } = require("express-validator");
 
-const { User } = require("../models/account");
+// import models
+const { User } = require("../models/accountModel");
 
 router.post(
     "/",
@@ -15,7 +37,9 @@ router.post(
             .withMessage("Surname must contain only alphabets."),
         body("firstName").trim().notEmpty().withMessage("Last name is required."),
         body("email").isEmail().withMessage("Must be a valid email address."),
-        body("password").isLength({ min: 5 }).withMessage("Password must be at least 5 characters long."),
+        body("password")
+            .isLength({ min: 5 })
+            .withMessage("Password must be at least 5 characters long."),
     ],
 
     async (req, res) => {

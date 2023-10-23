@@ -1,8 +1,22 @@
+// ```
+//     This is a middleware function that sends the otp to the user's email address.
+//     It accepts the user's email address in the request body and returns a response
+//     indicating whether the otp was successfully sent or not.
+
+//     Follwing payload must contain in the request body:
+//     request body: {
+//         "email": "string"
+//     }
+// ```;
+
+// import modules
 const otpGenerator = require("otp-generator");
-const { OTP } = require("../models/otpModel");
 const mailer = require("./mailer");
-const { User } = require("../models/account");
 const validator = require("validator");
+
+// import models
+const { OTP } = require("../models/otpModel");
+const { User } = require("../models/accountModel");
 
 exports.sendOtp = async (req, res) => {
     try {

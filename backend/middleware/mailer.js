@@ -1,3 +1,7 @@
+// ```
+//     THis is a middleware to send email using SMTP.
+// ```;
+// import modules
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -19,8 +23,6 @@ const sendMail = async (email, title, body, authNumber) => {
         };
 
         let sendOtp = await transporter.sendMail(mailOptions);
-        // console.log("Email sent", sendOtp);
-
         return sendOtp;
     } catch (err) {
         throw err;

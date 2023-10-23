@@ -1,7 +1,30 @@
+// ```
+//     This route is used to log out the user.
+//     It accepts a JSON Web Token (JWT) in the request header and returns a response indicating whether 
+//     the user was successfully logged out or not.
+
+//     POST: /logout
+//     Description: Log out a user
+//     Request: {
+//         "createToken": "string"
+//         "userId": "string"
+//     }
+//     Response: {
+//         "code": "string",
+//         "message": "string",
+//         "success": "boolean",
+//     }
+// ```;
+
+// import modules
 const express = require("express");
 const router = express.Router();
+
+// import middleware
 const { auth } = require("../middleware/auth");
-const { User } = require("../models/account");
+
+// import models
+const { User } = require("../models/accountModel");
 
 router.post("/", auth, async (req, res) => {
     // #swagger.tags = ['Authentication']

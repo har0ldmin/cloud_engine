@@ -1,3 +1,11 @@
+// ```
+//     This is a middleware function that sends the resetToken to the user's email address.
+//     It accepts the user's email address in the request body and returns a response
+//     indicating whether the resetToken was successfully sent or not.
+
+// ```;
+
+// import modules
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 dotenv.config();

@@ -1,0 +1,250 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- Primary Meta Tags -->
+    <title>Cloud Engine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- <link rel="canonical" href="https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard"> -->
+
+    <!-- Open Graph / Facebook -->
+    <!-- <meta property="og:type" content="website">
+    <meta property="og:url" content="https://demo.themesberg.com/volt-pro">
+    <meta property="og:title" content="Volt - Free Bootstrap 5 Dashboard">
+    <meta property="og:description"
+        content="Volt Pro is a Premium Bootstrap 5 Admin Dashboard featuring over 800 components, 10+ plugins and 20 example pages using Vanilla JS.">
+    <meta property="og:image"
+        content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg"> -->
+
+    <!-- Twitter -->
+    <!-- <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://demo.themesberg.com/volt-pro">
+    <meta property="twitter:title" content="Volt - Free Bootstrap 5 Dashboard">
+    <meta property="twitter:description"
+        content="Volt Pro is a Premium Bootstrap 5 Admin Dashboard featuring over 800 components, 10+ plugins and 20 example pages using Vanilla JS.">
+    <meta property="twitter:image"
+        content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg"> -->
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="../myDashboard/assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../myDashboard/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../myDashboard/assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../myDashboard/assets/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="../myDashboard/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Sweet Alert -->
+    <link type="text/css" href="../myDashboard/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- Notyf -->
+    <link type="text/css" href="../myDashboard/vendor/notyf/notyf.min.css" rel="stylesheet">
+
+    <!-- Volt CSS -->
+    <link type="text/css" href="../myDashboard/css/volt.css" rel="stylesheet">
+
+    <!-- Import Fa fa icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<style>
+    @media screen and (max-width: 995px) {
+        #guide {
+            display: none;
+        }
+    }
+
+    #guide:hover i {
+        transform: scale(1.3) rotate(360deg);
+        color: #F79901;
+        transition: transform 0.77s ease, color 0.5s ease;
+    }
+
+    #sidebar {
+        position: absolute;
+        top: 15;
+        left: 15;
+    }
+
+    #sidebar:hover {
+        transform: translateX(10px);
+        transition: transform 1s ease;
+    }
+</style>
+
+
+<body>
+    <header>
+        {% include 'template/guest_dashboard_sideNav.html' %}
+    </header>
+
+
+    <body style="padding: 2rem 2rem;">
+
+
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark ps-0 pe-2 pb-0"
+            style="padding-right: 5% !important;">
+
+            <div class="container-fluid px-0">
+                <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
+                    <div class="d-flex align-items-center">
+                        <!-- Search form : Null -->
+                        <form class="navbar-search form-inline" id="navbar-search-main">
+                        </form>
+                    </div>
+
+                    <!-- Top Navbar -->
+                    <ul class="navbar-nav align-items-center">
+                        <!-- Side nav toggle -->
+                        <li style="margin-right: 14%;" id="sidebar">
+                            <a href="#">
+                                <i class="fa fa-bars toggle-btn" style="font-size: 30px; color: orange;"></i>
+                            </a>
+                        </li>
+
+                        <!-- Guide -->
+                        <li style="margin-right: 20%;" id="guide">
+                            <a href="#">
+                                <i class="fa fa-question-circle" style="font-size: 32px;" onclick="guide()"></i>
+                            </a>
+                        </li>
+
+                        <!-- Profile -->
+                        <li class="nav-item dropdown ms-lg-3">
+                            <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="media d-flex align-items-center">
+                                    <img class="rounded-circle" alt="Image placeholder" width="50" height="50"
+                                        src="../myDashboard/assets/img/team/profile-picture-2.jpg">
+                                    <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
+                                        <span class="mb-0 font-small fw-bold text-gray-900" id="user-name"
+                                            style="font-size: 18px; padding-left: 3%; font-weight: 600 !important; padding-right: 2rem !important;">Guest
+                                            User</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
+                                <a class="dropdown-item d-flex align-items-center" href="/settings">
+                                    <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    My Profile
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    Contact Us
+                                </a>
+                                <div role="separator" class="dropdown-divider my-1"></div>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <svg class="dropdown-icon text-danger me-2" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                        </path>
+                                    </svg>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- <div class="container-lg"> -->
+        {% block content %}
+
+
+
+
+
+        {% endblock %}
+        <!-- </div> -->
+
+    </body>
+
+
+    <!-- Core -->
+    <script src="../myDashboard/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="../myDashboard/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Vendor JS -->
+    <script src="../myDashboard/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+
+    <!-- Slider -->
+    <script src="../myDashboard/vendor/nouislider/distribute/nouislider.min.js"></script>
+
+    <!-- Smooth scroll -->
+    <script src="../myDashboard/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+    <!-- Charts -->
+    <script src="../myDashboard/vendor/chartist/dist/chartist.min.js"></script>
+    <script src="../myDashboard/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+
+    <!-- Datepicker -->
+    <script src="../myDashboard/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+
+    <!-- Sweet Alerts 2 -->
+    <script src="../myDashboard/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+    <!-- Moment JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+    <!-- Vanilla JS Datepicker -->
+    <script src="../myDashboard/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+
+    <!-- Notyf -->
+    <script src="../myDashboard/vendor/notyf/notyf.min.js"></script>
+
+    <!-- Simplebar -->
+    <script src="../myDashboard/vendor/simplebar/dist/simplebar.min.js"></script>
+
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- Volt JS -->
+    <script src="../myDashboard/assets/js/volt.js"></script>
+
+    <!-- side nav effect -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var sidebar = document.querySelector('.sidebar');
+            var toggleBtn = document.querySelector('.toggle-btn');
+            var toggleBtn2 = document.querySelector('.toggle-btn2');
+            var content = document.querySelector('.content');
+
+            sidebar.classList.add('active');
+            toggleBtn.style.display = "none";
+
+            toggleBtn2.addEventListener('click', function () {
+                sidebar.classList.toggle('active');
+                content.style.marginLeft = "0px";
+                toggleBtn.style.display = "block";
+            });
+
+            toggleBtn.addEventListener('click', function () {
+                toggleBtn.style.display = "none";
+                sidebar.classList.toggle('active');
+                content.style.marginLeft = "260px";
+            });
+
+        });
+    </script>
+
+
+</body>
+
+</html>

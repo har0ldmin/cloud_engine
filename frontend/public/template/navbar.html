@@ -48,7 +48,7 @@
 
     .loginRegisterButton {
         background-color: #d89e4144;
-        border: 2px solid #d89e41;
+        border: 1px solid #d89e41;
         color: rgb(255, 255, 255);
         padding: 8px 22px !important;
     }
@@ -60,13 +60,12 @@
 </style>
 
 
-
 <header id="header" class="header d-flex align-items-center">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
         <nav id="navbar" class="navbar">
             <a href="/" class="logo d-flex align-items-center" style="left: -7%;">
-                <img src="../images/logo.png" style="margin-right: 200px;" alt="Cloud Engine">
+                <img src="../images/logo2.png" style="margin-right: 200px;" alt="Cloud Engine">
             </a>
             <ul>
                 <li style="margin-right: 20px;"><a href="/">Home</a></li>
@@ -74,24 +73,40 @@
 
                 <li style="margin-right: 20px;"><a href="/service">Our Services</a></li>
 
-                <li class="dropdown" style="margin-right: 200px;"><a href="#"><span>Dashboard</span> <i
+                <!-- User Dashboard -->
+                <li class="dropdown" style="margin-right: 40%;" id="UserOptionz"><a href="#"><span>Dashboard</span> <i
                             class="bi bi-chevron-down dropdown-indicator"></i></a>
+
                     <ul>
                         <li><a href="/myDashboard">My Dashboard</a></li>
                         <li><a href="/instance">Instances</a></li>
-                        <li><a href="/history">Order History</a></li>
-                        <li><a href="/settings">Profile</a></li>
+                        <li><a href="/history">History</a></li>
+                        <li><a href="/wishlist">My Wishlist</a></li>
+                        <li><a href="/settings">My Profile</a></li>
+                        <li><a href="/contactTeam">Support Center</a></li>
+                    </ul>
+                </li>
+
+                <!-- Guest Dashboard -->
+                <li class="dropdown" style="margin-right: 40%;" id="GuestOptionz"><a href="#"><span>Dashboard</span> <i
+                            class="bi bi-chevron-down dropdown-indicator"></i></a>
+
+                    <ul>
+                        <li><a href="/guestDashboard">About Dashboard</a></li>
                     </ul>
                 </li>
 
 
+
                 <!-- Guest -->
                 <div class="d-flex justify-content-center align-items-center gap-3 fs-7" id="GuestOption">
-                    <a class="text-decoration-none px-3 py-1 rounded-2 loginRegisterButton" href="../auth/signup">Register</a>
-                    <a class="text-decoration-none px-3 py-1 rounded-2 loginRegisterButton" href="../auth/login">Login</a>
+                    <a class="text-decoration-none px-3 py-1 rounded-2 loginRegisterButton"
+                        href="../auth/signup">Register</a>
+                    <a class="text-decoration-none px-3 py-1 rounded-2 loginRegisterButton"
+                        href="../auth/login">Login</a>
                 </div>
 
-                <!-- User  -->
+                <!-- User -->
                 <div class="d-flex justify-content-center align-items-center gap-3 fs-7" id="UserOption">
                     <!-- User Profile -->
                     <ul class="navbar-nav align-items-center">
@@ -100,7 +115,7 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <div class="media d-flex align-items-center">
                                     <img class="rounded-circle" alt="Image placeholder" width="50" height="50"
-                                        src="../myDashboard/assets/img/team/profile-picture-3.jpg">
+                                        src="../myDashboard/assets/img/team/min.png">
                                     <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                                         <span class="mb-0 font-small fw-bold text-gray-900" id="user-name"
                                             style="font-size: 18px; padding-left: 3%; color: white;">Rendering...</span>
@@ -139,7 +154,6 @@
 <script src="../solution/assets/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="../solution/assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="../solution/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="../solution/assets/vendor/php-email-form/validate.js"></script>
 <!-- edit -->
 <!-- Template Main JS File -->
 <script src="../solution/assets/js/main.js"></script>
@@ -151,6 +165,10 @@
     function UserProfile() {
         const userid = localStorage.getItem("id");
         const token = localStorage.getItem("token");
+
+        if (!userid) {
+            return;
+        }
 
         axios.post("http://localhost:3001/api/profile",
             {

@@ -1,6 +1,34 @@
+// ```
+//     This file contains the route to get user profile
+//     It accepts a JSON Web Token (JWT) in the request header and returns a response containing the user profile.
+
+//     POST: /profile
+//     Description: Get user profile
+//     Request: {
+//         "createToken": "string"
+//         "userId": "string"
+//     }
+//     Response: {
+//         "code": "string",
+//         "message": "string",
+//         "success": "boolean",
+//         "surname": "string",
+//         "firstName": "string",
+//         "birthday": "string",
+//         "gender": "string",
+//         "phone": "string",
+//         "address": "string",
+//         "city": "string",
+//         "postal_code": "string",
+//         "email": "string"
+//     }
+// ```;
+
+// import modules
 const express = require("express");
 const router = express.Router();
 
+// import middleware
 const { auth } = require("../middleware/auth");
 
 router.post("/", auth, async (req, res) => {
@@ -17,6 +45,13 @@ router.post("/", auth, async (req, res) => {
             message: "User profile fetched successfully",
             surname: userProfile.surname,
             firstName: userProfile.firstName,
+            birthday: userProfile.birthday,
+            gender: userProfile.gender,
+            phone: userProfile.phone,
+            address: userProfile.address,
+            city: userProfile.city,
+            postal_code: userProfile.postal_code,
+            email: userProfile.email,
         });
     } catch (error) {
         // console.error("Error fetching user profile", error);

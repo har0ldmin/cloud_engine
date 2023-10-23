@@ -1,10 +1,92 @@
 {% extends 'template/dashboard.html' %} {% block content %}
 
+<style>
+    .btn-smaller {
+        padding: 0.2rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .btn-primary {
+        background-color: rgb(105, 105, 105);
+        border-color: rgb(105, 105, 105);
+    }
+
+    .btn-primary:hover {
+        background-color: rgb(95, 95, 95);
+        border-color: rgb(95, 95, 95);
+    }
+
+    .btn-info {
+        background-color: rgba(0, 100, 255);
+        border-color: rgba(0, 100, 255);
+    }
+
+    .btn-info:hover {
+        background-color: rgba(0, 90, 255);
+        border-color: rgba(0, 90, 255);
+    }
+
+    /* Overlay helper */
+    .overlay {
+        position: absolute;
+        height: 15%;
+        width: 15%;
+        background-color: rgba(225, 183, 114, 0.7);
+        margin-top: 0.5%;
+        border-radius: 10px;
+        z-index: 1;
+    }
+
+    .nextBtn {
+        position: absolute;
+        bottom: 10;
+        right: 15;
+        border-radius: 5px;
+    }
+
+    .nextBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .skipBtn {
+        position: absolute;
+        bottom: 10;
+        left: 15;
+        border-radius: 5px;
+        background-color: rgb(99, 99, 99);
+        border-color: rgb(99, 99, 99);
+        ;
+    }
+
+    .skipBtn:hover {
+        background-color: rgb(78, 78, 78) !important;
+        border-color: rgb(78, 78, 78) !important;
+    }
+
+    .description {
+        position: absolute;
+        left: 15;
+        top: 10;
+        color: white;
+        font-size: 16px;
+    }
+
+    #pdfContent {
+        background-image: url('../../../images/logo2.png');
+        background-size: 300px; 
+        padding: 50px 50px;
+        background-repeat: repeat;
+        background-position: center center;;
+    }
+</style>
 
 
 <main class="content">
 
-
+    <!-- This HTML code block displays a breadcrumb navigation bar, a header, and a paragraph for the usage history page of the user's dashboard. 
+        The breadcrumb navigation bar allows the user to easily navigate back to the dashboard or to the current page. 
+        The header displays the title of the page, and the paragraph provides a brief description of the page's purpose. -->
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block" style="padding-bottom: 10%;">
@@ -20,7 +102,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href="#">History</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/history" style="text-decoration: underline; color: #F79901;">History</a></li>
                 </ol>
             </nav>
             <h2 class="h4">Usage History</h2>
@@ -30,7 +112,9 @@
 
 
     <div class="card card-body border-0 shadow table-wrapper table-responsive" style="margin-top: 3%;">
-
+        
+        <!-- This code block contains a search bar and a download button for the history page. 
+            The search bar allows users to search for specific instances in the history logs, while the download button allows users to download all history logs. -->
         <div class="table-settings mb-4" style="margin-top: 1%;">
             <div class="row">
                 <div class="col-md-6 col-lg-3 col-xl-4">
@@ -49,283 +133,465 @@
                         <div id="errorMessage" class="text-danger mt-2"
                             style="display: none; font-size: 14px; margin-left: 1%;"> Enter at least 2 words</div>
                     </div>
+
+                    <div class="overlay guideSearchHistory" style="display: none; height: 6%;"><a
+                            class=" description">You can add
+                            search desired instances here. </a>
+                        <br>
+                        <button class="btn btn-primary nextBtn" onclick="guideSearchHistoryNext()">Next</button>
+                        <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+                    </div>
                 </div>
-                <div class="col-md-6 col-lg-9 col-xl-8 text-end">
-                    <button type="button" class="btn btn-sm btn-outline-gray-600">Download All</button>
+                <div class="col-md-6 col-lg-9 col-xl-8 text-end" style="padding-right: 2%;">
+                    <button type="button" class="btn btn-secondary text-dark btn-sm me-2"
+                        onclick="downloadPDF()">Download All</button>
+                </div>
+                <div class="overlay guideDownloadAll" style="display: none; right: 0; margin-top: 3%; height: 6%;">
+                    <a class=" description">You can download all history logs through this button. </a>
+                    <br>
+                    <button class="btn btn-primary nextBtn" onclick="guideDownloadAllNext()">Next</button>
+                    <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
                 </div>
             </div>
         </div>
 
+        <!-- This table displays the history logs of a company. It has columns for Company name, ID, Log, and Action. 
+            The logs are dynamically added to the table body. -->
         <table class="table table-hover" style="margin-top: 3%;">
             <thead>
                 <tr>
+                    <th class="border-gray-200">Company</th>
                     <th class="border-gray-200">ID</th>
-                    <th class="border-gray-200">Private Ip Address</th>
-                    <th class="border-gray-200">Private DNS Name</th>
-                    <th class="border-gray-200">Instance Type</th>
-                    <th class="border-gray-200">Status</th>
+                    <th class="border-gray-200">Log</th>
                     <th class="border-gray-200"></th>
                     <th class="border-gray-200"></th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200"></th>
+                    <th class="border-gray-200">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Item -->
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            456478
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">Platinum Subscription Plan</span>
-                    </td>
-                    <td><span class="fw-normal">1 May 2020</span></td>
-                    <td><span class="fw-normal">1 Jun 2020</span></td>
-                    <td><span class="fw-bold text-warning">Pending</span></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
-                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
-                    </td>
-                </tr>
-                <!-- Item -->
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            456423
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">Platinum Subscription Plan</span>
-                    </td>
-                    <td><span class="fw-normal">1 Apr 2020</span></td>
-                    <td><span class="fw-normal">1 May 2020</span></td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
-                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
-                    </td>
-                </tr>
-                <!-- Item -->
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            456420
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">Platinum Subscription Plan</span>
-                    </td>
-                    <td><span class="fw-normal">1 Mar 2020</span></td>
-                    <td><span class="fw-normal">1 Apr 2020</span></td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
-                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
-                    </td>
-                </tr>
-                <!-- Item -->
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            456421
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">Platinum Subscription Plan</span>
-                    </td>
-                    <td><span class="fw-normal">1 Feb 2020</span></td>
-                    <td><span class="fw-normal">1 Mar 2020</span></td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
-                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
-                    </td>
-                </tr>
-                <!-- Item -->
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            456420
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">Platinum Subscription Plan</span>
-                    </td>
-                    <td><span class="fw-normal">1 Jan 2020</span></td>
-                    <td><span class="fw-normal">1 Feb 2020</span></td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
-                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
-                    </td>
-                </tr>
-                <!-- Item -->
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            456479
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">Platinum Subscription Plan</span>
-                    </td>
-                    <td><span class="fw-normal">1 Dec 2019</span></td>
-                    <td><span class="fw-normal">1 Jan 2020</span></td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
-                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
-                    </td>
-                </tr>
-                <!-- Item -->
-                <!-- Item -->
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            456478
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">Platinum Subscription Plan</span>
-                    </td>
-                    <td><span class="fw-normal">1 Nov 2019</span></td>
-                    <td><span class="fw-normal">1 Dec 2019</span></td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
-                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
-                    </td>
-                </tr>
-                <!-- Item -->
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            453673
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">Gold Subscription Plan</span>
-                    </td>
-                    <td><span class="fw-normal">1 Oct 2019</span></td>
-                    <td><span class="fw-normal">1 Nov 2019</span></td>
-                    <td><span class="fw-bold text-danger">Deactive</span></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
-                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
-                    </td>
-                </tr>
-                <!-- Item -->
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            456468
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">Gold Subscription Plan</span>
-                    </td>
-                    <td><span class="fw-normal">1 Sep 2019</span></td>
-                    <td><span class="fw-normal">1 Oct 2019</span></td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
-                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
-                    </td>
-                </tr>
-                <!-- Item -->
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            456478
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">Flexible Subscription Plan</span>
-                    </td>
-                    <td><span class="fw-normal">1 Aug 2019</span></td>
-                    <td><span class="fw-normal">1 Sep 2019</span></td>
-                    <td><span class="fw-bold text-success">Active</span></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-primary btn-smaller" onclick="viewRow(this)">View</button>
-                        <button class="btn btn-info btn-smaller" onclick="downloadRow(this)">Download</button>
-                    </td>
-                </tr>
+                <!-- History Logs go in here -->
             </tbody>
         </table>
+
+        <!-- This HTML code block displays a message when there is no history to display. 
+            It also contains an overlay with a guide log board that appears when the user is in tutorial mode. 
+            The guide log board displays the user's current history logs and provides options to see details and download them. -->
+        <div>
+            <a id="noHistoryMessage"
+                style="text-align: center; font-size: 24px; font-weight: bold; color: rgb(136, 136, 136); padding-top: 8%; padding-bottom: 8%; display: none;">
+                There isn't any history to display.
+            </a>
+            <div class="overlay guideLogBoard"
+                style="display: none; width: 96%; height: 25%; top: 200; background-color: rgba(225, 183, 114, 0.95);"><a
+                    class="description">Your current history logs will appear here. <br><br>
+                    You can see the details and download them in this area.</a>
+                <br>
+                <button class="btn btn-primary nextBtn" onclick="skipTutorial()">Finish</button>
+                <button class="btn btn-primary skipBtn" onclick="skipTutorial()">Skip</button>
+            </div>
+        </div>
     </div>
 
 </main>
 
 
-<!-- Search Box function -->
+
+
+<!-- This table displays the history logs of a user. It contains a header with the user's name and a table body where the logs are displayed. 
+    The table has three columns: Company, ID, and Log. -->
+<table id="pdfContent" style="display: none;" class="table table-hover" style="margin-top: 3%;">
+    <thead>
+        <tr>
+            <th class="border-gray-200" colspan="3">
+                <h2><a id="usernamePDF">User Name</a>'s History Logs</h2>
+            </th>
+        </tr>
+        <tr>
+            <th class="border-gray-200">Company</th>
+            <th class="border-gray-200">ID</th>
+            <th class="border-gray-200">Log</th>
+        </tr>
+    </thead>
+    <tbody id="PDF">
+        <!-- History Logs go in here -->
+    </tbody>
+</table>
+
+
+
+
+<!-- This script tag is used to import the html2pdf library from the specified URL. 
+    The library is used to convert HTML content to PDF format. -->
+<script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+
+
 <script>
+    // <!-- This function downloads a PDF file of the content in the "pdfContent" element. 
+    //     It uses the html2pdf library to convert the HTML content to a PDF file. 
+    //     The PDF file is named after the username of the user and includes a log of CloudEngine instances. -->
+    function downloadPDF() {
+        // Get the content of the <p> element
+        var pdfContent = document.getElementById("pdfContent");
+        pdfContent.style.display = "block";
+        var username = document.getElementById("usernamePDF").innerText;
+
+        // Create a configuration object for html2pdf
+        var pdfOptions = {
+            margin: 10,
+            filename: `${username}_CloudEngine_Instances_Log.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Use html2pdf to create the PDF
+        html2pdf(pdfContent, pdfOptions);
+    }
+
+
+    
+    // <!-- 
+    //     This function creates a table row with cells containing information about a company, instance ID, and status.
+    //     It then appends the row to the PDF table body in the history.html page.
+
+    //     @param {string} company - The name of the company.
+    //     @param {string} instanceId - The ID of the instance.
+    //     @param {string} Status - The status of the instance.
+    // -->
+    function createPDFtable(company, instanceId, Status) {
+        var newRow = document.createElement('tr');
+
+        var idCell = document.createElement('td');
+        var companyLink = document.createElement('a');
+        companyLink.href = '#';
+        companyLink.classList.add('fw-bold');
+        companyLink.textContent = company;
+        idCell.appendChild(companyLink);
+
+        newRow.appendChild(idCell);
+
+        var otherCells = [
+            instanceId, Status, '', '', '', '', '', ''
+        ];
+
+        for (var i = 0; i < otherCells.length; i++) {
+            var cell = document.createElement('td');
+            var span = document.createElement('span');
+            span.classList.add('fw-normal');
+            if (i === 1) {
+                if (otherCells[i] == "Created") {
+                    span.classList.add('text-success');
+                }
+                else {
+                    span.classList.add('text-danger');
+                }
+            }
+
+            span.textContent = otherCells[i];
+            cell.appendChild(span);
+            newRow.appendChild(cell);
+        }
+
+        var PDFtableBody = document.querySelector("#PDF");
+        PDFtableBody.appendChild(newRow);
+    }
+</script>
+
+
+
+
+<script>
+    // <!-- 
+    // This code block adds an event listener to the search input field in the history page. When the user types in the search input field, the filterInstances function is called to filter the instances based on the search text.
+    // -->
     document.addEventListener("DOMContentLoaded", function () {
         const searchInput = document.getElementById("searchInput");
-        const errorMessage = document.getElementById("errorMessage");
-        const tableRows = document.querySelectorAll("tbody tr");
 
         searchInput.addEventListener("input", function () {
-            const searchValue = searchInput.value.trim().toLowerCase();
+            const filterText = searchInput.value.toLowerCase();
+            filterInstances(filterText);
+        });
+    });
 
-            if (searchValue.length >= 2) {
-                tableRows.forEach(function (row) {
-                    const text = row.textContent.trim().toLowerCase();
-                    row.style.display = text.includes(searchValue) ? "table-row" : "none";
-                });
+    // <!-- This function filters instances based on the given filter text. 
+    //     It selects all the rows in the table body and iterates through each row. 
+    //     For each row, it selects the first and second columns and converts their text content to lowercase. 
+    //     If either of the columns includes the filter text, the row is displayed. Otherwise, the row is hidden. -->
+    function filterInstances(filterText) {
+        const tableRows = document.querySelectorAll("tbody tr");
+        tableRows.forEach(function (row) {
+            const companyColumn = row.querySelector("td:nth-child(1)").textContent.toLowerCase();
+            const idColumn = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
 
-                // Hide the error message when the search query is valid
-                errorMessage.style.display = "none";
-            } else if (searchValue.length > 0) {
-                // Show the error message when the search query is too short
-                errorMessage.style.display = "block";
-
-                // Clear the table rows when the search query is too short
-                tableRows.forEach(function (row) {
-                    row.style.display = "none";
-                });
+            if (companyColumn.includes(filterText) || idColumn.includes(filterText)) {
+                row.style.display = "";
             } else {
-                // Clear the table rows and hide the error message when the input is empty
-                errorMessage.style.display = "none";
-                tableRows.forEach(function (row) {
-                    row.style.display = "table-row";
-                });
+                row.style.display = "none";
             }
         });
+    }
+</script>
+
+
+<!-- 
+This script defines functions for guiding the user through the search history page. It includes functions for opening and closing the guide, skipping the tutorial, and advancing to the next step in the guide. 
+
+Functions:
+- guide(): opens the guide if it is closed, or skips the tutorial if it is open
+- skipTutorial(): quits the tutorial instantly
+- guideSearchHistoryNext(): advances to the next step in the guide
+- guideDownloadAllNext(): advances to the next step in the guide
+
+Variables:
+- guideStatus: a boolean that tracks whether the guide is open or closed
+-->
+<script>
+    // Default status
+    guideStatus = false;
+
+    // Opens the guide
+    function guide() {
+        if (guideStatus == false) {
+            var helperIcon = document.querySelector(".fa-question-circle");
+            helperIcon.style.color = "orange";
+            guideStatus = true;
+
+            let helper = document.querySelector(".guideSearchHistory");
+            helper.style.display = "block";
+        }
+        else {
+            skipTutorial();
+            guideStatus = false;
+        }
+    }
+
+    // Quit tutorial instantly
+    function skipTutorial() {
+        console.log("tutorial skipped");
+        let helpers = document.querySelectorAll(".overlay");
+        helpers.forEach(function (helper) {
+            helper.style.display = "none";
+        });
+
+        var guideStatus = false;
+        var helperIcon = document.querySelector(".fa-question-circle");
+        helperIcon.style.color = "";
+    }
+
+    // ====================== //
+
+    function guideSearchHistoryNext() {
+        let helper = document.querySelector(".guideSearchHistory");
+        helper.style.display = "none";
+
+        let helper2 = document.querySelector(".guideDownloadAll");
+        helper2.style.display = "block";
+    }
+
+    function guideDownloadAllNext() {
+        let helper = document.querySelector(".guideDownloadAll");
+        helper.style.display = "none";
+
+        let helper2 = document.querySelector(".guideLogBoard");
+        helper2.style.display = "block";
+    }
+</script>
+
+
+
+<!-- 
+This script tag includes the Axios library from a CDN. Axios is a popular promise-based HTTP client for JavaScript that can be used in both the browser and Node.js. It simplifies the process of making HTTP requests and handling responses. 
+-->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+<script>
+    // <!-- This function sends a POST request to the server to retrieve the user's dashboard data, including created and terminated history. 
+    //     The retrieved data is stored in the local storage. -->
+    async function dashboardAPI() {
+        const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+
+        try {
+            const response = await axios.post('http://localhost:3001/api/dashboard', {
+                "userId": userId,
+                "createToken": token,
+            });
+            await localStorage.setItem("CreatedHistory", response.data.created);
+            await localStorage.setItem("TerminatedHistory", response.data.terminated);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    // <!--
+    // Creates a new row in the history table with the given company, instanceId, and status.
+    // The function creates a new table row element and appends it to the table body.
+    // The row contains cells for company, instanceId, status, and buttons for viewing and downloading logs.
+    // The function takes three parameters: company (string), instanceId (string), and Status (string).
+    // -->
+    function createNewInstance(company, instanceId, Status) {
+        var newRow = document.createElement('tr');
+
+        var idCell = document.createElement('td');
+        var companyLink = document.createElement('a');
+        companyLink.href = '#';
+        companyLink.classList.add('fw-bold');
+        companyLink.textContent = company;
+        idCell.appendChild(companyLink);
+
+        newRow.appendChild(idCell);
+
+        var otherCells = [
+            instanceId, Status, '', '', '', '', '', ''
+        ];
+
+        for (var i = 0; i < otherCells.length; i++) {
+            var cell = document.createElement('td');
+            var span = document.createElement('span');
+            span.classList.add('fw-normal');
+            if (i === 1) {
+                if (otherCells[i] == "Created") {
+                    span.classList.add('text-success');
+                }
+                else {
+                    span.classList.add('text-danger');
+                }
+            }
+
+            span.textContent = otherCells[i];
+            cell.appendChild(span);
+
+            if (i === otherCells.length - 1) {
+                var viewButton = document.createElement("button");
+                viewButton.classList.add("btn", "btn-primary", "btn-smaller");
+                viewButton.textContent = "View";
+                viewButton.onclick = function () { ViewLog(this, instanceId); };
+                cell.appendChild(viewButton);
+
+                cell.appendChild(document.createTextNode("\u00A0\u00A0"));
+
+                var DownloadButton = document.createElement("button");
+                DownloadButton.classList.add("btn", "btn-info", "btn-smaller");
+                DownloadButton.textContent = "Download";
+                DownloadButton.onclick = function () { DownloadLog(this, instanceId); };
+                cell.appendChild(DownloadButton);
+            }
+
+            newRow.appendChild(cell);
+        }
+
+        var tableBody = document.querySelector("tbody");
+        tableBody.appendChild(newRow);
+    }
+</script>
+
+
+<script>
+    // <!-- 
+    // This code block is responsible for rendering the history page of the dashboard. 
+    // It listens for the DOMContentLoaded event and then clears the local storage. 
+    // It then calls the dashboardAPI function and gets the user's full name from the response. 
+    // The user's full name is then added to the PDF file. 
+    // The code then retrieves the created and terminated instances from the local storage and renders them in the table. 
+    // If there are no instances to display, a message is shown. 
+    // -->
+    document.addEventListener("DOMContentLoaded", async function () {
+        // empty the local storage
+        await localStorage.removeItem("CreatedHistory");
+        await localStorage.removeItem("TerminatedHistory")
+
+        console.log("Dashboard API calling..");
+        await dashboardAPI();
+        console.log("Dashboard API called..");
+        console.log("username adding to pdf file..")
+        // Get user name
+        const userid = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+
+        axios.post("http://localhost:3001/api/profile",
+            {
+                "userId": userid,
+                "createToken": token,
+            },
+        )
+            .then(function (response) {
+                console.log(response.data);
+                let fullName = response.data.firstName + " " + response.data.surname;
+                document.getElementById("usernamePDF").innerHTML = fullName;
+                console.log(document.getElementById("usernamePDF"));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        console.log("username added to pdf file..");
+
+        const tableBody = document.querySelector("tbody");
+        const createdInstances = localStorage.getItem("CreatedHistory");
+        const terminatedInstances = localStorage.getItem("TerminatedHistory");
+
+        if (createdInstances) {
+            const createdInstance = createdInstances.split(",");
+            console.log("Created instances list: " + createdInstances);
+
+            if (createdInstance.length > 0) {
+
+                createdInstance.forEach(function (instanceId) {
+                    console.log(instanceId);
+                    createNewInstance("AMAZON", instanceId, "Created");
+                    createPDFtable("AMAZON", instanceId, "Created");
+                });
+            }
+            else {
+                console.log("There are no created instances.");
+            }
+        }
+
+        if (terminatedInstances) {
+            const terminatedInstance = terminatedInstances.split(",");
+            console.log("Terminated instances list: " + terminatedInstances);
+
+            if (terminatedInstance.length > 0) {
+
+                terminatedInstance.forEach(function (instanceId) {
+                    console.log(instanceId);
+                    createNewInstance("AMAZON", instanceId, "Terminated");
+                    createPDFtable("AMAZON", instanceId, "Terminated");
+                });
+            }
+            else {
+                console.log("There are no terminated instances.");
+            }
+        }
+
+        else if ((createdInstances.length == 0) && (terminatedInstances.length == 0)) {
+            console.log("There isn't any instances to display.");
+            noHistoryMessage.style.display = "block";
+        }
+        else {
+            console.log("Rendering History Log finished.");
+        }
     });
 </script>
 
-<style>
-    .btn-smaller {
-        padding: 0.2rem 0.75rem;
-        font-size: 0.75rem;
+
+<!-- This script defines two functions: DownloadLog() and ViewLog(). -->
+<!-- DownloadLog() logs a message to the console when the download button is clicked. -->
+<!-- ViewLog() logs a message to the console when the view button is clicked. -->
+<script>
+    function DownloadLog() {
+        console.log("download button cliccked");
     }
-    .btn-primary {
-        background-color: rgb(105, 105, 105);
-        border-color: rgb(105, 105, 105);
+
+    function ViewLog() {
+        console.log("view button cliccked");
     }
-    .btn-primary:hover{
-        background-color: rgb(95, 95, 95);
-        border-color: rgb(95, 95, 95);
-    }
-    .btn-info {
-        background-color: rgba(0, 100, 255);
-        border-color: rgba(0, 100, 255);
-    }
-    .btn-info:hover{
-        background-color: rgba(0, 90, 255);
-        border-color: rgba(0, 90, 255);
-    }
-</style>
+</script>
 
 
 {% endblock %}

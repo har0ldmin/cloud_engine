@@ -1,11 +1,14 @@
+```
+[Proof of Concept Only]
+This file contains the code to create a Compute Engine instance from Google Cloud Platform
+
+In order to run this code, you need to have a a key.json file in the current directory. 
+
+```;
 require("dotenv").config();
 
 const compute = require("@google-cloud/compute");
-/**
- * TODO(developer): Uncomment and replace these variables before running the sample.
- */
 
-// Create a new instance with the values provided above in the specified project and zone.
 async function createInstance(name) {
     const instancesClient = new compute.InstancesClient();
     const projectId = "cloudengine-401003";
@@ -13,7 +16,7 @@ async function createInstance(name) {
     const machineType = "n1-standard-1";
     const sourceImage = "projects/debian-cloud/global/images/family/debian-10";
     const networkName = "global/networks/default";
-    const instanceName = name;
+    const instanceName = "testinstance";
 
     console.log(`Creating the ${instanceName} instance in ${zone}...`);
 
@@ -57,8 +60,8 @@ async function createInstance(name) {
 
     console.log("Instance created.");
 }
-// console.log("hello world");
-// createInstance();
+
+createInstance();
 
 module.exports = {
     createInstance,

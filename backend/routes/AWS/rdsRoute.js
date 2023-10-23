@@ -14,37 +14,7 @@ const {
 const debug = false;
 
 const { dashboard } = require("../../middleware/dashboard-middleware");
-const { UserAWS } = require("../../models/UserAWSModel");
-
-// Routes (RDS)
-// router.get("/getAllRDSInstances", async (req, res) => {
-//     // #swagger.tags = ['SDK - RDS']
-//     try {
-//         infoRDSInstance()
-//             .then((data) => {
-//                 if (data.rdsinfo.length == 0)
-//                     res.status(404).json({
-//                         isError: true,
-//                         message: "No Available Instances",
-//                         rawErr: data,
-//                     });
-//                 else res.status(200).json(data);
-//             })
-//             .catch((err) => {
-//                 res.status(500).json({
-//                     isError: true,
-//                     message: "Error fetching RDS instances",
-//                     rawErr: err,
-//                 });
-//             });
-//     } catch (err) {
-//         res.status(500).json({
-//             isError: true,
-//             message: "Error fetching RDS instances",
-//             rawErr: err,
-//         });
-//     }
-// });
+const { UserAWS } = require("../../models/userAWSModel");
 
 router.post("/getRDSInstance", dashboard, async (req, res) => {
     // #swagger.tags = ['SDK - RDS']

@@ -1,16 +1,38 @@
 {% extends 'template/index.html' %}
 
 {% block content %}
+<link href="../solution/assets/css/solution.css" rel="stylesheet">
+<!-- slogan style -->
+<style>
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
 
-<div class="input-group flex-nowrap fixed-searchBar">
-  <button class="btn btn-outline-dark" type="button" id="button-addon1" 
-    style="background-color:#F79901; opacity: 70%; border: none;">Search</button>
-  <input type="text" class="form-control searchBar-input" placeholder="Search the service" aria-label="Username" style="height: 4.5vh;"
-    aria-describedby="addon-wrapping">
-</div>
+    100% {
+      transform: translateX(0);
+    }
+  }
 
+  @keyframes slideInFromRight {
+    0% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+  .swiper-pagination {
+    margin-top: -55% !important;
+  }
+</style>
 <!-- auto-slide -->
+
+<!-- This code block contains HTML code for a carousel with three images and captions. 
+  The carousel is used for displaying images and messages on the home page of a website. -->
 <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
       aria-label="Slide 1"></button>
@@ -33,10 +55,9 @@
         preserveAspectRatio="xMidYMid slice" focusable="false">
       <rect width="100%" height="100%" fill="var(--bs-secondary-color)">
         <div class="container">
-          <div class="carousel-caption">
-            <h1 style="font-weight:lighter; font-size: larger; color: #ffffff;">Another example headline.</br>
-              Some representative placeholder content for the second slide of the carousel.</h1></br>
-            <p><a class="btn btn-lg btn-warning mybutton" href="#">Learn more</a></p>
+          <div class="carousel-caption gradient-section">
+            <p class="home-main-text" style="color:#ffffff;">Your Gateway to </br>Optimal Cloud Services</p>
+
           </div>
         </div>
     </div>
@@ -45,15 +66,16 @@
         preserveAspectRatio="xMidYMid slice" focusable="false">
       <rect width="100%" height="100%" fill="var(--bs-secondary-color)">
         <div class="container">
-          <div class="carousel-caption text-end">
-            <h1 style="font-weight: lighter; font-size: larger; color: #ffffff;">One more for good measure.</br>
-              Some representative placeholder content for the third slide of this carousel.</h1></br>
-            <p><a class="btn btn-lg btn-warning mybutton" href="#">Browse Services</a></p>
+          <div class="carousel-caption text-end gradient-section">
+            <p class="home-main-text" style="color:#ffffff;">Navigate Your Cloud Journey with Confidence</br>Tailored for You</p>
+
           </div>
         </div>
     </div>
   </div>
 
+  <!-- These are the buttons used to control the carousel. The first button is used to move to the previous slide and the second button is used to move to the next slide.
+     The buttons are associated with the carousel using the data-bs-target attribute. -->
   <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
@@ -63,6 +85,211 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
+<!-- gradient section -->
+<div
+  style="display: flex; justify-content: center; align-items: center; background: linear-gradient(to bottom, #f5b144, transparent); height: 60vh;">
+  <!-- 
+  This script adds a scroll event listener to the window object. When the user scrolls, it selects all elements with the classes 'animate-left' and 'animate-right'. 
+  It then checks if the top of each element is within 50 pixels of the bottom of the viewport. 
+  If it is, it adds an animation to the element depending on its class. The animation duration is set to 2 seconds and the fill mode is set to both.
+  -->
+  <script>
+    window.addEventListener('scroll', function () {
+      var elements = document.querySelectorAll('.animate-left, .animate-right');
+      var windowHeight = window.innerHeight;
+
+      elements.forEach(function (element) {
+        var position = element.getBoundingClientRect().top;
+
+        if (position - windowHeight <= -50) {
+          if (element.classList.contains('animate-left')) {
+            element.style.animationName = 'slideInFromLeft';
+          } else if (element.classList.contains('animate-right')) {
+            element.style.animationName = 'slideInFromRight';
+          }
+
+          element.style.animationDuration = '2s';
+          element.style.animationFillMode = 'both';
+        }
+      });
+    });
+  </script>
+
+  
+  <!-- This code block displays a hero section with a gradient background and a title that animates from left to right. The title reads "Discover, Compare, Thrive: Your Ultimate Cloud Companion". -->
+  <div
+    style="display: flex; justify-content: center; align-items: center; background: linear-gradient(to bottom, #f5b144, transparent); height:50vh;">
+    <div style="display:flex; flex-direction:column; justify-content:center; align-items:center;width:80%;">
+      <h1 class="animate-left"
+        style="text-align:left; font-family:Arial,sans-serif;font-weight:bold;color:#ffffff;margin-right:auto;text-shadow:2px2px2px#999;">
+        Discover,</h1>
+      <h1 class="animate-left"
+        style="text-align:left;font-family:Arial,sans-serif;font-weight:bold;color:#ffffff;margin-right:auto;text-shadow:2px2px2px#999;">
+        Compare,</h1>
+      <h1 class="animate-left"
+        style="text-align:left;font-family:Arial,sans-serif;font-weight:bold;color:#ffffff;margin-right:auto;text-shadow:2px2px2px#999;">
+        Thrive:</h1>
+      <h1 class="animate-right"
+        style="text-align:right;font-family:Arial,sans-serif;font-weight:bold;color:#ffffff;margin-left:auto;text-shadow :2px2px2px#999;">
+        Your Ultimate Cloud Companion</h1>
+    </div>
+  </div>
+</div>
+<section>
+<!-- here for empty space -->
+</section>
+<!-- ======= Service Overview Section ======= -->
+<!-- This section displays cards for various cloud computing services, including AWS Lambda, Azure App Service, Google App Engine, Amazon RDS, and Azure SQL Database. 
+  Each cards includes a provider name, a rating, and a brief description of the service. -->
+<section id="testimonials" class="testimonials">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-header">
+      <h2>Services Overview</h2>
+      
+    </div>
+
+    <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper-wrapper">
+
+        
+        <!-- This code block represents a testimonial item for AWS Lambda service. It includes an image, service provider name,
+           rating stars, and a brief description of the service. -->
+        <div class="swiper-slide">
+          <div class="testimonial-wrap">
+            <div class="testimonial-item">
+              <div class="d-flex align-items-center">
+                <img src="../solution/assets/img/services/AwsLambda.png" class="testimonial-img flex-shrink-0" alt="">
+                <div>
+                  <h3>AWS Lambda</h3>
+                  <h4>Provider: Amazon</h4>
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                AWS Lambda is a serverless compute service that automatically scales and manages the
+                      infrastructure needed to run your code in response to events.
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+        </div><!-- End card item -->
+
+        <div class="swiper-slide">
+          <div class="testimonial-wrap">
+            <div class="testimonial-item">
+              <div class="d-flex align-items-center">
+                <img src="../solution/assets/img/services/AzureAppService.png" class="testimonial-img flex-shrink-0" alt="">
+                <div>
+                  <h3>Azure App Service</h3>
+                  <h4>Provider: Microsoft</h4>
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                Azure App Service is a fully managed platform for building, deploying, and scaling web apps and
+                      APIs.<br>
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+        </div><!-- End card item -->
+
+        <div class="swiper-slide">
+          <div class="testimonial-wrap">
+            <div class="testimonial-item">
+              <div class="d-flex align-items-center">
+                <img src="../solution/assets/img/services/GoogleAppEngine.jpg" class="testimonial-img flex-shrink-0" alt="">
+                <div>
+                  <h3>Google App Engine</h3>
+                  <h4>Provider: Google</h4>
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                Google App Engine is a serverless platform for building and deploying applications, allowing you
+                      to focus on writing code without managing the underlying infrastructure.
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+        </div><!-- End card item -->
+
+        <div class="swiper-slide">
+          <div class="testimonial-wrap">
+            <div class="testimonial-item">
+              <div class="d-flex align-items-center">
+                <img src="../solution/assets/img/services/AmazonRds.png" class="testimonial-img flex-shrink-0" alt="">
+                <div>
+                  <h3>Amazon RDS</h3>
+                  <h4>Provider: Amazon</h4>
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                Amazon RDS (Relational Database Service) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. 
+                <br>
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+        </div><!-- End card item -->
+
+        <div class="swiper-slide">
+          <div class="testimonial-wrap">
+            <div class="testimonial-item">
+              <div class="d-flex align-items-center">
+                <img src="../solution/assets/img/services/AzureCloudDatabase.png" class="testimonial-img flex-shrink-0" alt="">
+                <div>
+                  <h3>Azure SQL Database</h3>
+                  <h4>Provider: Microsoft</h4>
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                Azure SQL Database is a fully managed relational database service in Microsoft Azure that
+                      provides high availability and security for your data.
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+        </div><!-- End card item -->
+
+      </div>
+      <section class="swiper-pagination"></section>
+    </div>
+
+  </div>
+</section><!-- End card Section -->
+
+
+
+<!-- This script adds visibility to the chat box and chat box to GPT button when the DOM content is loaded. -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var chatBox = document.getElementById("helpContactBtn");
+    chatBox.style.visibility = "visible";
+
+    var chatBoxToGPT = document.getElementById("helpContactBtnToGPT");
+    chatBoxToGPT.style.visibility = "visible";
+  });
+</script>
 
 
 

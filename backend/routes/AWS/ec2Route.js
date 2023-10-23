@@ -1,7 +1,25 @@
+// ```
+// A EC2 related API routes
+
+//     EC2 API routes:
+//         - create EC2 instance
+//         - start EC2 instance
+//         - stop EC2 instance
+//         - reboot EC2 instance
+//         - describe EC2 instance
+//         - get all EC2 instances
+//         - terminate EC2 instance
+
+//     All routes uses dashboard middleware to check whether the user has access to the dashboard
+// ```;
+
+// import modules
 const express = require("express");
 const router = express.Router();
 
 require("dotenv").config();
+
+// import helper functions
 const {
     createEC2Instance,
     startEC2Instance,
@@ -14,24 +32,42 @@ const {
 
 const debug = false;
 
+// import middlewares
 const { dashboard } = require("../../middleware/dashboard-middleware");
-const { UserAWS } = require("../../models/UserAWSModel");
+
+// import models
+const { UserAWS } = require("../../models/userAWSModel");
+const { UsageHistory } = require("../../models/usageHistory");
 
 // check whether user had previously deployed instance before
-
 router.post("/create", dashboard, async (req, res) => {
     try {
+        // if instance name is not provided, use default name
         const InstanceName = req.body.InstanceName || "try now";
 
+        // create EC2 instance
         createEC2Instance(InstanceName)
             .then(async (data) => {
                 const instanceId = data.ec2info[0].InstanceId;
                 await UserAWS.findByIdAndUpdate(
                     req.dashboardId,
-                    { $push: { ec2Instances: instanceId } },
+                    {
+                        $push: {
+                            ec2Instances: {
+                                instanceId: instanceId,
+                                instanceName: data.ec2info[0].tagName,
+                            },
+                        },
+                    },
                     { new: true }
                 );
 
+                // update usage history
+                await UsageHistory.findByIdAndUpdate(
+                    req.historyId,
+                    { $push: { created: instanceId } },
+                    { new: true }
+                );
                 res.status(200).json(data);
             })
             .catch((err) => {
@@ -62,7 +98,14 @@ router.post("/start", dashboard, async (req, res) => {
         }
 
         const InstanceId = req.body.InstanceId;
-        if (!serviceUser.ec2Instances.includes(InstanceId)) {
+        let instance_list = [];
+
+        // retrieve all instance ids from ec2Instances list of dictionaries [{InstanceId: "id1"}, {InstanceId: "id2"}]
+        serviceUser.ec2Instances.forEach((instance) => {
+            instance_list.push(instance.instanceId);
+        });
+        // if instanceid not in ec2instances list of dictionaries [{instanceId: instanceid, name: name}]
+        if (!instance_list.includes(InstanceId)) {
             return res.status(500).json({
                 isError: true,
                 message: "Error starting EC2 instance",
@@ -70,6 +113,7 @@ router.post("/start", dashboard, async (req, res) => {
             });
         }
 
+        // start EC2 instance
         startEC2Instance(InstanceId).then((data) => {
             res.status(200).json(data);
         });
@@ -94,7 +138,13 @@ router.post("/stop", dashboard, async (req, res) => {
         }
 
         const InstanceId = req.body.InstanceId;
-        if (!serviceUser.ec2Instances.includes(InstanceId)) {
+        let instance_list = [];
+        // retrieve all instance ids from ec2Instances list of dictionaries [{InstanceId: "id1"}, {InstanceId: "id2"}]
+        serviceUser.ec2Instances.forEach((instance) => {
+            instance_list.push(instance.instanceId);
+        });
+        // if instanceid not in ec2instances list of dictionaries [{instanceId: instanceid, name: name}]
+        if (!instance_list.includes(InstanceId)) {
             return res.status(500).json({
                 isError: true,
                 message: "Error stopping EC2 instance",
@@ -126,7 +176,13 @@ router.post("/reboot", dashboard, async (req, res) => {
         }
 
         const InstanceId = req.body.InstanceId;
-        if (!userService.ec2Instances.includes(InstanceId)) {
+        let instance_list = [];
+        // retrieve all instance ids from ec2Instances list of dictionaries [{InstanceId: "id1"}, {InstanceId: "id2"}]
+        serviceUser.ec2Instances.forEach((instance) => {
+            instance_list.push(instance.instanceId);
+        });
+        // if instanceid not in ec2instances list of dictionaries [{instanceId: instanceid, name: name}]
+        if (!instance_list.includes(InstanceId)) {
             return res.status(500).json({
                 isError: true,
                 message: "Error rebooting EC2 instance",
@@ -158,7 +214,13 @@ router.post("/describe", dashboard, async (req, res) => {
         }
 
         const InstanceId = req.body.InstanceId;
-        if (!serviceUser.ec2Instances.includes(InstanceId)) {
+        let instance_list = [];
+        // retrieve all instance ids from ec2Instances list of dictionaries [{InstanceId: "id1"}, {InstanceId: "id2"}]
+        serviceUser.ec2Instances.forEach((instance) => {
+            instance_list.push(instance.instanceId);
+        });
+        // if instanceid not in ec2instances list of dictionaries [{instanceId: instanceid, name: name}]
+        if (!instance_list.includes(InstanceId)) {
             return res.status(500).json({
                 isError: true,
                 message: "Error describing EC2 instance",
@@ -203,7 +265,13 @@ router.post("/getAllEC2Instances", dashboard, async (req, res) => {
                 data: [],
             });
         else {
-            getAllEC2Instances(serviceUser.ec2Instances)
+            let instance_list = [];
+            // retrieve all instance ids from ec2Instances list of dictionaries [{InstanceId: "id1"}, {InstanceId: "id2"}]
+            serviceUser.ec2Instances.forEach((instance) => {
+                instance_list.push(instance.instanceId);
+            });
+
+            getAllEC2Instances(instance_list)
                 .then((data) => {
                     res.status(200).json({
                         isError: false,
@@ -240,24 +308,35 @@ router.post("/terminate", dashboard, async (req, res) => {
                 rawErr: "User not found",
             });
         }
+        let instance_list = [];
 
-        // if instanceid not in ec2instances
-        if (!serviceUser.ec2Instances.includes(InstanceId)) {
+        // retrieve all instance ids from ec2Instances list of dictionaries [{InstanceId: "id1"}, {InstanceId: "id2"}]
+        serviceUser.ec2Instances.forEach((instance) => {
+            instance_list.push(instance.instanceId);
+        });
+
+        // if instanceid not in ec2instances list of dictionaries [{instanceId: instanceid, name: name}]
+
+        if (!instance_list.includes(InstanceId)) {
             return res.status(500).json({
                 isError: true,
                 message: "Error terminating EC2 instance",
-                rawErr: "InstanceId not found",
+                rawErr: "Instance not found",
             });
         }
+
         terminateEC2Instance(InstanceId)
             .then(async (data) => {
-                // delete instanceid from ec2instances list
+                // delete instanceid from ec2instances list of dictionaries [{instanceId: instanceid, name: name}]
                 serviceUser.ec2Instances = serviceUser.ec2Instances.filter(
-                    (id) => id != InstanceId
+                    (instance) => instance.instanceId != InstanceId
                 );
-                console.log(serviceUser.ec2Instances);
                 serviceUser.save();
-                res.status(200).json(data);
+                await UsageHistory.findByIdAndUpdate(
+                    req.historyId,
+                    { $push: { terminated: InstanceId } },
+                    { new: true }
+                );
             })
             .catch((err) => {
                 res.status(500).json({

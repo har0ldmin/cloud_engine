@@ -1,19 +1,32 @@
-require("dotenv").config();
+// ```
+// A ec2 related helper Class
+// Mainly used for creating and managing EC2 instances
+// Uses AWS SDK
+// ```;
+
+// import modules
 const AWS = require("aws-sdk");
+require("dotenv").config();
 require("aws-sdk/lib/maintenance_mode_message").suppress = true;
+
+// set debug mode false to disable console.log
 const debug = false;
 
+// set AWS credentials
 AWS.config.update({
+    // uncomment the following lines to use your own credentials
     // accessKeyId: process.env.ACCESSKEY,
     // secretAccessKey: process.env.SECRETACCESSKEY,
 
+    // use the following lines to use the university account
     accessKeyId: process.env.aws_access_key_id,
     secretAccessKey: process.env.aws_secret_access_key,
+    sessionToken: process.env.aws_session_token, // Only applicable when using university account
 
     region: "ap-southeast-2",
-    sessionToken: process.env.aws_session_token, // Only applicable when using university account
 });
 
+// check whether the credentials are loaded
 AWS.config.getCredentials(function (err) {
     if (err) console.log(err.stack); // credentials not loaded
     else {
@@ -21,7 +34,10 @@ AWS.config.getCredentials(function (err) {
     }
 });
 
+// create EC2 service object
 const ec2 = new AWS.EC2({ apiVersion: "2016-11-15" });
+
+// create EC2 instance creation function
 function createEC2Instance(instanceName) {
     let result = {
         name: instanceName,
@@ -36,6 +52,7 @@ function createEC2Instance(instanceName) {
         MinCount: 1,
         MaxCount: 1,
     };
+    // Create a promise on an EC2 service object
     return new Promise((resolve, reject) => {
         ec2.runInstances(instanceParams, async (err, data) => {
             if (err) {
@@ -81,6 +98,7 @@ function createEC2Instance(instanceName) {
     });
 }
 
+// create EC2 instance start function
 function startEC2Instance(instanceId) {
     let result = {
         name: null,
@@ -92,6 +110,7 @@ function startEC2Instance(instanceId) {
         InstanceIds: [instanceId],
         DryRun: true,
     };
+    // call EC2 to start the selected instances
     return new Promise((resolve, reject) => {
         ec2.startInstances(params, function (err, data) {
             if (err && err.code === "DryRunOperation") {
@@ -103,7 +122,6 @@ function startEC2Instance(instanceId) {
                         result.message = err;
                         reject(result);
                     } else if (data) {
-                        // console.log("Success", data.StartingInstances);
                         result.ec2info = data.StartingInstances;
                         resolve(result);
                     }
@@ -118,6 +136,7 @@ function startEC2Instance(instanceId) {
     });
 }
 
+// create EC2 instance stop function
 function stopEC2Instance(instanceId) {
     let result = {
         name: null,
@@ -129,6 +148,8 @@ function stopEC2Instance(instanceId) {
         InstanceIds: [instanceId],
         DryRun: true,
     };
+
+    // call EC2 to stop the selected instances
     return new Promise((resolve, reject) => {
         ec2.stopInstances(params, function (err, data) {
             if (err && err.code === "DryRunOperation") {
@@ -155,6 +176,7 @@ function stopEC2Instance(instanceId) {
     });
 }
 
+// create EC2 instance reboot function
 function rebootEC2Instance(instanceId) {
     let result = {
         name: null,
@@ -166,6 +188,8 @@ function rebootEC2Instance(instanceId) {
         InstanceIds: [instanceId],
         DryRun: true,
     };
+
+    // call EC2 to reboot instances
     return new Promise((resolve, reject) => {
         ec2.rebootInstances(params, function (err, data) {
             if (err && err.code === "DryRunOperation") {
@@ -192,6 +216,7 @@ function rebootEC2Instance(instanceId) {
     });
 }
 
+// create EC2 instance describe function
 function describeEC2Instance(instanceId) {
     let result = {
         name: null,
@@ -203,6 +228,7 @@ function describeEC2Instance(instanceId) {
         InstanceIds: [instanceId],
     };
 
+    // call EC2 to retrieve instance description
     return new Promise((resolve, reject) => {
         ec2.describeInstances(params, function (err, data) {
             if (err) {
@@ -211,14 +237,6 @@ function describeEC2Instance(instanceId) {
                 result.message = err;
                 reject(result);
             } else {
-                // console.log("Success", {
-                //     InstanceId: data.Reservations[0].Instances[0].InstanceId,
-                //     Status: data.Reservations[0].Instances[0].State.Name,
-                //     PrivateIpAddress: data.Reservations[0].Instances[0].PrivateIpAddress,
-                //     PrivateDnsName: data.Reservations[0].Instances[0].PrivateDnsName,
-                //     tagName: data.Reservations[0].Instances[0].Tags[0].Value,
-                //     InstanceType: data.Reservations[0].Instances[0].InstanceType,
-                // });
                 result.ec2info = [
                     {
                         InstanceId: data.Reservations[0].Instances[0].InstanceId,
@@ -234,7 +252,8 @@ function describeEC2Instance(instanceId) {
         });
     });
 }
-// stopEC2Instances("i-0335b616c9b9cdac8");
+
+// create helper that returns all ec2 instance that belongs to the user
 function getAllEC2Instances(instanceIds) {
     let result = {
         name: [],
@@ -242,6 +261,7 @@ function getAllEC2Instances(instanceIds) {
         isError: false,
         message: null,
     };
+
     // show all instance that is not terminated
     var params = {
         InstanceIds: instanceIds,
@@ -253,6 +273,7 @@ function getAllEC2Instances(instanceIds) {
         ],
     };
 
+    // call EC2 to retrieve instance description
     return new Promise((resolve, reject) => {
         ec2.describeInstances(params, function (err, data) {
             if (err) {
@@ -261,7 +282,6 @@ function getAllEC2Instances(instanceIds) {
                 result.message = err;
                 reject(result);
             } else {
-                // console.log("Success", data);
                 for (let i = 0; i < data.Reservations.length; i++) {
                     result.ec2info[i] = {
                         InstanceId: data.Reservations[i].Instances[0].InstanceId,
@@ -273,14 +293,13 @@ function getAllEC2Instances(instanceIds) {
                     };
                     result.name[i] = data.Reservations[i].Instances[0].Tags[0].Value;
                 }
-                // result.ec2info = data.Reservations[0].Instances;
                 resolve(result);
             }
         });
     });
 }
 
-// getAllEC2Instances();
+// create EC2 instance termination function
 function terminateEC2Instance(instanceId) {
     let result = {
         name: null,
@@ -292,6 +311,8 @@ function terminateEC2Instance(instanceId) {
         InstanceIds: [instanceId],
         DryRun: true,
     };
+
+    // call EC2 to terminate instances
     return new Promise((resolve, reject) => {
         ec2.terminateInstances(params, function (err, data) {
             if (err && err.code === "DryRunOperation") {
@@ -303,8 +324,6 @@ function terminateEC2Instance(instanceId) {
                         result.message = err;
                         reject(result);
                     } else if (data) {
-                        //tag name
-                        // result.name = data.TerminatingInstances[0].Tags[0].Value;
                         result.ec2info = [
                             {
                                 InstanceId: data.TerminatingInstances[0].InstanceId,
@@ -325,6 +344,7 @@ function terminateEC2Instance(instanceId) {
     });
 }
 
+// export all functions
 module.exports = {
     createEC2Instance,
     startEC2Instance,

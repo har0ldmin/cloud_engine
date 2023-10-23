@@ -1,8 +1,23 @@
-const { Reset } = require("../models/resetModel");
-const mailer = require("./resetMailer");
-const { User } = require("../models/account");
+// ``` 
+//     This is a middleware function that sends the resetToken to the user's email address.
+//     It accepts the user's email address in the request body and returns a response
+//     indicating whether the resetToken was successfully sent or not.
+
+//     Follwing payload must contain in the request body:
+//     request body: {
+//         "email": "string"
+//     }
+
+// ```;
+
+// import modules
 const validator = require("validator");
 const crypto = require("crypto");
+const mailer = require("./resetMailer");
+
+// import models
+const { Reset } = require("../models/resetModel");
+const { User } = require("../models/accountModel");
 
 exports.sendReset = async (req, res) => {
     try {
@@ -26,7 +41,6 @@ exports.sendReset = async (req, res) => {
         await Reset.deleteMany({ email });
 
         let resetToken = crypto.randomBytes(32).toString("hex");
-        // console.log(resetToken);
 
         let result = await Reset.findOne({ resetToken: resetToken });
 

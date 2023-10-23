@@ -2,134 +2,406 @@
 
 {% block content %}
 
-
-<!-- Vendor CSS Files -->
-<link href="../selection/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="../selection/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="../selection/vendor/aos/aos.css" rel="stylesheet">
-<link href="../selection/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-<link href="../selection/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
 <!-- Template Main CSS File -->
 <link href="../selection/css/selection.css" rel="stylesheet">
+
+<style>
+    .readmore {
+        text-decoration: none !important;
+    }
+
+    .categoryCard:hover {
+        transform: translateY(-10px);
+        transition: 0.5s;
+        box-shadow: 0px 0px 50px #f7990153;
+    }
+
+    button[type="submit"] {
+        border-radius: 10px !important;
+        background-color: #F79901 !important;
+        border-color: #F79901 !important;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #f79901cd !important;
+        border-color: #f79901cd !important;
+    }
+
+    input[type="checkbox"] {
+        margin-left: 20px;
+    }
+
+    input[type=checkbox] {
+        accent-color: #F79901;
+    }
+
+    #awsCheckbox:checked+label,
+    #azureCheckbox:checked+label,
+    #googleCheckbox:checked+label,
+    #webCheckbox:checked+label,
+    #databaseCheckbox:checked+label,
+    #computeCheckbox:checked+label,
+    #containerCheckbox:checked+label,
+    #serverlessCheckbox:checked+label,
+    #networkingCheckbox:checked+label,
+    #freeTierCheckbox:checked+label,
+    #payAsYouGoCheckbox:checked+label,
+    #enterprisePricingCheckbox:checked+label,
+    #reservedInstanceCheckbox:checked+label,
+    #linuxCheckbox:checked+label,
+    #windowsCheckbox:checked+label,
+    #macOsCheckbox:checked+label,
+    #pythonCheckbox:checked+label,
+    #javaCheckbox:checked+label,
+    #cSharpCheckbox:checked+label,
+    #goCheckbox:checked+label,
+    #javascriptCheckbox:checked+label,
+    #apiCompatibilityCheckbox:checked+label,
+    #kubernetesCheckbox:checked+label,
+    #machineLearningCheckbox:checked+label,
+    #databaseConnectionCheckbox:checked+label,
+    #securityIntegrationCheckbox:checked+label {
+        color: #F79901 !important;
+    }
+</style>
 
 
 
 <!-- new head -->
-<!-- ======= Hero Section ======= -->
 <div>
     <img src="../selection/images/AdobeStock_626457242.jpeg" width=100% class="img-fluid" alt="Responsive image">
 </div>
-<!-- End Hero -->
-
 
 
 
 <!-- what are you looking for -->
 <!-- ======= Our Services Section ======= -->
+
+<!--
+The selection section displays a list of service categories that the website offers. It includes a breadcrumb navigation bar, a section header, and a grid of service categories. Each service category is represented by a card with an icon, title, and description. The cards are clickable and lead to a page with more information about the selected category. 
+-->
 <section id="services" class="services sections-bg">
-    <div class="container" data-aos="fade-up">
+
+    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent" style="margin-left: 14%; margin-bottom: 5%;">
+        <li class="breadcrumb-item"">
+            <a href=" /">
+            <i class="fa-solid fa-house" style="color: rgb(70, 70, 70) !important;"></i>
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/service" style="color: rgb(70, 70, 70) !important;">Our Services</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <a href="/selection" style="text-decoration: underline;"">Instances</a>
+        </li>
+    </ol>
+
+   
+    <!-- 
+        This section displays a list of categories for services that the website offers. 
+        Each category is represented by a card with an icon, title, and description. 
+        The cards are arranged in a grid layout with 2 columns on medium screens and 3 columns on large screens. 
+        Each card has a link to a page where the user can learn more about the category. 
+    -->
+    <div class=" container" data-aos="fade-up">
 
         <div class="section-header">
             <h2>What Are You Looking For?</h2>
-            <p>Aperiam dolorum et et wuia molestias qui eveniet numquam nihil porro incidunt dolores placeat sunt id
-                nobis omnis tiledo stran delop</p>
+            <p>Whatever category you choose, we can recommend you the best services.</p>
         </div>
 
         <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
 
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item  position-relative">
+            <div class="col-lg-4 col-md-6" id="webDevlop">
+                <div class="service-item position-relative categoryCard">
                     <div class="icon">
                         <i class="bi bi-activity"></i>
                     </div>
-                    <h3>Nesciunt Mete</h3>
-                    <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure
-                        perferendis tempore et consequatur.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <h3>Web Develop</h3>
+                    <p style="font-family: Arial, Helvetica, sans-serif;">Web development is the process of creating websites or web applications.</p>
+                    <a href="#" class="readmore stretched-link"></a>
                 </div>
             </div><!-- End Service Item -->
 
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item position-relative">
+            <div class="col-lg-4 col-md-6" id="database">
+                <div class="service-item position-relative categoryCard">
                     <div class="icon">
                         <i class="bi bi-broadcast"></i>
                     </div>
-                    <h3>Eosle Commodi</h3>
-                    <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic
-                        non ut nesciunt dolorem.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <h3>Database</h3>
+                    <p style="font-family: Arial, Helvetica, sans-serif;">A database stores, organizes, and manages data<br>for efficient retrieval and updating.</p>
+                    <a href="#" class="readmore stretched-link "></a>
                 </div>
             </div><!-- End Service Item -->
 
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item position-relative">
+            <div class="col-lg-4 col-md-6" id="computation">
+                <div class="service-item position-relative categoryCard">
                     <div class="icon">
                         <i class="bi bi-easel"></i>
                     </div>
-                    <h3>Ledo Markt</h3>
-                    <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas
-                        adipisci eos earum corrupti.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <h3>Computation</h3>
+                    <p style="font-family: Arial, Helvetica, sans-serif;">Computation is the process of performing calculations to solve problems using a computer.</p>
+                    <a href="#" class="readmore stretched-link"></a>
                 </div>
             </div><!-- End Service Item -->
 
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item position-relative">
+            <div class="col-lg-4 col-md-6" id="container">
+                <div class="service-item position-relative categoryCard">
                     <div class="icon">
                         <i class="bi bi-bounding-box-circles"></i>
                     </div>
-                    <h3>Asperiores Commodit</h3>
-                    <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit
-                        provident adipisci neque.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <h3>Container</h3>
+                    <p style="font-family: Arial, Helvetica, sans-serif;">Container computing service provides scalable, isolated environments for deploying and running applications.</p>
+                    <a href="#" class="readmore stretched-link"></a>
                 </div>
             </div><!-- End Service Item -->
 
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item position-relative">
+            <div class="col-lg-4 col-md-6" id="serverless">
+                <div class="service-item position-relative categoryCard">
                     <div class="icon">
                         <i class="bi bi-calendar4-week"></i>
                     </div>
-                    <h3>Velit Doloremque</h3>
-                    <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi
-                        at autem alias eius labore.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <h3>Serverless</h3>
+                    <p style="font-family: Arial, Helvetica, sans-serif;">Serverless computing allows running applications without managing underlying servers, scaling automatically with usage.</p>
+                    <a href="#" class="readmore stretched-link"></a>
                 </div>
             </div><!-- End Service Item -->
 
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item position-relative">
+            <div class="col-lg-4 col-md-6" id="networking">
+                <div class="service-item position-relative categoryCard">
                     <div class="icon">
                         <i class="bi bi-chat-square-text"></i>
                     </div>
-                    <h3>Dolori Architecto</h3>
-                    <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure.
-                        Corrupti recusandae ducimus enim.</p>
-                    <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+                    <h3>Networking</h3>
+                    <p style="font-family: Arial, Helvetica, sans-serif;">Networking computing services connect computers and servers for data exchange and resource sharing.</p>
+                    <br>
+                    <a href="#" class="readmore stretched-link"></a>
                 </div>
             </div><!-- End Service Item -->
 
         </div>
-
     </div>
+                
 </section><!-- End Our Services Section -->
 
+
+
+<!-- This section displays an image with text overlay and a button to open a modal for filtering options. The image and text overlay are positioned using absolute positioning. 
+    The button opens a modal with checkboxes for filtering by provider and type of service. -->
 <section class="bg-white py-8">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 image-container2">
+    <div class="container-fluid p-0">
+        <div class="row m-0">
+            <div id="image-area" class="col-lg-12 image-container2 p-0" style="position: relative;">
                 <!-- Image -->
-                <img src="../selection/images/survey.jpeg" width=100% class="image-container2 img-fluid midle_img"
-                    alt="Responsive image">
+                <img src="../selection/images/survey.jpeg" style="
+                    width: 100%; 
+                    height: 70vh; 
+                    object-fit: cover;" alt="Responsive image">
 
                 <!-- Text Overlay -->
-                <p class="image-overlay-text fw-medium midle_text">
-                    Your Text Here</br></br>
-                    <a href="/results">
-                        <button class="btn btn-warning midle_button">Quick Survey</button>
-                    </a>
+                <h4 id="overlay-text" style="
+                    position: absolute; 
+                    top: 50%; 
+                    left: 0;
+                    transform: translate(-70%, -70%);
+                    color: white;
+                    font-size: 3em;
+                    font-weight: bolder;
+                    text-align:left;
+                    line-height :1.5;
+                    animation: slide-in 2s ease-in-out;                   
+                ">
+                    We Drive,<br>Navigation<br>Into Your Big Dream
+                </h4>
+
+
+
+                <!-- Text Overlay -->
+                <p class="image-overlay-text fw-medium midle_text" style="position: absolute;
+                margin-top: 260px;
+                left: 50%;
+                transform: translate(-50%, -50%);">
+
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#filterModal"
+                        style="
+                    font-size: 18px; font-weight: 300; padding: 10px 30px; color: white; margin-bottom: 40px;">
+                        Find My Services
+                    </button>
                 </p>
+
+                <!-- Filter Modal -->
+                <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header"
+                                style="background-image: linear-gradient(to bottom, #f79901c5, #3e17be2f) !important;">
+                                <h5 class="modal-title" id="filterModalLabel" style="color: white;">Select Your
+                                    Preferences</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            
+                            <!-- This HTML code block contains a modal window for filtering options for cloud service providers.
+                                 It includes checkboxes for selecting providers, type of service, pricing options, and more. -->
+                            <div class="modal-body" style="margin-top: 5%; padding: 0px 50px;">
+                                <!-- Filtering options -->
+                                <h6
+                                    style="font-size: large; font-weight: bold; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                                    Provider</h6>
+                                <div class='row'>
+                                    <div class='col'>
+                                        <input type='checkbox' id="awsCheckbox" name='manufacturer' value='AWS'>
+                                        <label for='awsCheckbox' class='containerLabel'> AWS</label>
+
+                                        <input type='checkbox' id="azureCheckbox" name='manufacturer'
+                                            value='Microsoft Azure'>
+                                        <label for='azureCheckbox' class='containerLabel'> AZURE</label>
+
+                                        <input type='checkbox' id="googleCheckbox" name='manufacturer'
+                                            value='Google Cloud Platform'>
+                                        <label for='googleCheckbox' class='containerLabel'> Google</label>
+                                    </div>
+                                </div><br>
+
+                                <h6
+                                    style="font-size: large; font-weight: bold; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                                    Type Of Service</h6>
+                                <div class='row'>
+                                    <div class='col'>
+                                        <input type='checkbox' id="webCheckbox" name='manufacturer' value='web'>
+                                        <label for='webCheckbox' class='containerLabel'> Web Develop</label>
+
+                                        <input type='checkbox' id="databaseCheckbox" name='manufacturer'
+                                            value='database'>
+                                        <label for='databaseCheckbox' class='containerLabel'> Database</label>
+
+                                        <input type='checkbox' id="computeCheckbox" name='manufacturer' value='compute'>
+                                        <label for='computeCheckbox' class='containerLabel'> Computation</label>
+                                        <br>
+
+                                        <input type='checkbox' id="containerCheckbox" name='manufacturer'
+                                            value='container'>
+                                        <label for='containerCheckbox' class='containerLabel'> Container</label>
+
+                                        <input type='checkbox' id="serverlessCheckbox" name='manufacturer'
+                                            value='serverless'>
+                                        <label for='serverlessCheckbox' class='containerLabel'> Serverless</label>
+
+                                        <input type='checkbox' id="networkingCheckbox" name='manufacturer'
+                                            value='networking'>
+                                        <label for='networkingCheckbox' class='containerLabel'> Networking</label>
+                                    </div>
+                                </div><br>
+
+                                <h6
+                                    style="font-size: large; font-weight: bold; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                                    Price</h6>
+                                <div class='row'>
+                                    <div class='col'>
+                                        <input type='checkbox' id="freeTierCheckbox" name='manufacturer'
+                                            value='freeTier'>
+                                        <label for='freeTierCheckbox' class='containerLabel'> Free-tier</label>
+
+                                        <input type='checkbox' id="payAsYouGoCheckbox" name='manufacturer'
+                                            value='payAsYouGo'>
+                                        <label for='payAsYouGoCheckbox' class='containerLabel'> Pay-as-you-go</label>
+
+                                        <input type='checkbox' id="enterprisePricingCheckbox" name='manufacturer'
+                                            value='enterprisePricing'>
+                                        <label for='enterprisePricingCheckbox' class='containerLabel'>
+                                            Enterprise</label>
+                                        <br>
+
+                                        <input type='checkbox' id="reservedInstanceCheckbox" name='manufacturer'
+                                            value='reservedInstance'>
+                                        <label for='reservedInstanceCheckbox' class='containerLabel'> Reserved
+                                            instance</label>
+                                    </div>
+                                </div><br>
+
+                                <h6
+                                    style="font-size: large; font-weight: bold; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                                    Operation System</h6>
+                                <div class='row'>
+                                    <div class='col'>
+                                        <input type='checkbox' id="linuxCheckbox" name='manufacturer' value='linux'>
+                                        <label for='linuxCheckbox' class='containerLabel'> Linux</label>
+
+                                        <input type='checkbox' id="windowsCheckbox" name='manufacturer' value='windows'>
+                                        <label for='windowsCheckbox' class='containerLabel'> Window</label>
+
+                                        <input type='checkbox' id="macOsCheckbox" name='manufacturer' value='macOs'>
+                                        <label for='macOsCheckbox' class='containerLabel'> MacOS</label>
+                                    </div>
+                                </div><br>
+
+                                <h6
+                                    style="font-size: large; font-weight: bold; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                                    Programming Language</h6>
+                                <div class='row'>
+                                    <div class='col'>
+                                        <input type='checkbox' id="pythonCheckbox" name='manufacturer' value='python'>
+                                        <label for='pythonCheckbox' class='containerLabel'> Python</label>
+
+                                        <input type='checkbox' id="javaCheckbox" name='manufacturer' value='java'>
+                                        <label for='javaCheckbox' class='containerLabel'> Java</label>
+
+                                        <input type='checkbox' id="cSharpCheckbox" name='manufacturer' value='cSharp'>
+                                        <label for='cSharpCheckbox' class='containerLabel'> C#</label>
+                                        <br>
+
+                                        <input type='checkbox' id="goCheckbox" name='manufacturer' value='go'>
+                                        <label for='goCheckbox' class='containerLabel'> GO</label>
+
+                                        <input type='checkbox' id="javascriptCheckbox" name='manufacturer'
+                                            value='javascript'>
+                                        <label for='javascriptCheckbox' class='containerLabel'> Javascript</label>
+                                    </div>
+                                </div><br>
+
+                                <h6
+                                    style="font-size: large; font-weight: bold; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                                    Integration and Compatibility</h6>
+                                <div class='row'>
+                                    <div class='col'>
+                                        <input type='checkbox' id="apiCompatibilityCheckbox" name='manufacturer'
+                                            value='apiCompatibility'>
+                                        <label for='apiCompatibilityCheckbox' class='containerLabel'> API
+                                            compatibility</label>
+
+                                        <input type='checkbox' id="kubernetesCheckbox" name='manufacturer'
+                                            value='kubernetes'>
+                                        <label for='kubernetesCheckbox' class='containerLabel'> Kubernetes</label>
+                                        <br>
+
+                                        <input type='checkbox' id="machineLearningCheckbox" name='manufacturer'
+                                            value='machineLearning'>
+                                        <label for='machineLearningCheckbox' class='containerLabel'> Machine
+                                            Learning</label>
+
+                                        <input type='checkbox' id="databaseConnectionCheckbox" name='manufacturer'
+                                            value='databaseConnection'>
+                                        <label for='databaseConnectionCheckbox' class='containerLabel'> Database
+                                            connect</label>
+                                        <br>
+
+                                        <input type='checkbox' id="securityIntegrationCheckbox" name='manufacturer'
+                                            value='securityIntegration'>
+                                        <label for='securityIntegrationCheckbox' class='containerLabel'>
+                                            Security</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer" style="display: flex; justify-content: center; margin-top: 5%;">
+                                <button class="btn btn-primary" id='apply-filters-btn' type='submit'
+                                    form='product-filter-form' value='Submit'>Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Filtering Modal End -->
 
             </div>
         </div>
@@ -137,30 +409,6 @@
 
 </section>
 
-
-<!-- ======= Clients Section ======= -->
-<!-- <section id="clients" class="clients">
-    <div class="container" data-aos="zoom-out">
-
-        <div class="clients-slider swiper">
-            <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide"><img src="../selection/images/client-1.png" class="img-fluid" alt="">
-                </div>
-                <div class="swiper-slide"><img src="../selection/images/client-2.png" class="img-fluid" alt="">
-                </div>
-                <div class="swiper-slide"><img src="../selection/images/client-3.png" class="img-fluid" alt="">
-                </div>
-                <div class="swiper-slide"><img src="../selection/images/client-4.png" class="img-fluid" alt="">
-                </div>
-                <div class="swiper-slide"><img src="../selection/images/client-5.png" class="img-fluid" alt="">
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</section> -->
-<!-- End Clients Section -->
 
 <!-- ======= Stats Counter Section ======= -->
 <section id="stats-counter" class="stats-counter">
@@ -175,21 +423,21 @@
             <div class="col-lg-6">
 
                 <div class="stats-item d-flex align-items-center">
-                    <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
+                    <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="2"
                         class="purecounter"></span>
-                    <p><strong>Happy Clients</strong> consequuntur quae diredo para mesta</p>
+                    <p><strong>Happy Clients</strong> are statisfied with our services</p>
                 </div><!-- End Stats Item -->
 
                 <div class="stats-item d-flex align-items-center">
-                    <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
+                    <span data-purecounter-start="0" data-purecounter-end="399" data-purecounter-duration="2.5"
                         class="purecounter"></span>
-                    <p><strong>Projects</strong> adipisci atque cum quia aut</p>
+                    <p><strong>Projects</strong> you can try with our provided services</p>
                 </div><!-- End Stats Item -->
 
                 <div class="stats-item d-flex align-items-center">
-                    <span data-purecounter-start="0" data-purecounter-end="453" data-purecounter-duration="1"
+                    <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="3"
                         class="purecounter"></span>
-                    <p><strong>Hours Of Support</strong> aut commodi quaerat</p>
+                    <p><strong>Hours Of Support</strong> we provide you with our best</p>
                 </div><!-- End Stats Item -->
 
             </div>
@@ -200,6 +448,14 @@
 </section><!-- End Stats Counter Section -->
 
 
+
+
+<!-- =====================================================================================
+    ======================================================================================
+    ====================================================================================== -->
+
+
+
 <!-- Vendor JS Files -->
 <script src="../selection/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../selection/vendor/aos/aos.js"></script>
@@ -207,10 +463,158 @@
 <script src="../selection/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="../selection/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="../selection/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="../selection/vendor/php-email-form/validate.js"></script>
+
 <!-- edit -->
 <!-- Template Main JS File -->
 <script src="../aboutUs2/assets/js/main.js"></script>
 
+
+<!-- Filtering JS File -->
+<script src="../selection/js/selection.js"></script>
+
+<!-- IMport axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+<!-- After filtering, return to results page -->
+<!-- 
+This script listens for a click event on the "apply-filters-btn" button and retrieves all checkboxes in the modal. 
+It then creates an empty object to store checkbox values and loops through each checkbox to check if it is checked. 
+If the checkbox is checked, it adds the checkbox value to the checkedValues object. 
+The checkedValues object is then sent as a POST request to the specified URL using axios. 
+If the request is successful, the response data is stored in a string and the window is redirected to the "/results" page with the filtered data as a query parameter. 
+If the request fails, an error message is logged to the console.
+-->
+<script>
+    document.getElementById("apply-filters-btn").addEventListener("click", function () {
+        // Get all checkboxes in the modal
+        var checkboxes = document.querySelectorAll('#filterModal input[type=checkbox]');
+
+        // Create an empty object to store checkbox values
+        var checkedValues = {};
+
+
+        checkboxes.forEach(function (checkbox, index) {
+            if ((index == 0) || (index == 1) || (index == 2)) {
+                if (checkbox.checked) {
+                    checkedValues['provider'] = checkbox.value;
+                }
+            } else {
+                if (checkbox.checked) {
+                    checkedValues[checkbox.value] = true;
+                }
+            }
+        });
+
+        // retrieve only keys from checkedValues
+        var checkedValuesKeys = Object.keys(checkedValues);
+
+        // <!-- 
+        //     This code block sends a POST request to a local server with a filter parameter that contains the checked values from a form.
+        //     The response data is then encoded and used to open a new window with the filtered data and category name as query parameters.
+        // -->
+        axios.post('http://127.0.0.1:3001/api/service?filter=' + encodeURIComponent(JSON.stringify(checkedValues)), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                var responseDataString = '?filteredData=' + encodeURIComponent(JSON.stringify(response.data));
+                var categoryNameString = '&categoryName=' + encodeURIComponent(checkedValuesKeys);
+                window.open("/results" + responseDataString + categoryNameString, "_blank");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+</script>
+
+<!-- After choosing the category, return to results page -->
+
+
+<script>
+    // <!--
+    // This script adds click event listeners to the card elements and sends the selected category to the server.
+    // The selected category is stored in the input variable as a boolean value.
+    // The sendCategory function is called with the input and the category name as arguments.
+    // -->
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the card element by its ID
+        var webDevlop = document.getElementById('webDevlop');
+        var database = document.getElementById('database');
+        var computation = document.getElementById('computation');
+        var container = document.getElementById('container');
+        var serverless = document.getElementById('serverless');
+        var networking = document.getElementById('networking');
+
+        var input = "";
+
+        // Add a click event listener to the card
+        webDevlop.addEventListener('click', function () {
+            input = { web: true };
+            sendCategory(input, "Web Development");
+        });
+
+        database.addEventListener('click', function () {
+            input = { database: true };
+            sendCategory(input, "Database");
+        });
+
+        computation.addEventListener('click', function () {
+            input = { compute: true };
+            sendCategory(input, "Computation");
+        });
+
+        container.addEventListener('click', function () {
+            input = { container: true };
+            sendCategory(input, "Container");
+        });
+
+        serverless.addEventListener('click', function () {
+            input = { serverless: true };
+            sendCategory(input, "Serverless");
+        });
+
+        networking.addEventListener('click', function () {
+            input = { networking: true };
+            sendCategory(input, "Networking");
+        });
+    });
+
+    // <!--
+    //     Sends a POST request to the specified API endpoint with the given category filter.
+    //     If the request is successful, opens a new window with the filtered data and category name.
+    //     @param {Object} category - The category filter to apply to the data.
+    //     @param {string} categoryName - The name of the category being filtered.
+    // -->
+    function sendCategory(category, categoryName) {
+        axios.post('http://127.0.0.1:3001/api/service?filter=' + encodeURIComponent(JSON.stringify(category)), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                var responseDataString = '?filteredData=' + encodeURIComponent(JSON.stringify(response.data));
+                var categoryNameString = '&categoryName=' + encodeURIComponent(categoryName);
+                window.open("/results" + responseDataString + categoryNameString, "_blank");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+</script>
+
+<!-- This script adds visibility to the chat box and chat box to GPT button when the DOM content is loaded. -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var chatBox = document.getElementById("helpContactBtn");
+        chatBox.style.visibility = "visible";
+
+        var chatBoxToGPT = document.getElementById("helpContactBtnToGPT");
+        chatBoxToGPT.style.visibility = "visible";
+    });
+</script>
 
 {% endblock %}
