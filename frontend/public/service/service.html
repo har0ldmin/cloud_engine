@@ -5,14 +5,12 @@
 <style>
     .serv-cell {
         height: 100vh;
-
         transition: transform 0.3s ease-in-out;
         box-shadow: 0px 4px 8px rgba(59, 58, 58, 0.2);
-        border-radius: 20px;
+        border-radius: 10px;
     }
 
     .serv-cell:hover {
-
         transform: scale(1.02);
     }
 
@@ -22,6 +20,7 @@
         text-decoration: none;
         transition: all 0.45s ease-in-out;
         font-weight: 700;
+        position: relative;
     }
 
     .serv-cell a:hover {
@@ -37,8 +36,6 @@
         background-image: url('../service/images/solutions_bg.jpeg');
         background-size: cover;
         background-position: center;
-
-
     }
 
     .serv-solution-cell a {
@@ -48,8 +45,6 @@
         align-items: center;
         width: 100%;
         height: 100%;
-
-
     }
 
     .serv-recomm-cell {
@@ -67,6 +62,23 @@
         height: 100%;
     }
 
+    .serv-description {
+        font-size: 1.2rem;
+        color: #fff;
+        position: absolute;
+        bottom: 36%;
+        width: 50%;
+        text-align: left;
+    }
+
+    .serv-text {  
+        font-size: 2rem;
+        color: #fff;
+        position: absolute;
+        bottom: 50%;
+        width: 50%;
+        text-align: center;
+    }
 
     header a:hover {
         color: rgb(255, 255, 255) !important;
@@ -95,6 +107,9 @@
                 <span class="serv-text">
                     Recommendations
                 </span>
+                <span class="serv-description">
+                    Access top-tier advice and curated offerings to enhance your account and make a lasting impact in your field.
+                </span>
             </a>
         </div>
 
@@ -102,6 +117,9 @@
             <a href="/solution">
                 <span class="serv-text">
                     Solutions
+                </span>
+                <span class="serv-description">
+                    This is a recommendation page, click here to check
                 </span>
             </a>
         </div>

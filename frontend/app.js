@@ -25,11 +25,9 @@ const selectionRouter = require('./routes/selection');
 const solutionRouter = require('./routes/solution')
 const resultsRouter = require('./routes/results')
 const aboutUsRouter = require('./routes/about')
-const myDashboardRouter = require('./routes/myDashboard');
 const instanceRouter = require('./routes/instance');
 const historyRouter = require('./routes/history');
 const settingsRouter = require('./routes/settings')
-const guestDashboardRouter = require('./routes/guestDashboard')
 const guestInstanceRouter = require('./routes/guestInstance')
 const guestHistoryRouter = require('./routes/guestHistory')
 const guestSettingsRouter = require('./routes/guestSettings')
@@ -55,7 +53,6 @@ app.use('/results', resultsRouter);
 app.use('/aboutUs2', aboutUsRouter);
 
 // My Dashboard
-app.use('/myDashboard', myDashboardRouter);
 app.use('/instance', instanceRouter);
 app.use('/history', historyRouter);
 app.use('/settings', settingsRouter);
@@ -64,7 +61,6 @@ app.use('/contactTeam', contactTeamRouter)
 
 
 // Guest Dashboard
-app.use('/guestDashboard', guestDashboardRouter)
 app.use('/guestInstance', guestInstanceRouter)
 app.use('/guestHistory', guestHistoryRouter)
 app.use('/guestSettings', guestSettingsRouter)
